@@ -1,1 +1,515 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V-CareRx DCR | Login</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #eef7f7;
+      color: #173742;
+    }
+
+    .login-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #eaf7f7, #f8fcfc);
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 950px;
+      min-height: 560px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 70, 80, 0.15);
+    }
+
+    .branding {
+      background: linear-gradient(145deg, #075c69, #103f50);
+      color: white;
+      padding: 55px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .logo {
+      width: 62px;
+      height: 62px;
+      background: white;
+      color: #087f83;
+      border-radius: 17px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 23px;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+
+    .branding h1 {
+      margin: 0 0 12px;
+      font-size: 38px;
+    }
+
+    .branding h3 {
+      margin: 0 0 20px;
+      font-weight: normal;
+      color: #bde0e2;
+    }
+
+    .branding p {
+      line-height: 1.7;
+      color: #d1e7e9;
+      max-width: 390px;
+    }
+
+    .login-section {
+      padding: 55px;
+      display: flex;
+      align-items: center;
+    }
+
+    .login-box {
+      width: 100%;
+    }
+
+    .login-box h2 {
+      margin: 0 0 8px;
+      font-size: 30px;
+    }
+
+    .subtitle {
+      color: #788b92;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    .form-label {
+      display: block;
+      margin: 18px 0 8px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d8e7e9;
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: #087f83;
+      box-shadow: 0 0 0 3px rgba(8, 127, 131, 0.10);
+    }
+
+    .login-button {
+      width: 100%;
+      border: 0;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 25px;
+      background: linear-gradient(90deg, #087f83, #0aa6a1);
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login-button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .error-message {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 9px;
+      background: #fff0f1;
+      border: 1px solid #ffd3d7;
+      color: #a43d49;
+      font-size: 13px;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 9px;
+      background: #effaf4;
+      border: 1px solid #ccebd8;
+      color: #24734b;
+      font-size: 13px;
+    }
+
+    .footer {
+      margin-top: 25px;
+      text-align: center;
+      color: #9aa9ae;
+      font-size: 11px;
+    }
+
+    /* Dashboard */
+    #dashboard {
+      display: none;
+      min-height: 100vh;
+      background: #f3f8f8;
+    }
+
+    .dashboard-header {
+      background: white;
+      border-bottom: 1px solid #dce8e9;
+      padding: 18px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dashboard-title {
+      color: #103f50;
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .logout-button {
+      width: auto;
+      margin: 0;
+      padding: 10px 18px;
+      background: white;
+      color: #173742;
+      border: 1px solid #d7e3e5;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .dashboard-content {
+      padding: 30px;
+    }
+
+    .welcome {
+      margin-bottom: 25px;
+    }
+
+    .welcome h2 {
+      margin: 0 0 7px;
+    }
+
+    .welcome p {
+      color: #74878d;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .stat-card {
+      background: white;
+      border: 1px solid #dce8e9;
+      border-radius: 15px;
+      padding: 23px;
+    }
+
+    .stat-card span {
+      color: #71858b;
+      font-size: 13px;
+    }
+
+    .stat-card strong {
+      display: block;
+      margin-top: 9px;
+      font-size: 30px;
+      color: #087f83;
+    }
+
+    @media (max-width: 750px) {
+      .login-container {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .branding {
+        display: none;
+      }
+
+      .login-section {
+        padding: 35px 25px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard-content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOGIN PAGE -->
+  <div id="loginPage" class="login-page">
+
+    <div class="login-container">
+
+      <div class="branding">
+        <div class="logo">VC</div>
+
+        <h1>V-CareRx DCR</h1>
+
+        <h3>Medical Representative Reporting</h3>
+
+        <p>
+          Secure daily call reporting for medical representatives.
+          Manage doctor visits, chemist visits, samples, gifts and
+          daily remarks from one simple platform.
+        </p>
+      </div>
+
+      <div class="login-section">
+
+        <div class="login-box">
+
+          <h2>Welcome Back</h2>
+
+          <div class="subtitle">
+            Sign in to your V-CareRx DCR account
+          </div>
+
+          <div id="errorMessage" class="error-message"></div>
+
+          <div id="successMessage" class="success-message">
+            Login successful. Loading dashboard...
+          </div>
+
+          <form id="loginForm">
+
+            <label class="form-label">
+              Admin / Representative ID
+            </label>
+
+            <input
+              id="username"
+              class="form-input"
+              type="text"
+              placeholder="Enter username"
+              autocomplete="username"
+              required
+            >
+
+            <label class="form-label">
+              Password
+            </label>
+
+            <input
+              id="password"
+              class="form-input"
+              type="password"
+              placeholder="Enter password"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              id="loginButton"
+              class="login-button"
+              type="submit"
+            >
+              Sign In to DCR
+            </button>
+
+          </form>
+
+          <div class="footer">
+            V-CareRx DCR • Secure Authentication
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- DASHBOARD -->
+  <div id="dashboard">
+
+    <div class="dashboard-header">
+
+      <div class="dashboard-title">
+        V-CareRx DCR Dashboard
+      </div>
+
+      <button id="logoutButton" class="logout-button">
+        Logout
+      </button>
+
+    </div>
+
+    <div class="dashboard-content">
+
+      <div class="welcome">
+        <h2>
+          Welcome, <span id="loggedUser">Vaibhav</span>
+        </h2>
+
+        <p>
+          Your V-CareRx DCR authentication is active.
+        </p>
+      </div>
+
+      <div class="stats">
+
+        <div class="stat-card">
+          <span>Doctor Calls</span>
+          <strong>0</strong>
+        </div>
+
+        <div class="stat-card">
+          <span>Chemist Visits</span>
+          <strong>0</strong>
+        </div>
+
+        <div class="stat-card">
+          <span>DCR Reports</span>
+          <strong>0</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    const loginPage = document.getElementById("loginPage");
+    const dashboard = document.getElementById("dashboard");
+
+    const loginForm = document.getElementById("loginForm");
+    const loginButton = document.getElementById("loginButton");
+
+    const username = document.getElementById("username");
+    const password = document.getElementById("password");
+
+    const errorMessage = document.getElementById("errorMessage");
+    const successMessage = document.getElementById("successMessage");
+
+    const loggedUser = document.getElementById("loggedUser");
+
+    const logoutButton = document.getElementById("logoutButton");
+
+
+    async function apiRequest(url, options = {}) {
+
+      const token =
+        localStorage.getItem("vcarerx_token");
+
+      options.headers = {
+        "Content-Type": "application/json",
+
+        ...(token
+          ? {
+              "Authorization":
+                "Bearer " + token
+            }
+          : {})
+      };
+
+      const response =
+        await fetch(url, options);
+
+      const data =
+        await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+
+        throw new Error(
+          data.message || "Request failed"
+        );
+
+      }
+
+      return data;
+    }
+
+
+    loginForm.addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+        errorMessage.style.display = "none";
+        successMessage.style.display = "none";
+
+        loginButton.disabled = true;
+        loginButton.textContent = "Signing in...";
+
+        try {
+
+          const data =
+            await apiRequest(
+              "/api/auth/login",
+              {
+                method: "POST",
+
+                body: JSON.stringify({
+
+                  username:
+                    username.value.trim(),
+
+                  password:
+                    password.value
+
+                })
+              }
+            );
+
+
+          localStorage.setItem(
+            "vcarerx_token",
+            data.token
+          );
+
+
+          loggedUser.textContent =
+            data.user.username;
+
+
+          successMessage.style.display =
+            "block";
+
+
+          setTimeout(function() {
+
+            loginPage.style.display =
+              "none";
+
+            dashboard.style.display =
+              "

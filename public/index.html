@@ -407,109 +407,70 @@
 
 
   <script>
+const form = document.getElementById("loginForm");
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+const errorMessage = document.getElementById("errorMessage");
+const successMessage = document.getElementById("successMessage");
+const loginButton = document.getElementById("loginButton");
 
-    const loginPage = document.getElementById("loginPage");
-    const dashboard = document.getElementById("dashboard");
+form.addEventListener("submit", async function (event) {
+  event.preventDefault();
 
-    const loginForm = document.getElementById("loginForm");
-    const loginButton = document.getElementById("loginButton");
+  errorMessage.style.display = "none";
+  successMessage.style.display = "none";
 
-    const username = document.getElementById("username");
-    const password = document.getElementById("password");
+  const username = usernameInput.value.trim();
+  const password = passwordInput.value;
 
-    const errorMessage = document.getElementById("errorMessage");
-    const successMessage = document.getElementById("successMessage");
+  if (!username || !password) {
+    errorMessage.textContent = "Please enter username and password.";
+    errorMessage.style.display = "block";
+    return;
+  }
 
-    const loggedUser = document.getElementById("loggedUser");
+  loginButton.disabled = true;
+  loginButton.textContent = "Signing in...";
 
-    const logoutButton = document.getElementById("logoutButton");
+  try {
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password
+      })
+    });
 
+    const data = await response.json();
 
-    async function apiRequest(url, options = {}) {
-
-      const token =
-        localStorage.getItem("vcarerx_token");
-
-      options.headers = {
-        "Content-Type": "application/json",
-
-        ...(token
-          ? {
-              "Authorization":
-                "Bearer " + token
-            }
-          : {})
-      };
-
-      const response =
-        await fetch(url, options);
-
-      const data =
-        await response.json().catch(() => ({}));
-
-      if (!response.ok) {
-
-        throw new Error(
-          data.message || "Request failed"
-        );
-
-      }
-
-      return data;
+    if (!response.ok) {
+      throw new Error(data.message || "Login failed");
     }
 
+    localStorage.setItem("vcarerx_token", data.token);
 
-    loginForm.addEventListener(
-      "submit",
-      async function(event) {
+    successMessage.textContent =
+      "Login successful. Welcome " + data.user.username + "!";
 
-        event.preventDefault();
+    successMessage.style.display = "block";
 
-        errorMessage.style.display = "none";
-        successMessage.style.display = "none";
+    setTimeout(function () {
+      window.location.href = "/dashboard";
+    }, 500);
 
-        loginButton.disabled = true;
-        loginButton.textContent = "Signing in...";
+  } catch (error) {
+    errorMessage.textContent =
+      error.message || "Unable to connect to authentication server.";
 
-        try {
+    errorMessage.style.display = "block";
+  }
 
-          const data =
-            await apiRequest(
-              "/api/auth/login",
-              {
-                method: "POST",
+  loginButton.disabled = false;
+  loginButton.textContent = "Sign In to DCR";
+});
+</script>
 
-                body: JSON.stringify({
-
-                  username:
-                    username.value.trim(),
-
-                  password:
-                    password.value
-
-                })
-              }
-            );
-
-
-          localStorage.setItem(
-            "vcarerx_token",
-            data.token
-          );
-
-
-          loggedUser.textContent =
-            data.user.username;
-
-
-          successMessage.style.display =
-            "block";
-
-
-          setTimeout(function() {
-
-            loginPage.style.display =
-              "none";
-
-            dashboard.style.display =
-              "
+    

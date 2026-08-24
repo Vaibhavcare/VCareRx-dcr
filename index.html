@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V-CareRx DCR | Login</title>
+<style>
+:root{--teal:#087f83;--teal2:#0aa6a1;--navy:#103f50;--bg:#eef7f7;--text:#18323d;--muted:#71858d;--border:#dce9eb}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(135deg,#eaf7f7,#f7fbfb);color:var(--text);min-height:100vh}
+.page{min-height:100vh;display:grid;grid-template-columns:1.1fr .9fr}.brand{background:linear-gradient(145deg,#0b5664,#103f50);color:#fff;padding:55px 7vw;display:flex;flex-direction:column;justify-content:center}
+.logo{display:flex;align-items:center;gap:13px}.mark{width:52px;height:52px;border-radius:15px;background:#fff;color:var(--teal);display:grid;place-items:center;font-weight:900}.logo h1{font-size:25px;margin:0}.logo small{color:#a9d2d5}
+.hero{max-width:620px;margin-top:70px}.hero h2{font-size:43px;line-height:1.1;margin:0 0 18px}.hero p{font-size:16px;line-height:1.7;color:#c6e1e4}
+.login{display:flex;align-items:center;justify-content:center;padding:35px}.card{width:min(440px,100%);background:#fff;border:1px solid var(--border);border-radius:22px;padding:38px;box-shadow:0 20px 55px #0d59621c}
+.card h2{margin:0 0 7px;font-size:27px}.sub{color:var(--muted);font-size:13px;margin:0 0 27px}.label{font-size:12px;font-weight:700;margin:17px 0 8px;display:block}input{width:100%;padding:13px 14px;border:1px solid var(--border);border-radius:10px;outline:0;font-size:14px}input:focus{border-color:var(--teal);box-shadow:0 0 0 3px #087f8312}.btn{width:100%;margin-top:23px;border:0;border-radius:10px;padding:14px;background:linear-gradient(90deg,var(--teal),var(--teal2));color:#fff;font-weight:800;cursor:pointer}.error{display:none;background:#fff1f2;color:#bb4d58;border:1px solid #ffd5d9;border-radius:9px;padding:10px;font-size:12px;margin-bottom:14px}.ok{display:none;background:#effaf5;color:#23754b;border:1px solid #ccebd9;border-radius:9px;padding:10px;font-size:12px;margin-bottom:14px}.demo{margin-top:20px;text-align:center;color:#8a9ba0;font-size:11px}.dash{display:none}.top{display:flex;justify-content:space-between;align-items:center;padding:18px 25px;background:#fff;border-bottom:1px solid var(--border)}.top b{font-size:20px;color:var(--navy)}.logout{border:1px solid var(--border);background:#fff;border-radius:8px;padding:9px 14px;cursor:pointer}.body{padding:35px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.stat{background:#fff;border:1px solid var(--border);border-radius:15px;padding:22px}.stat span{font-size:12px;color:var(--muted)}.stat b{display:block;font-size:30px;margin-top:8px;color:var(--teal)}
+@media(max-width:800px){.page{grid-template-columns:1fr}.brand{display:none}.login{padding:24px}.card{padding:30px 24px}.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="loginPage" class="page">
+<section class="brand"><div class="logo"><div class="mark">VC</div><div><h1>V-CareRx DCR</h1><small>Medical Representative Reporting</small></div></div><div class="hero"><h2>Daily Call Reporting, made simple.</h2><p>Secure access for field teams to manage doctor calls, chemist visits, samples, gifts and daily remarks.</p></div></section>
+<section class="login"><div class="card"><h2>Welcome back</h2><p class="sub">Sign in to your V-CareRx DCR account</p><div id="error" class="error"></div><form id="form"><label class="label">Admin / Representative ID</label><input id="username" placeholder="Enter username" autocomplete="username"><label class="label">Password</label><input id="password" type="password" placeholder="Enter password" autocomplete="current-password"><button class="btn">Sign In to DCR</button></form><div class="demo">Authentication protected by JWT • V-CareRx DCR</div></div></section>
+</div>
+<div id="dashboard" class="dash"><div class="top"><b>V-CareRx DCR Dashboard</b><button class="logout" id="logout">Logout</button></div><div class="body"><h2>Welcome, <span id="who"></span></h2><p>Admin dashboard is connected to the authentication API.</p><div class="cards"><div class="stat"><span>Doctor Calls</span><b>0</b></div><div class="stat"><span>Chemist Visits</span><b>0</b></div><div class="stat"><span>DCR Reports</span><b>0</b></div></div></div></div>
+<script>
+const loginPage=document.getElementById("loginPage"), dashboard=document.getElementById("dashboard"), error=document.getElementById("error");
+async function api(path, options={}){const token=localStorage.getItem("vcarerx_token"); options.headers={...(options.headers||{}), "Content-Type":"application/json", ...(token?{"Authorization":"Bearer "+token}:{})}; const r=await fetch(path,options); const data=await r.json().catch(()=>({})); if(!r.ok) throw new Error(data.message||"Request failed"); return data;}
+async function showSession(){const token=localStorage.getItem("vcarerx_token"); if(!token)return; try{const d=await api("/api/auth/me"); document.getElementById("who").textContent=d.user.username; loginPage.style.display="none";dashboard.style.display="block"}catch{localStorage.removeItem("vcarerx_token")}}
+document.getElementById("form").addEventListener("submit",async e=>{e.preventDefault();error.style.display="none";try{const d=await api("/api/auth/login",{method:"POST",body:JSON.stringify({username:username.value.trim(),password:password.value})});localStorage.setItem("vcarerx_token",d.token);document.getElementById("who").textContent=d.user.username;loginPage.style.display="none";dashboard.style.display="block"}catch(err){error.textContent=err.message;error.style.display="block"}});
+document.getElementById("logout").onclick=async()=>{try{await api("/api/auth/logout",{method:"POST"})}catch{}localStorage.removeItem("vcarerx_token");dashboard.style.display="none";loginPage.style.display="grid"};
+showSession();
+</script>
+</body>
+</html>

@@ -2,1579 +2,1335 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover">
+
 <title>V-CareRx DCR</title>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f3f6f8;color:#26343d}
-button,input,select,textarea{font:inherit}
-button{border:0;border-radius:8px;padding:11px 16px;cursor:pointer}
+*{
+  box-sizing:border-box;
+}
 
-.login{
- min-height:100vh;
- display:flex;
- align-items:center;
- justify-content:center;
- padding:20px;
- background:linear-gradient(145deg,#07506c,#008d82)
+body{
+  margin:0;
+  background:#eee;
+  color:#27323a;
+  font-family:Arial,Helvetica,sans-serif;
 }
-.loginBox{
- width:100%;max-width:470px;background:white;
- padding:35px;border-radius:25px;
- box-shadow:0 15px 50px #0005
-}
-.logo{
- width:100px;height:100px;border:3px solid #07506c;
- border-radius:50%;display:flex;align-items:center;
- justify-content:center;margin:auto;color:#07506c;font-weight:bold
-}
-h1{text-align:center}
-.subtitle{text-align:center;color:#71808a}
-label{display:block;font-weight:bold;margin:15px 0 6px}
-input,select,textarea{
- width:100%;padding:12px;border:1px solid #ccd5da;
- border-radius:8px;background:white
-}
-.loginBtn{width:100%;background:#08aa95;color:white;font-weight:bold;margin-top:18px}
-.error{text-align:center;color:#c32e38;margin-top:15px}
-.demo{text-align:center;color:#777;font-size:13px;margin-top:15px}
 
-.app{display:none;min-height:100vh}
-.header{
- height:62px;background:#073f58;color:white;
- display:flex;align-items:center;justify-content:space-between;
- padding:0 18px;position:sticky;top:0;z-index:5
+button{
+  font:inherit;
 }
-.layout{display:flex}
-.sidebar{
- width:235px;background:white;min-height:calc(100vh - 62px);
- padding:12px;border-right:1px solid #ddd
+
+.app{
+  max-width:720px;
+  min-height:100vh;
+  margin:auto;
+  padding-bottom:72px;
+  background:#eee;
 }
+
+/* TOP BAR */
+
+.topbar{
+  height:64px;
+  background:#050505;
+  color:white;
+  display:flex;
+  align-items:center;
+  padding:0 18px;
+  gap:22px;
+}
+
+.menu{
+  font-size:31px;
+  cursor:pointer;
+}
+
+.title{
+  font-size:24px;
+  flex:1;
+}
+
+.top-icon{
+  font-size:27px;
+  cursor:pointer;
+}
+
+/* PROFILE */
+
+.hero{
+  background:#08b39b;
+  color:white;
+  text-align:center;
+  padding:34px 15px 108px;
+  position:relative;
+}
+
+.avatar{
+  width:88px;
+  height:88px;
+  background:white;
+  border-radius:50%;
+  margin:auto;
+  position:relative;
+}
+
+.avatar:before{
+  content:"";
+  position:absolute;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  background:white;
+  left:26px;
+  top:10px;
+}
+
+.avatar:after{
+  content:"";
+  position:absolute;
+  width:66px;
+  height:38px;
+  border-radius:50% 50% 18px 18px;
+  background:white;
+  left:11px;
+  bottom:6px;
+}
+
+.name{
+  font-size:29px;
+  margin-top:12px;
+}
+
+.role{
+  font-size:22px;
+  margin-top:5px;
+}
+
+.version{
+  position:absolute;
+  left:18px;
+  bottom:105px;
+  font-size:19px;
+}
+
+.settings{
+  position:absolute;
+  right:16px;
+  bottom:92px;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:#078f7e;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+}
+
+/* ATTENDANCE */
+
+.attendance{
+  text-align:center;
+  background:#eee;
+  padding:0 12px 14px;
+}
+
+.attendance-title{
+  font-size:29px;
+  padding:6px 0 3px;
+}
+
+.att-buttons{
+  display:flex;
+  max-width:540px;
+  margin:auto;
+}
+
+.att-buttons button{
+  height:76px;
+  border:0;
+  flex:1;
+  font-size:27px;
+  cursor:pointer;
+}
+
+.signin{
+  background:white;
+  color:#08a992;
+}
+
+.signout{
+  background:#08b39b;
+  color:white;
+}
+
+/* ACTIVITY */
+
+.activity{
+  margin:20px 5px 5px;
+  background:#06486c;
+  color:white;
+  min-height:355px;
+  border-radius:3px;
+  padding:15px 12px;
+  position:relative;
+  box-shadow:0 1px 4px #aaa;
+}
+
+.activity-title{
+  font-size:25px;
+}
+
+.pin{
+  position:absolute;
+  right:66px;
+  top:16px;
+  font-size:25px;
+}
+
+.more{
+  position:absolute;
+  right:22px;
+  top:16px;
+  font-size:25px;
+}
+
+.empty{
+  text-align:center;
+  font-size:22px;
+  margin-top:90px;
+}
+
+/* SUMMARY */
+
+.grid3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-top:1px solid #d6d6d6;
+}
+
+.stat{
+  min-height:190px;
+  border-right:1px solid #d6d6d6;
+  text-align:center;
+  padding-top:70px;
+}
+
+.stat:last-child{
+  border-right:0;
+}
+
+.stat .label{
+  font-size:25px;
+}
+
+.stat .number{
+  font-size:29px;
+  margin:8px 0;
+}
+
+.stat .sub{
+  font-size:20px;
+}
+
+/* EXPENSE / BROCHURE */
+
+.grid2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-top:1px solid #d6d6d6;
+}
+
+.tile{
+  height:150px;
+  border-right:1px solid #d6d6d6;
+  text-align:center;
+  padding-top:40px;
+  font-size:23px;
+  cursor:pointer;
+}
+
+.tile:last-child{
+  border-right:0;
+}
+
+.tile .ico{
+  font-size:40px;
+  margin-bottom:8px;
+}
+
+/* BOTTOM NAV */
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(720px,100%);
+  height:72px;
+  background:#171717;
+  color:white;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  z-index:20;
+}
+
 .nav{
- width:100%;text-align:left;background:white;
- margin:3px 0;color:#34444d
+  border:0;
+  background:none;
+  color:white;
+  text-align:center;
+  cursor:pointer;
+  padding-top:7px;
 }
-.nav:hover,.nav.active{background:#e4f7f3;color:#008b7b}
-.content{flex:1;padding:20px;max-width:1500px}
-.page{display:none}
-.page.active{display:block}
 
-.cards{
- display:grid;grid-template-columns:repeat(4,1fr);gap:14px
+.nav .ico{
+  font-size:28px;
+  display:block;
 }
-.card{
- background:white;padding:20px;border-radius:14px;
- box-shadow:0 2px 10px #0001
-}
-.number{font-size:30px;font-weight:bold;margin-top:8px}
-.panel{
- background:white;padding:18px;border-radius:14px;
- margin-top:16px;box-shadow:0 2px 10px #0001
-}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-.primary{background:#08aa95;color:white}
-.secondary{background:#e9eff2}
-.danger{background:#ffe5e5;color:#b51f2b}
-.success{background:#e3f7ef;color:#087b6d}
 
-table{width:100%;border-collapse:collapse}
-th,td{padding:11px;border-bottom:1px solid #e4e8ea;text-align:left}
-th{background:#f5f8f9}
-
-.badge{
- padding:5px 9px;border-radius:20px;
- background:#e1f7ef;color:#087b6d;font-size:12px
+.nav span{
+  font-size:17px;
 }
-.badge.off{background:#eee;color:#666}
+
+/* DRAWER */
+
+.drawer{
+  position:fixed;
+  inset:0;
+  z-index:50;
+  display:none;
+}
+
+.drawer.open{
+  display:block;
+}
+
+.shade{
+  position:absolute;
+  inset:0;
+  background:#0008;
+}
+
+.side{
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:min(390px,88vw);
+  background:white;
+  overflow:auto;
+}
+
+.side-head{
+  background:#06486c;
+  color:white;
+  text-align:center;
+  padding:26px 15px;
+}
+
+.side-logo{
+  width:74px;
+  height:74px;
+  border-radius:50%;
+  background:white;
+  color:#06486c;
+  margin:auto;
+  display:grid;
+  place-items:center;
+  font-weight:bold;
+}
+
+.side h2{
+  font-size:23px;
+  margin:12px 0 3px;
+}
+
+.side p{
+  margin:5px 0;
+  font-size:17px;
+}
+
+.side-sync{
+  padding:12px;
+  text-align:center;
+  color:#198b55;
+  font-size:18px;
+}
+
+.side-item{
+  padding:18px;
+  border-bottom:1px solid #ddd;
+  font-size:21px;
+  cursor:pointer;
+}
+
+/* MODAL */
 
 .modal{
- display:none;position:fixed;inset:0;background:#0007;
- align-items:center;justify-content:center;padding:15px;z-index:20
-}
-.modal.show{display:flex}
-.modalBox{
- background:white;width:100%;max-width:550px;
- padding:22px;border-radius:16px;max-height:90vh;overflow:auto
+  position:fixed;
+  inset:0;
+  background:#0008;
+  z-index:60;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
 }
 
-@media(max-width:900px){
- .cards{grid-template-columns:1fr 1fr}
- .sidebar{width:70px}
- .nav span{display:none}
+.modal.show{
+  display:flex;
 }
-@media(max-width:550px){
- .cards{grid-template-columns:1fr}
- .grid2{grid-template-columns:1fr}
- .content{padding:12px}
+
+.modal-box{
+  background:white;
+  width:min(560px,100%);
+  border-radius:14px;
+  padding:22px;
+}
+
+.modal-box h2{
+  margin-top:0;
+}
+
+.modal-box input,
+.modal-box select{
+  width:100%;
+  padding:13px;
+  margin:7px 0 12px;
+  border:1px solid #ccc;
+  border-radius:8px;
+}
+
+.primary{
+  background:#08b39b;
+  color:white;
+  border:0;
+  padding:13px 18px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.secondary{
+  background:#eee;
+  border:0;
+  padding:13px 18px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-left:7px;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:90px;
+  transform:translateX(-50%);
+  background:#222;
+  color:white;
+  padding:12px 18px;
+  border-radius:8px;
+  display:none;
+  z-index:100;
+}
+
+@media(max-width:500px){
+
+  .title{
+    font-size:22px;
+  }
+
+  .name{
+    font-size:28px;
+  }
+
+  .role{
+    font-size:20px;
+  }
+
+  .activity{
+    min-height:300px;
+  }
+
+  .stat{
+    min-height:165px;
+    padding-top:55px;
+  }
+
+  .stat .label{
+    font-size:21px;
+  }
+
+  .stat .number{
+    font-size:27px;
+  }
+
+  .stat .sub{
+    font-size:18px;
+  }
+
+  .tile{
+    height:135px;
+    padding-top:30px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= LOGIN ================= -->
+<div class="app">
 
-<div id="loginPage" class="login">
-<div class="loginBox">
+<!-- TOP BAR -->
 
-<div class="logo">V-CareRx</div>
+<header class="topbar">
 
-<h1>V-CareRx DCR</h1>
-<div class="subtitle">Administrator Login</div>
+  <div class="menu" onclick="openDrawer()">☰</div>
 
-<form id="loginForm">
+  <div class="title">
+    PRx Cloud
+  </div>
 
-<label>Admin ID</label>
-<input id="adminId"
-       type="text"
-       value="Vaibhav"
-       autocomplete="username"
-       required>
+  <div class="top-icon" onclick="toast('Search')">
+    ⌕
+  </div>
 
-<label>Password</label>
-<input id="adminPassword"
-       type="password"
-       autocomplete="current-password"
-       required>
+  <div class="top-icon" onclick="toast('Sync started')">
+    ↻
+  </div>
 
-<button class="loginBtn" type="submit">LOGIN</button>
+  <div class="top-icon" onclick="openReports()">
+    ↗
+  </div>
 
-<div id="loginError" class="error"></div>
-
-</form>
-
-<div class="demo">
-Demo Admin: Vaibhav / Vaibhav@123
-</div>
-
-</div>
-</div>
-
-
-<!-- ================= APPLICATION ================= -->
-
-<div id="app" class="app">
-
-<header class="header">
-<b>V-CareRx DCR — ADMIN</b>
-<button class="secondary" onclick="logout()">LOG OUT</button>
 </header>
 
-<div class="layout">
 
-<aside class="sidebar">
+<!-- PROFILE -->
 
-<button class="nav active" onclick="page('dashboard',this)">🏠 <span>Dashboard</span></button>
-<button class="nav" onclick="page('representatives',this)">👤 <span>Representatives</span></button>
-<button class="nav" onclick="page('doctors',this)">🩺 <span>Doctors</span></button>
-<button class="nav" onclick="page('chemists',this)">💊 <span>Chemists</span></button>
-<button class="nav" onclick="page('stockists',this)">📦 <span>Stockists</span></button>
-<button class="nav" onclick="page('products',this)">🧴 <span>Products</span></button>
-<button class="nav" onclick="page('assignments',this)">🔗 <span>Assignments</span></button>
-<button class="nav" onclick="page('dcr',this)">📝 <span>DCR Entry</span></button>
-<button class="nav" onclick="page('reports',this)">📊 <span>Reports</span></button>
-<button class="nav" onclick="page('settings',this)">⚙️ <span>Settings</span></button>
+<section class="hero">
 
-</aside>
+  <div class="avatar"></div>
 
+  <div class="name" id="repName">
+    TANUJA
+  </div>
 
-<main class="content">
+  <div class="role">
+    MEDICAL REPRESENTATIVE
+  </div>
 
-<!-- DASHBOARD -->
+  <div class="version">
+    V-8.7.2
+  </div>
 
-<section id="dashboard" class="page active">
-
-<h2>Admin Dashboard</h2>
-
-<div class="cards">
-
-<div class="card">
-Representatives
-<div class="number" id="countRep">0</div>
-</div>
-
-<div class="card">
-Doctors
-<div class="number" id="countDoctor">0</div>
-</div>
-
-<div class="card">
-Chemists
-<div class="number" id="countChemist">0</div>
-</div>
-
-<div class="card">
-Stockists
-<div class="number" id="countStockist">0</div>
-</div>
-
-</div>
-
-<div class="panel">
-
-<h3>Admin Quick Actions</h3>
-
-<div class="actions">
-
-<button class="primary"
-onclick="openForm('representative')">
-+ Add Representative
-</button>
-
-<button class="secondary"
-onclick="openForm('doctor')">
-+ Add Doctor
-</button>
-
-<button class="secondary"
-onclick="openForm('chemist')">
-+ Add Chemist
-</button>
-
-<button class="secondary"
-onclick="openForm('stockist')">
-+ Add Stockist
-</button>
-
-<button class="secondary"
-onclick="openForm('product')">
-+ Add Product
-</button>
-
-</div>
-
-</div>
+  <div class="settings" onclick="openSettings()">
+    ⚙
+  </div>
 
 </section>
 
 
-<!-- REPRESENTATIVES -->
+<!-- ATTENDANCE -->
 
-<section id="representatives" class="page">
+<section class="attendance">
 
-<h2>Representatives</h2>
+  <div class="attendance-title">
+    Attendance
+  </div>
 
-<button class="primary"
-onclick="openForm('representative')">
-+ Create Representative ID
-</button>
+  <div class="att-buttons">
 
-<div class="panel">
+    <button
+      class="signin"
+      onclick="attendance('in')">
+      SIGN IN
+    </button>
 
-<table>
-<thead>
-<tr>
-<th>MR ID</th>
-<th>Name</th>
-<th>Phone</th>
-<th>Status</th>
-<th>GPS</th>
-<th>Actions</th>
-</tr>
-</thead>
+    <button
+      class="signout"
+      onclick="attendance('out')">
+      SIGN OUT ➜
+    </button>
 
-<tbody id="repList"></tbody>
-
-</table>
-
-</div>
+  </div>
 
 </section>
 
 
-<!-- DOCTORS -->
+<!-- TODAY ACTIVITY -->
 
-<section id="doctors" class="page">
+<section class="activity">
 
-<h2>Doctor Master</h2>
+  <div class="activity-title">
+    Today's Activity
+  </div>
 
-<button class="primary"
-onclick="openForm('doctor')">
-+ Add Doctor
-</button>
+  <div class="pin">
+    ⌖
+  </div>
 
-<div class="panel">
+  <div class="more">
+    ⋮
+  </div>
 
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Speciality</th>
-<th>Phone</th>
-<th>City</th>
-<th>MR</th>
-<th>Delete</th>
-</tr>
-</thead>
-
-<tbody id="doctorList"></tbody>
-
-</table>
-
-</div>
+  <div class="empty" id="activityText">
+    No plan for the day
+  </div>
 
 </section>
 
 
-<!-- CHEMISTS -->
+<!-- COUNTERS -->
 
-<section id="chemists" class="page">
+<section class="grid3">
 
-<h2>Chemist Master</h2>
+  <div class="stat">
 
-<button class="primary"
-onclick="openForm('chemist')">
-+ Add Chemist
-</button>
+    <div class="label">
+      Daily Report
+    </div>
 
-<div class="panel">
+    <div
+      class="number"
+      id="reportCount">
+      0
+    </div>
 
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Phone</th>
-<th>City</th>
-<th>Delete</th>
-</tr>
-</thead>
+    <div class="sub">
+      Completed
+    </div>
 
-<tbody id="chemistList"></tbody>
-
-</table>
-
-</div>
-
-</section>
+  </div>
 
 
-<!-- STOCKISTS -->
+  <div class="stat">
 
-<section id="stockists" class="page">
+    <div class="label">
+      Clients
+    </div>
 
-<h2>Stockist Master</h2>
+    <div
+      class="number"
+      id="clientCount">
+      3186
+    </div>
 
-<button class="primary"
-onclick="openForm('stockist')">
-+ Add Stockist
-</button>
+  </div>
 
-<div class="panel">
 
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Phone</th>
-<th>City</th>
-<th>Delete</th>
-</tr>
-</thead>
+  <div class="stat">
 
-<tbody id="stockistList"></tbody>
+    <div class="label">
+      Orders
+    </div>
 
-</table>
+    <div
+      class="number"
+      id="orderCount">
+      0
+    </div>
 
-</div>
+    <div class="sub">
+      Today's Order
+    </div>
+
+  </div>
 
 </section>
 
 
-<!-- PRODUCTS -->
+<!-- EXPENSE / BROCHURE -->
 
-<section id="products" class="page">
+<section class="grid2">
 
-<h2>Product Choice</h2>
+  <div
+    class="tile"
+    onclick="openDcr()">
 
-<button class="primary"
-onclick="openForm('product')">
-+ Add Product
-</button>
+    <div class="ico">
+      ▣
+    </div>
 
-<div class="panel">
+    Expenses
 
-<table>
-<thead>
-<tr>
-<th>Product</th>
-<th>Brand</th>
-<th>Choice</th>
-<th>Action</th>
-</tr>
-</thead>
-
-<tbody id="productList"></tbody>
-
-</table>
-
-</div>
-
-</section>
+  </div>
 
 
-<!-- ASSIGNMENT -->
+  <div
+    class="tile"
+    onclick="toast('Brochure opened')">
 
-<section id="assignments" class="page">
+    <div class="ico">
+      ◫
+    </div>
 
-<h2>Doctor / Chemist / Stockist Assignment</h2>
+    Brochure
 
-<div class="panel">
-
-<div class="grid2">
-
-<div>
-<label>Representative</label>
-<select id="assignRep"></select>
-</div>
-
-<div>
-<label>Type</label>
-<select id="assignType"
-onchange="loadClients()">
-<option value="doctor">Doctor</option>
-<option value="chemist">Chemist</option>
-<option value="stockist">Stockist</option>
-</select>
-</div>
-
-</div>
-
-<label>Client</label>
-<select id="assignClient"></select>
-
-<div class="actions">
-
-<button class="primary"
-onclick="assignClient()">
-ASSIGN
-</button>
-
-</div>
-
-<table>
-<thead>
-<tr>
-<th>Representative</th>
-<th>Type</th>
-<th>Client</th>
-<th>Remove</th>
-</tr>
-</thead>
-
-<tbody id="assignmentList"></tbody>
-</table>
-
-</div>
+  </div>
 
 </section>
 
-
-<!-- DCR -->
-
-<section id="dcr" class="page">
-
-<h2>DCR Filling</h2>
-
-<div class="panel">
-
-<label>Representative</label>
-<select id="dcrRep"></select>
-
-<label>Date</label>
-<input id="dcrDate" type="date">
-
-<label>Doctor / Chemist / Stockist</label>
-<input id="dcrClient" placeholder="Client name">
-
-<label>Visit Status</label>
-<select id="dcrStatus">
-<option>Visited</option>
-<option>Missed</option>
-<option>Planned</option>
-</select>
-
-<label>Remarks</label>
-<textarea id="dcrRemarks" rows="4"></textarea>
-
-<div class="actions">
-
-<button class="primary"
-onclick="getGPS()">
-📍 GET GPS LOCATION
-</button>
-
-<button class="secondary"
-onclick="saveDCR()">
-SAVE DCR
-</button>
-
 </div>
 
-<div id="gpsResult"></div>
 
-</div>
+<!-- BOTTOM NAV -->
 
-</section>
+<nav class="bottom">
 
+  <button class="nav"
+          onclick="toast('Home')">
 
-<!-- REPORTS -->
+    <span class="ico">⌂</span>
+    <span>Home</span>
 
-<section id="reports" class="page">
-
-<h2>Reports</h2>
-
-<div class="cards">
-
-<div class="card">
-Total DCR
-<div class="number" id="totalDcr">0</div>
-</div>
-
-<div class="card">
-Visited
-<div class="number" id="visitedDcr">0</div>
-</div>
-
-<div class="card">
-Missed
-<div class="number" id="missedDcr">0</div>
-</div>
-
-<div class="card">
-GPS Records
-<div class="number" id="gpsDcr">0</div>
-</div>
-
-</div>
-
-<div class="panel">
-
-<table>
-<thead>
-<tr>
-<th>Date</th>
-<th>MR</th>
-<th>Client</th>
-<th>Status</th>
-<th>GPS</th>
-</tr>
-</thead>
-
-<tbody id="reportList"></tbody>
-
-</table>
-
-</div>
-
-</section>
+  </button>
 
 
-<!-- SETTINGS -->
+  <button class="nav"
+          onclick="openDcr()">
 
-<section id="settings" class="page">
+    <span class="ico">▣</span>
+    <span>Task</span>
 
-<h2>Administrator Settings</h2>
+  </button>
 
-<div class="panel">
 
-<h3>Location Permission</h3>
+  <button class="nav"
+          onclick="openReports()">
 
-<label>
-<input id="locationSwitch"
-type="checkbox"
-style="width:auto"
-onchange="changeLocation()">
+    <span class="ico">▥</span>
+    <span>Reports</span>
 
- Allow GPS / Location
-</label>
+  </button>
 
-<p>
-Only the administrator controls this setting in this demo.
-The phone/browser will still ask for GPS permission.
-</p>
 
-<hr>
+  <button class="nav"
+          onclick="toast('No new messages')">
 
-<h3>Admin Access</h3>
+    <span class="ico">♟</span>
+    <span>Messages</span>
 
-<p>
-✓ Representative activation/deactivation<br>
-✓ Representative ID creation<br>
-✓ Doctor addition/deletion<br>
-✓ Chemist addition/deletion<br>
-✓ Stockist addition/deletion<br>
-✓ Product choice management<br>
-✓ Client assignment<br>
-✓ GPS capture<br>
-✓ DCR entry<br>
-✓ DCR reports
-</p>
+  </button>
 
-<button class="danger"
-onclick="resetData()">
-RESET ALL DEMO DATA
-</button>
 
-</div>
+  <button class="nav"
+          onclick="openSummary()">
 
-</section>
+    <span class="ico">♟</span>
+    <span>Summary</span>
 
-</main>
-</div>
+  </button>
+
+</nav>
+
+
+<!-- SIDE MENU -->
+
+<div class="drawer" id="drawer">
+
+  <div
+    class="shade"
+    onclick="closeDrawer()">
+  </div>
+
+  <aside class="side">
+
+    <div class="side-head">
+
+      <div class="side-logo">
+        V-CareRx
+      </div>
+
+      <h2>
+        V-CareRx DCR
+      </h2>
+
+      <p>
+        HQ: KOLHAPUR
+      </p>
+
+      <p>
+        Medical Representative Portal
+      </p>
+
+    </div>
+
+
+    <div class="side-sync">
+      Last Sync: Today
+    </div>
+
+
+    <div
+      class="side-item"
+      onclick="toast('Quick Summary');closeDrawer()">
+      ▣ Quick Summary
+    </div>
+
+
+    <div
+      class="side-item"
+      onclick="openDcr();closeDrawer()">
+      ✚ Add DCR
+    </div>
+
+
+    <div
+      class="side-item"
+      onclick="openClients();closeDrawer()">
+      ♟ Doctors / Clients
+    </div>
+
+
+    <div
+      class="side-item"
+      onclick="toast('Chemists');closeDrawer()">
+      ♟ Chemists
+    </div>
+
+
+    <div
+      class="side-item"
+      onclick="toast('Stockists');closeDrawer()">
+      ▣ Stockists
+    </div>
+
+
+    <div
+      class="side-item"
+      onclick="toast('Routes');closeDrawer()">
+      ⌖ Route
+    </div>
+
+
+    <div
+      class="side-item"
+      onclick="toast('Location permission');closeDrawer()">
+      ⌖ Location Access
+    </div>
+
+
+    <div
+      class="side-item"
+      onclick="openReports();closeDrawer()">
+      ▥ Reports
+    </div>
+
+
+    <div
+      class="side-item"
+      onclick="openSettings();closeDrawer()">
+      ⚙ Settings
+    </div>
+
+
+    <div
+      class="side-item"
+      onclick="toast('Sync completed');closeDrawer()">
+      ↻ Complete Sync
+    </div>
+
+  </aside>
+
 </div>
 
 
 <!-- MODAL -->
 
-<div id="modal" class="modal">
+<div class="modal" id="modal">
 
-<div class="modalBox">
-
-<h2 id="modalTitle"></h2>
-
-<div id="modalBody"></div>
-
-<div class="actions">
-
-<button class="secondary"
-onclick="closeModal()">
-Cancel
-</button>
-
-<button class="primary"
-onclick="saveForm()">
-SAVE
-</button>
+  <div
+    class="modal-box"
+    id="modalContent">
+  </div>
 
 </div>
 
-</div>
+
+<div
+  class="toast"
+  id="toast">
 </div>
 
 
 <script>
 
-/* ================= LOGIN ================= */
+const state = {
 
-const ADMIN_ID="Vaibhav";
-const ADMIN_PASSWORD="Vaibhav@123";
+  clients:
+    Number(
+      localStorage.getItem("vc_clients")
+      || 3186
+    ),
 
-document.getElementById("loginForm").onsubmit=function(e){
+  reports:
+    Number(
+      localStorage.getItem("vc_reports")
+      || 0
+    ),
 
-e.preventDefault();
+  orders:
+    Number(
+      localStorage.getItem("vc_orders")
+      || 0
+    ),
 
-let id=document.getElementById("adminId").value.trim();
-let password=document.getElementById("adminPassword").value;
-
-if(id===ADMIN_ID && password===ADMIN_PASSWORD){
-
-sessionStorage.setItem("VC_ADMIN","YES");
-
-document.getElementById("loginPage").style.display="none";
-document.getElementById("app").style.display="block";
-
-render();
-
-}else{
-
-document.getElementById("loginError").textContent=
-"Invalid Admin ID or password";
-
-}
+  signedIn:
+    localStorage.getItem("vc_signed")
+    === "1"
 
 };
 
-
-function logout(){
-
-sessionStorage.removeItem("VC_ADMIN");
-location.reload();
-
-}
-
-
-/* ================= DATABASE ================= */
-
-let db=JSON.parse(localStorage.getItem("VC_DCR_DATA")||"null")||{
-
-representatives:[],
-doctors:[],
-chemists:[],
-stockists:[],
-products:[],
-assignments:[],
-dcr:[],
-location:true
-
-};
 
 function save(){
 
-localStorage.setItem(
-"VC_DCR_DATA",
-JSON.stringify(db)
-);
+  localStorage.setItem(
+    "vc_clients",
+    state.clients
+  );
 
-render();
+  localStorage.setItem(
+    "vc_reports",
+    state.reports
+  );
 
-}
+  localStorage.setItem(
+    "vc_orders",
+    state.orders
+  );
 
-function id(){
+  localStorage.setItem(
+    "vc_signed",
+    state.signedIn ? "1" : "0"
+  );
 
-return Date.now().toString(36)+
-Math.random().toString(36).substring(2,7);
+  document.getElementById(
+    "clientCount"
+  ).textContent = state.clients;
 
-}
+  document.getElementById(
+    "reportCount"
+  ).textContent = state.reports;
 
-
-/* ================= NAVIGATION ================= */
-
-function page(name,button){
-
-document.querySelectorAll(".page")
-.forEach(x=>x.classList.remove("active"));
-
-document.getElementById(name)
-.classList.add("active");
-
-document.querySelectorAll(".nav")
-.forEach(x=>x.classList.remove("active"));
-
-button.classList.add("active");
-
-render();
+  document.getElementById(
+    "orderCount"
+  ).textContent = state.orders;
 
 }
 
 
-/* ================= FORM ================= */
+function toast(message){
 
-let formType="";
+  const t =
+    document.getElementById("toast");
 
-function openForm(type){
+  t.textContent = message;
 
-formType=type;
+  t.style.display = "block";
 
-let title=
-"Add "+
-type.charAt(0).toUpperCase()+
-type.slice(1);
+  clearTimeout(window.toastTimer);
 
-document.getElementById("modalTitle")
-.textContent=title;
-
-let html="";
-
-if(type==="representative"){
-
-html=`
-
-<label>Representative ID</label>
-<input id="f1" placeholder="Example MR001">
-
-<label>Representative Name</label>
-<input id="f2" placeholder="Name">
-
-<label>Phone</label>
-<input id="f3" placeholder="Phone">
-
-<label>Password</label>
-<input id="f4" type="password"
-placeholder="Representative password">
-
-`;
+  window.toastTimer =
+    setTimeout(
+      () => {
+        t.style.display = "none";
+      },
+      1800
+    );
 
 }
 
-if(type==="doctor"){
 
-html=`
+function attendance(type){
 
-<label>Doctor Name</label>
-<input id="f1">
+  state.signedIn =
+    type === "in";
 
-<label>Speciality</label>
-<input id="f2">
+  if(type === "in"){
 
-<label>Phone</label>
-<input id="f3">
+    document.getElementById(
+      "activityText"
+    ).textContent =
+      "Signed in • GPS location can be captured";
 
-<label>City</label>
-<input id="f4">
+  }else{
 
-`;
+    document.getElementById(
+      "activityText"
+    ).textContent =
+      "Signed out";
 
-}
+  }
 
-if(type==="chemist" || type==="stockist"){
+  save();
 
-html=`
-
-<label>Name</label>
-<input id="f1">
-
-<label>Phone</label>
-<input id="f2">
-
-<label>City</label>
-<input id="f3">
-
-`;
+  toast(
+    "Attendance " +
+    (type === "in"
+      ? "SIGN IN"
+      : "SIGN OUT") +
+    " recorded"
+  );
 
 }
 
-if(type==="product"){
 
-html=`
+function openDrawer(){
 
-<label>Product Name</label>
-<input id="f1">
-
-<label>Brand</label>
-<input id="f2">
-
-<label>
-<input id="f3"
-type="checkbox"
-style="width:auto">
- Enable Product Choice
-</label>
-
-`;
+  document
+    .getElementById("drawer")
+    .classList.add("open");
 
 }
 
-document.getElementById("modalBody").innerHTML=html;
 
-document.getElementById("modal")
-.classList.add("show");
+function closeDrawer(){
+
+  document
+    .getElementById("drawer")
+    .classList.remove("open");
 
 }
+
+
+function showModal(html){
+
+  document.getElementById(
+    "modalContent"
+  ).innerHTML = html;
+
+  document
+    .getElementById("modal")
+    .classList.add("show");
+
+}
+
 
 function closeModal(){
 
-document.getElementById("modal")
-.classList.remove("show");
+  document
+    .getElementById("modal")
+    .classList.remove("show");
 
 }
 
 
-function saveForm(){
+function openDcr(){
 
-let a=document.getElementById("f1")?.value.trim();
-let b=document.getElementById("f2")?.value.trim();
-let c=document.getElementById("f3")?.value.trim();
-let d=document.getElementById("f4")?.value.trim();
+  showModal(`
 
-if(!a){
+    <h2>Daily Call Report (DCR)</h2>
 
-alert("Please enter required information");
-return;
+    <label>Date</label>
 
-}
+    <input
+      type="date"
+      value="${new Date()
+        .toISOString()
+        .slice(0,10)}">
 
-if(formType==="representative"){
+    <label>Client Type</label>
 
-db.representatives.push({
+    <select>
 
-id:id(),
-mr:a,
-name:b,
-phone:c,
-password:d,
-active:true,
-lat:null,
-lng:null
+      <option>Doctor</option>
+      <option>Chemist</option>
+      <option>Stockist</option>
 
-});
+    </select>
 
-}
+    <label>Client Name</label>
 
-if(formType==="doctor"){
+    <input
+      id="dcrClient"
+      placeholder="Enter client name">
 
-db.doctors.push({
+    <label>Visit Outcome</label>
 
-id:id(),
-name:a,
-speciality:b,
-phone:c,
-city:d
+    <select>
 
-});
+      <option>Visited</option>
+      <option>Not Visited</option>
+      <option>Follow-up</option>
 
-}
+    </select>
 
-if(formType==="chemist"){
+    <label>Notes</label>
 
-db.chemists.push({
+    <input
+      placeholder="Visit notes">
 
-id:id(),
-name:a,
-phone:b,
-city:c
+    <button
+      class="primary"
+      onclick="saveDcr()">
+      Save DCR
+    </button>
 
-});
+    <button
+      class="secondary"
+      onclick="closeModal()">
+      Cancel
+    </button>
 
-}
-
-if(formType==="stockist"){
-
-db.stockists.push({
-
-id:id(),
-name:a,
-phone:b,
-city:c
-
-});
-
-}
-
-if(formType==="product"){
-
-db.products.push({
-
-id:id(),
-name:a,
-brand:b,
-choice:document.getElementById("f3").checked
-
-});
-
-}
-
-closeModal();
-save();
+  `);
 
 }
 
 
-/* ================= REPRESENTATIVES ================= */
+function saveDcr(){
 
-function toggleRep(x){
+  const name =
+    document
+      .getElementById("dcrClient")
+      .value
+      .trim();
 
-let r=db.representatives.find(a=>a.id===x);
+  if(!name){
 
-r.active=!r.active;
+    toast("Enter client name");
 
-save();
+    return;
+  }
 
-}
+  state.reports++;
 
+  document.getElementById(
+    "activityText"
+  ).textContent =
+    "Latest DCR: " + name;
 
-function deleteRep(x){
+  save();
 
-if(!confirm(
-"Delete representative? Their assignments and DCR records will also be deleted."
-))return;
+  closeModal();
 
-db.representatives=
-db.representatives.filter(a=>a.id!==x);
-
-db.assignments=
-db.assignments.filter(a=>a.rep!==x);
-
-db.dcr=
-db.dcr.filter(a=>a.rep!==x);
-
-save();
+  toast("DCR saved");
 
 }
 
 
-function representativeGPS(x){
+function openClients(){
 
-if(!db.location){
+  showModal(`
 
-alert("Location access is OFF in Settings.");
-return;
+    <h2>Doctors / Clients</h2>
 
-}
+    <p>
+      Total clients:
+      <b>${state.clients}</b>
+    </p>
 
-if(!navigator.geolocation){
+    <input
+      id="newClient"
+      placeholder="Doctor / Chemist / Stockist name">
 
-alert("GPS is not available on this phone.");
-return;
+    <button
+      class="primary"
+      onclick="addClient()">
+      Add Client
+    </button>
 
-}
+    <button
+      class="secondary"
+      onclick="closeModal()">
+      Close
+    </button>
 
-navigator.geolocation.getCurrentPosition(
-
-function(position){
-
-let r=db.representatives.find(a=>a.id===x);
-
-r.lat=position.coords.latitude;
-r.lng=position.coords.longitude;
-
-save();
-
-alert("GPS saved for "+r.name);
-
-},
-
-function(error){
-
-alert("GPS permission failed: "+error.message);
-
-},
-
-{
-enableHighAccuracy:true,
-timeout:10000
-}
-
-);
+  `);
 
 }
 
 
-/* ================= CLIENT DELETE ================= */
+function addClient(){
 
-function deleteDoctor(x){
+  const name =
+    document
+      .getElementById("newClient")
+      .value
+      .trim();
 
-if(!confirm("Delete doctor?"))return;
+  if(!name){
 
-db.doctors=
-db.doctors.filter(a=>a.id!==x);
+    toast("Enter a name");
 
-db.assignments=
-db.assignments.filter(a=>
-!(a.type==="doctor"&&a.client===x));
+    return;
+  }
 
-save();
+  state.clients++;
 
-}
+  save();
 
-function deleteChemist(x){
+  closeModal();
 
-if(!confirm("Delete chemist?"))return;
-
-db.chemists=
-db.chemists.filter(a=>a.id!==x);
-
-db.assignments=
-db.assignments.filter(a=>
-!(a.type==="chemist"&&a.client===x));
-
-save();
-
-}
-
-function deleteStockist(x){
-
-if(!confirm("Delete stockist?"))return;
-
-db.stockists=
-db.stockists.filter(a=>a.id!==x);
-
-db.assignments=
-db.assignments.filter(a=>
-!(a.type==="stockist"&&a.client===x));
-
-save();
+  toast(name + " added");
 
 }
 
 
-/* ================= PRODUCT ================= */
+function openReports(){
 
-function productChoice(x){
+  showModal(`
 
-let p=db.products.find(a=>a.id===x);
+    <h2>Reports</h2>
 
-p.choice=!p.choice;
+    <p>
+      Daily Reports:
+      <b>${state.reports}</b>
+    </p>
 
-save();
+    <p>
+      Clients:
+      <b>${state.clients}</b>
+    </p>
 
-}
+    <p>
+      Orders:
+      <b>${state.orders}</b>
+    </p>
 
-function deleteProduct(x){
+    <button
+      class="primary"
+      onclick="closeModal()">
+      Done
+    </button>
 
-if(!confirm("Delete product?"))return;
-
-db.products=
-db.products.filter(a=>a.id!==x);
-
-save();
-
-}
-
-
-/* ================= ASSIGNMENT ================= */
-
-function loadAssignment(){
-
-let type=document.getElementById("assignType").value;
-
-let list=[];
-
-if(type==="doctor")list=db.doctors;
-if(type==="chemist")list=db.chemists;
-if(type==="stockist")list=db.stockists;
-
-document.getElementById("assignClient").innerHTML=
-
-list.map(x=>
-`<option value="${x.id}">${x.name}</option>`
-).join("");
-
-}
-
-document.getElementById("assignType").onchange=
-loadAssignment;
-
-
-function assignClient(){
-
-let rep=document.getElementById("assignRep").value;
-let type=document.getElementById("assignType").value;
-let client=document.getElementById("assignClient").value;
-
-if(!rep||!client){
-
-alert("Select representative and client");
-return;
-
-}
-
-db.assignments.push({
-
-id:id(),
-rep:rep,
-type:type,
-client:client
-
-});
-
-save();
+  `);
 
 }
 
 
-function removeAssignment(x){
+function openSummary(){
 
-db.assignments=
-db.assignments.filter(a=>a.id!==x);
+  showModal(`
 
-save();
+    <h2>Summary</h2>
 
-}
+    <p>
+      Attendance:
+      <b>
+        ${
+          state.signedIn
+          ? "Signed In"
+          : "Signed Out"
+        }
+      </b>
+    </p>
 
+    <p>
+      DCR completed:
+      <b>${state.reports}</b>
+    </p>
 
-/* ================= GPS / DCR ================= */
+    <p>
+      Clients:
+      <b>${state.clients}</b>
+    </p>
 
-let currentGPS=null;
+    <p>
+      Orders:
+      <b>${state.orders}</b>
+    </p>
 
-function getGPS(){
+    <button
+      class="primary"
+      onclick="closeModal()">
+      Close
+    </button>
 
-if(!db.location){
-
-alert("Admin has turned GPS OFF.");
-return;
-
-}
-
-navigator.geolocation.getCurrentPosition(
-
-function(position){
-
-currentGPS={
-
-lat:position.coords.latitude,
-lng:position.coords.longitude
-
-};
-
-document.getElementById("gpsResult").innerHTML=
-"📍 GPS captured: "+
-currentGPS.lat.toFixed(6)+
-", "+
-currentGPS.lng.toFixed(6);
-
-},
-
-function(error){
-
-alert("GPS error: "+error.message);
-
-},
-
-{
-enableHighAccuracy:true,
-timeout:10000
-}
-
-);
+  `);
 
 }
 
 
-function saveDCR(){
+function openSettings(){
 
-let rep=document.getElementById("dcrRep").value;
-let date=document.getElementById("dcrDate").value;
-let client=document.getElementById("dcrClient").value;
-let status=document.getElementById("dcrStatus").value;
-let remarks=document.getElementById("dcrRemarks").value;
+  showModal(`
 
-if(!rep||!date||!client){
+    <h2>Settings</h2>
 
-alert("Fill Representative, Date and Client");
-return;
+    <label>
+      Representative Name
+    </label>
+
+    <input
+      id="repInput"
+      value="${
+        document.getElementById("repName")
+        .textContent
+      }">
+
+    <button
+      class="primary"
+      onclick="saveRep()">
+      Save
+    </button>
+
+    <button
+      class="secondary"
+      onclick="closeModal()">
+      Cancel
+    </button>
+
+  `);
 
 }
 
-db.dcr.push({
 
-id:id(),
-rep:rep,
-date:date,
-client:client,
-status:status,
-remarks:remarks,
-lat:currentGPS?currentGPS.lat:null,
-lng:currentGPS?currentGPS.lng:null
+function saveRep(){
 
-});
+  const name =
+    document
+      .getElementById("repInput")
+      .value
+      .trim();
 
-currentGPS=null;
+  if(name){
 
-document.getElementById("gpsResult").innerHTML="";
+    localStorage.setItem(
+      "vc_rep",
+      name
+    );
 
-document.getElementById("dcrClient").value="";
-document.getElementById("dcrRemarks").value="";
+    document.getElementById(
+      "repName"
+    ).textContent = name;
+
+  }
+
+  closeModal();
+
+  toast("Settings saved");
+
+}
+
+
+document
+  .getElementById("modal")
+  .addEventListener(
+    "click",
+    function(e){
+
+      if(e.target === this){
+        closeModal();
+      }
+
+    }
+  );
+
+
+const savedName =
+  localStorage.getItem("vc_rep");
+
+if(savedName){
+
+  document.getElementById(
+    "repName"
+  ).textContent = savedName;
+
+}
 
 save();
-
-alert("DCR saved successfully");
-
-}
-
-
-/* ================= SETTINGS ================= */
-
-function changeLocation(){
-
-db.location=
-document.getElementById("locationSwitch").checked;
-
-save();
-
-}
-
-
-function resetData(){
-
-if(confirm("Delete all demo data?")){
-
-localStorage.removeItem("VC_DCR_DATA");
-
-location.reload();
-
-}
-
-}
-
-
-/* ================= RENDER ================= */
-
-function render(){
-
-document.getElementById("countRep").textContent=
-db.representatives.length;
-
-document.getElementById("countDoctor").textContent=
-db.doctors.length;
-
-document.getElementById("countChemist").textContent=
-db.chemists.length;
-
-document.getElementById("countStockist").textContent=
-db.stockists.length;
-
-
-/* Representatives */
-
-document.getElementById("repList").innerHTML=
-
-db.representatives.map(r=>`
-
-<tr>
-
-<td>${r.mr}</td>
-<td>${r.name}</td>
-<td>${r.phone}</td>
-
-<td>
-<span class="badge ${r.active?"":"off"}">
-${r.active?"ACTIVE":"INACTIVE"}
-</span>
-</td>
-
-<td>
-${r.lat?
-r.lat.toFixed(5)+", "+r.lng.toFixed(5):
-"Not captured"}
-</td>
-
-<td>
-
-<button class="secondary"
-onclick="representativeGPS('${r.id}')">
-GPS
-</button>
-
-<button class="secondary"
-onclick="toggleRep('${r.id}')">
-${r.active?"Deactivate":"Activate"}
-</button>
-
-<button class="danger"
-onclick="deleteRep('${r.id}')">
-Delete
-</button>
-
-</td>
-
-</tr>
-
-`).join("");
-
-
-/* Doctors */
-
-document.getElementById("doctorList").innerHTML=
-
-db.doctors.map(d=>`
-
-<tr>
-
-<td>${d.name}</td>
-<td>${d.speciality}</td>
-<td>${d.phone}</td>
-<td>${d.city}</td>
-<td>${assignedMR(d.id,"doctor")}</td>
-
-<td>
-<button class="danger"
-onclick="deleteDoctor('${d.id}')">
-Delete
-</button>
-</td>
-
-</tr>
-
-`).join("");
-
-
-/* Chemists */
-
-document.getElementById("chemistList").innerHTML=
-
-db.chemists.map(d=>`
-
-<tr>
-
-<td>${d.name}</td>
-<td>${d.phone}</td>
-<td>${d.city}</td>
-
-<td>
-<button class="danger"
-onclick="deleteChemist('${d.id}')">
-Delete
-</button>
-</td>
-
-</tr>
-
-`).join("");
-
-
-/* Stockists */
-
-document.getElementById("stockistList").innerHTML=
-
-db.stockists.map(d=>`
-
-<tr>
-
-<td>${d.name}</td>
-<td>${d.phone}</td>
-<td>${d.city}</td>
-
-<td>
-<button class="danger"
-onclick="deleteStockist('${d.id}')">
-Delete
-</button>
-</td>
-
-</tr>
-
-`).join("");
-
-
-/* Products */
-
-document.getElementById("productList").innerHTML=
-
-db.products.map(p=>`
-
-<tr>
-
-<td>${p.name}</td>
-<td>${p.brand}</td>
-<td>${p.choice?"ON":"OFF"}</td>
-
-<td>
-
-<button class="secondary"
-onclick="productChoice('${p.id}')">
-ON / OFF
-</button>
-
-<button class="danger"
-onclick="deleteProduct('${p.id}')">
-Delete
-</button>
-
-</td>
-
-</tr>
-
-`).join("");
-
-
-/* Representative dropdowns */
-
-let reps=db.representatives
-.filter(r=>r.active);
-
-let options=reps.map(r=>
-`<option value="${r.id}">
-${r.name} (${r.mr})
-</option>`
-).join("");
-
-document.getElementById("assignRep").innerHTML=options;
-document.getElementById("dcrRep").innerHTML=options;
-
-loadAssignment();
-
-
-/* Assignments */
-
-document.getElementById("assignmentList").innerHTML=
-
-db.assignments.map(a=>`
-
-<tr>
-
-<td>${repName(a.rep)}</td>
-<td>${a.type}</td>
-<td>${clientName(a.type,a.client)}</td>
-
-<td>
-<button class="danger"
-onclick="removeAssignment('${a.id}')">
-Remove
-</button>
-</td>
-
-</tr>
-
-`).join("");
-
-
-/* Reports */
-
-let visited=db.dcr.filter(x=>x.status==="Visited").length;
-let missed=db.dcr.filter(x=>x.status==="Missed").length;
-let gps=db.dcr.filter(x=>x.lat).length;
-
-document.getElementById("totalDcr").textContent=db.dcr.length;
-document.getElementById("visitedDcr").textContent=visited;
-document.getElementById("missedDcr").textContent=missed;
-document.getElementById("gpsDcr").textContent=gps;
-
-document.getElementById("reportList").innerHTML=
-
-db.dcr.map(x=>`
-
-<tr>
-
-<td>${x.date}</td>
-<td>${repName(x.rep)}</td>
-<td>${x.client}</td>
-<td>${x.status}</td>
-
-<td>
-${x.lat?
-x.lat.toFixed(5)+", "+x.lng.toFixed(5):
-"-"}
-</td>
-
-</tr>
-
-`).join("");
-
-document.getElementById("locationSwitch").checked=
-db.location;
-
-}
-
-
-function repName(x){
-
-let r=db.representatives.find(a=>a.id===x);
-
-return r?r.name:"Deleted";
-
-}
-
-
-function assignedMR(client,type){
-
-let a=db.assignments.find(x=>
-x.client===client&&x.type===type);
-
-return a?repName(a.rep):"-";
-
-}
-
-
-function clientName(type,id){
-
-let list=[];
-
-if(type==="doctor")list=db.doctors;
-if(type==="chemist")list=db.chemists;
-if(type==="stockist")list=db.stockists;
-
-let x=list.find(a=>a.id===id);
-
-return x?x.name:"Deleted";
-
-}
-
-
-/* ================= START ================= */
-
-document.getElementById("dcrDate").value=
-new Date().toISOString().slice(0,10);
-
-if(sessionStorage.getItem("VC_ADMIN")==="YES"){
-
-document.getElementById("loginPage").style.display="none";
-document.getElementById("app").style.display="block";
-
-}
-
-render();
 
 </script>
 

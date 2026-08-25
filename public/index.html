@@ -3,1809 +3,1578 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>V-CareRx DCR Admin</title>
+<title>V-CareRx DCR</title>
 
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;
- font-family:Arial,Helvetica,sans-serif;
- background:#f4f7f9;
- color:#26343d
-}
-button,input,select{font:inherit}
-button{cursor:pointer}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6f8;color:#26343d}
+button,input,select,textarea{font:inherit}
+button{border:0;border-radius:8px;padding:11px 16px;cursor:pointer}
 
 .login{
  min-height:100vh;
  display:flex;
  align-items:center;
  justify-content:center;
- background:linear-gradient(135deg,#063d5c,#008b78);
- padding:20px
+ padding:20px;
+ background:linear-gradient(145deg,#07506c,#008d82)
 }
 .loginBox{
- width:100%;
- max-width:400px;
- background:white;
- padding:30px;
- border-radius:20px;
- box-shadow:0 20px 60px #0005
+ width:100%;max-width:470px;background:white;
+ padding:35px;border-radius:25px;
+ box-shadow:0 15px 50px #0005
 }
 .logo{
- width:80px;
- height:80px;
- border-radius:50%;
- background:#fff;
- border:2px solid #0a4b6c;
- display:flex;
- align-items:center;
- justify-content:center;
- margin:auto;
- color:#0a4b6c;
- font-weight:bold
+ width:100px;height:100px;border:3px solid #07506c;
+ border-radius:50%;display:flex;align-items:center;
+ justify-content:center;margin:auto;color:#07506c;font-weight:bold
 }
-.loginBox h1{text-align:center}
-.field{margin:14px 0}
-.field label{
- display:block;
- font-size:13px;
- font-weight:bold;
- margin-bottom:6px
+h1{text-align:center}
+.subtitle{text-align:center;color:#71808a}
+label{display:block;font-weight:bold;margin:15px 0 6px}
+input,select,textarea{
+ width:100%;padding:12px;border:1px solid #ccd5da;
+ border-radius:8px;background:white
 }
-.field input,.field select{
- width:100%;
- padding:12px;
- border:1px solid #d6dee3;
- border-radius:9px
-}
-.primary{
- background:#00a88f;
- color:white;
- padding:12px 18px;
- border:0;
- border-radius:9px;
- font-weight:bold
-}
-.secondary{
- background:#e9eff2;
- color:#26343d;
- padding:9px 13px;
- border:0;
- border-radius:8px
-}
-.danger{
- background:#ffe8e6;
- color:#c62828;
- padding:9px 13px;
- border:0;
- border-radius:8px
-}
+.loginBtn{width:100%;background:#08aa95;color:white;font-weight:bold;margin-top:18px}
+.error{text-align:center;color:#c32e38;margin-top:15px}
+.demo{text-align:center;color:#777;font-size:13px;margin-top:15px}
 
-.hidden{display:none!important}
-
-.top{
- height:64px;
- background:#073f60;
- color:white;
- display:flex;
- align-items:center;
- padding:0 18px;
- gap:15px;
- position:sticky;
- top:0;
- z-index:10
+.app{display:none;min-height:100vh}
+.header{
+ height:62px;background:#073f58;color:white;
+ display:flex;align-items:center;justify-content:space-between;
+ padding:0 18px;position:sticky;top:0;z-index:5
 }
-.brand{font-size:20px;font-weight:bold}
-.spacer{flex:1}
-.admin{
- background:#ffffff22;
- padding:8px 12px;
- border-radius:20px;
- font-size:12px
-}
-
 .layout{display:flex}
 .sidebar{
- width:250px;
- background:white;
- min-height:calc(100vh - 64px);
- border-right:1px solid #ddd;
- padding:12px;
- position:sticky;
- top:64px
+ width:235px;background:white;min-height:calc(100vh - 62px);
+ padding:12px;border-right:1px solid #ddd
 }
 .nav{
- width:100%;
- border:0;
- background:white;
- text-align:left;
- padding:13px;
- margin:2px 0;
- border-radius:8px;
- color:#26343d
+ width:100%;text-align:left;background:white;
+ margin:3px 0;color:#34444d
 }
-.nav:hover,.nav.active{
- background:#e5f6f3;
- color:#087d6f;
- font-weight:bold
-}
+.nav:hover,.nav.active{background:#e4f7f3;color:#008b7b}
+.content{flex:1;padding:20px;max-width:1500px}
+.page{display:none}
+.page.active{display:block}
 
-main{
- flex:1;
- padding:20px;
- max-width:1500px
-}
-
-.header{
- display:flex;
- align-items:center;
- margin-bottom:18px;
- gap:10px
-}
-.header h2{margin:0}
 .cards{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:14px
+ display:grid;grid-template-columns:repeat(4,1fr);gap:14px
 }
 .card{
- background:white;
- border:1px solid #e0e5e8;
- border-radius:14px;
- padding:18px
+ background:white;padding:20px;border-radius:14px;
+ box-shadow:0 2px 10px #0001
 }
-.stat b{
- display:block;
- font-size:30px;
- margin-top:7px
+.number{font-size:30px;font-weight:bold;margin-top:8px}
+.panel{
+ background:white;padding:18px;border-radius:14px;
+ margin-top:16px;box-shadow:0 2px 10px #0001
 }
-.muted{color:#6e7b83}
-.small{font-size:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.primary{background:#08aa95;color:white}
+.secondary{background:#e9eff2}
+.danger{background:#ffe5e5;color:#b51f2b}
+.success{background:#e3f7ef;color:#087b6d}
 
-.tableBox{
- background:white;
- border:1px solid #dfe5e8;
- border-radius:14px;
- overflow:auto
-}
-table{
- width:100%;
- min-width:850px;
- border-collapse:collapse
-}
-th,td{
- padding:12px;
- border-bottom:1px solid #e4e8ea;
- text-align:left
-}
-th{
- background:#f7f9fa;
- font-size:12px;
- color:#68757d
-}
-.actions{
- display:flex;
- gap:6px;
- flex-wrap:wrap
-}
+table{width:100%;border-collapse:collapse}
+th,td{padding:11px;border-bottom:1px solid #e4e8ea;text-align:left}
+th{background:#f5f8f9}
+
 .badge{
- display:inline-block;
- padding:5px 9px;
- border-radius:20px;
- font-size:11px;
- font-weight:bold
+ padding:5px 9px;border-radius:20px;
+ background:#e1f7ef;color:#087b6d;font-size:12px
 }
-.active{
- background:#e2f7ed;
- color:#087d4b
-}
-.inactive{
- background:#eee;
- color:#68747d
-}
-
-.grid{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:15px
-}
+.badge.off{background:#eee;color:#666}
 
 .modal{
- position:fixed;
- inset:0;
- background:#0008;
- display:flex;
- justify-content:center;
- align-items:center;
- padding:15px;
- z-index:50
+ display:none;position:fixed;inset:0;background:#0007;
+ align-items:center;justify-content:center;padding:15px;z-index:20
 }
+.modal.show{display:flex}
 .modalBox{
- width:100%;
- max-width:650px;
- max-height:90vh;
- overflow:auto;
- background:white;
- border-radius:16px;
- padding:20px
+ background:white;width:100%;max-width:550px;
+ padding:22px;border-radius:16px;max-height:90vh;overflow:auto
 }
-.formGrid{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:12px
-}
-
-.reportGrid{
- display:grid;
- grid-template-columns:1fr 1fr;
- background:white;
- border:1px solid #ddd;
- border-radius:14px;
- overflow:hidden
-}
-.report{
- padding:20px;
- border-bottom:1px solid #ddd;
- border-right:1px solid #ddd;
- background:white;
- text-align:left
-}
-
-.mobileNav{display:none}
 
 @media(max-width:900px){
- .sidebar{display:none}
  .cards{grid-template-columns:1fr 1fr}
- .grid,.reportGrid{grid-template-columns:1fr}
- .formGrid{grid-template-columns:1fr}
- .mobileNav{
-  display:flex;
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:60px;
-  background:#222;
-  z-index:20;
-  justify-content:space-around
- }
- .mobileNav button{
-  background:none;
-  color:white;
-  border:0;
-  font-size:11px
- }
- main{padding-bottom:75px}
+ .sidebar{width:70px}
+ .nav span{display:none}
+}
+@media(max-width:550px){
+ .cards{grid-template-columns:1fr}
+ .grid2{grid-template-columns:1fr}
+ .content{padding:12px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<section id="login" class="login">
+<!-- ================= LOGIN ================= -->
+
+<div id="loginPage" class="login">
 <div class="loginBox">
 
 <div class="logo">V-CareRx</div>
 
 <h1>V-CareRx DCR</h1>
-<p style="text-align:center" class="muted">Administrator Login</p>
+<div class="subtitle">Administrator Login</div>
 
 <form id="loginForm">
 
-<div class="field">
 <label>Admin ID</label>
-<input id="username" required>
-</div>
+<input id="adminId"
+       type="text"
+       value="Vaibhav"
+       autocomplete="username"
+       required>
 
-<div class="field">
 <label>Password</label>
-<input id="password" type="password" required>
-</div>
+<input id="adminPassword"
+       type="password"
+       autocomplete="current-password"
+       required>
 
-<button class="primary" style="width:100%">
-LOGIN
-</button>
+<button class="loginBtn" type="submit">LOGIN</button>
 
-<p id="loginError" style="color:#c62828;text-align:center"></p>
+<div id="loginError" class="error"></div>
 
 </form>
 
-<p class="small muted">
+<div class="demo">
 Demo Admin: Vaibhav / Vaibhav@123
-</p>
+</div>
 
 </div>
-</section>
+</div>
 
 
-<!-- APP -->
-<section id="app" class="hidden">
+<!-- ================= APPLICATION ================= -->
 
-<header class="top">
-<div class="brand">V-CareRx DCR</div>
-<div class="spacer"></div>
-<div class="admin">ADMIN : Vaibhav</div>
-<button class="secondary" onclick="logout()">Logout</button>
+<div id="app" class="app">
+
+<header class="header">
+<b>V-CareRx DCR — ADMIN</b>
+<button class="secondary" onclick="logout()">LOG OUT</button>
 </header>
 
 <div class="layout">
 
 <aside class="sidebar">
 
-<button class="nav active" onclick="page('home')">🏠 Quick Summary</button>
-<button class="nav" onclick="page('representatives')">👤 Representatives</button>
-<button class="nav" onclick="page('doctors')">🩺 Doctors</button>
-<button class="nav" onclick="page('chemists')">💊 Chemists</button>
-<button class="nav" onclick="page('stockists')">📦 Stockists</button>
-<button class="nav" onclick="page('products')">🧪 Products</button>
-<button class="nav" onclick="page('assignments')">🔗 Assignments</button>
-<button class="nav" onclick="page('permissions')">📍 Permissions</button>
-<button class="nav" onclick="page('reports')">📊 Reports</button>
-<button class="nav" onclick="page('settings')">⚙️ Settings</button>
+<button class="nav active" onclick="page('dashboard',this)">🏠 <span>Dashboard</span></button>
+<button class="nav" onclick="page('representatives',this)">👤 <span>Representatives</span></button>
+<button class="nav" onclick="page('doctors',this)">🩺 <span>Doctors</span></button>
+<button class="nav" onclick="page('chemists',this)">💊 <span>Chemists</span></button>
+<button class="nav" onclick="page('stockists',this)">📦 <span>Stockists</span></button>
+<button class="nav" onclick="page('products',this)">🧴 <span>Products</span></button>
+<button class="nav" onclick="page('assignments',this)">🔗 <span>Assignments</span></button>
+<button class="nav" onclick="page('dcr',this)">📝 <span>DCR Entry</span></button>
+<button class="nav" onclick="page('reports',this)">📊 <span>Reports</span></button>
+<button class="nav" onclick="page('settings',this)">⚙️ <span>Settings</span></button>
 
 </aside>
 
-<main id="content"></main>
+
+<main class="content">
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="page active">
+
+<h2>Admin Dashboard</h2>
+
+<div class="cards">
+
+<div class="card">
+Representatives
+<div class="number" id="countRep">0</div>
+</div>
+
+<div class="card">
+Doctors
+<div class="number" id="countDoctor">0</div>
+</div>
+
+<div class="card">
+Chemists
+<div class="number" id="countChemist">0</div>
+</div>
+
+<div class="card">
+Stockists
+<div class="number" id="countStockist">0</div>
+</div>
 
 </div>
 
-<div class="mobileNav">
-<button onclick="page('home')">⌂<br>Home</button>
-<button onclick="page('doctors')">🩺<br>Doctors</button>
-<button onclick="page('representatives')">👤<br>MR</button>
-<button onclick="page('reports')">📊<br>Reports</button>
-<button onclick="page('settings')">⚙<br>Settings</button>
+<div class="panel">
+
+<h3>Admin Quick Actions</h3>
+
+<div class="actions">
+
+<button class="primary"
+onclick="openForm('representative')">
++ Add Representative
+</button>
+
+<button class="secondary"
+onclick="openForm('doctor')">
++ Add Doctor
+</button>
+
+<button class="secondary"
+onclick="openForm('chemist')">
++ Add Chemist
+</button>
+
+<button class="secondary"
+onclick="openForm('stockist')">
++ Add Stockist
+</button>
+
+<button class="secondary"
+onclick="openForm('product')">
++ Add Product
+</button>
+
+</div>
+
 </div>
 
 </section>
 
 
+<!-- REPRESENTATIVES -->
+
+<section id="representatives" class="page">
+
+<h2>Representatives</h2>
+
+<button class="primary"
+onclick="openForm('representative')">
++ Create Representative ID
+</button>
+
+<div class="panel">
+
+<table>
+<thead>
+<tr>
+<th>MR ID</th>
+<th>Name</th>
+<th>Phone</th>
+<th>Status</th>
+<th>GPS</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="repList"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- DOCTORS -->
+
+<section id="doctors" class="page">
+
+<h2>Doctor Master</h2>
+
+<button class="primary"
+onclick="openForm('doctor')">
++ Add Doctor
+</button>
+
+<div class="panel">
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Speciality</th>
+<th>Phone</th>
+<th>City</th>
+<th>MR</th>
+<th>Delete</th>
+</tr>
+</thead>
+
+<tbody id="doctorList"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- CHEMISTS -->
+
+<section id="chemists" class="page">
+
+<h2>Chemist Master</h2>
+
+<button class="primary"
+onclick="openForm('chemist')">
++ Add Chemist
+</button>
+
+<div class="panel">
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Phone</th>
+<th>City</th>
+<th>Delete</th>
+</tr>
+</thead>
+
+<tbody id="chemistList"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- STOCKISTS -->
+
+<section id="stockists" class="page">
+
+<h2>Stockist Master</h2>
+
+<button class="primary"
+onclick="openForm('stockist')">
++ Add Stockist
+</button>
+
+<div class="panel">
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Phone</th>
+<th>City</th>
+<th>Delete</th>
+</tr>
+</thead>
+
+<tbody id="stockistList"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section id="products" class="page">
+
+<h2>Product Choice</h2>
+
+<button class="primary"
+onclick="openForm('product')">
++ Add Product
+</button>
+
+<div class="panel">
+
+<table>
+<thead>
+<tr>
+<th>Product</th>
+<th>Brand</th>
+<th>Choice</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="productList"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- ASSIGNMENT -->
+
+<section id="assignments" class="page">
+
+<h2>Doctor / Chemist / Stockist Assignment</h2>
+
+<div class="panel">
+
+<div class="grid2">
+
+<div>
+<label>Representative</label>
+<select id="assignRep"></select>
+</div>
+
+<div>
+<label>Type</label>
+<select id="assignType"
+onchange="loadClients()">
+<option value="doctor">Doctor</option>
+<option value="chemist">Chemist</option>
+<option value="stockist">Stockist</option>
+</select>
+</div>
+
+</div>
+
+<label>Client</label>
+<select id="assignClient"></select>
+
+<div class="actions">
+
+<button class="primary"
+onclick="assignClient()">
+ASSIGN
+</button>
+
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Representative</th>
+<th>Type</th>
+<th>Client</th>
+<th>Remove</th>
+</tr>
+</thead>
+
+<tbody id="assignmentList"></tbody>
+</table>
+
+</div>
+
+</section>
+
+
+<!-- DCR -->
+
+<section id="dcr" class="page">
+
+<h2>DCR Filling</h2>
+
+<div class="panel">
+
+<label>Representative</label>
+<select id="dcrRep"></select>
+
+<label>Date</label>
+<input id="dcrDate" type="date">
+
+<label>Doctor / Chemist / Stockist</label>
+<input id="dcrClient" placeholder="Client name">
+
+<label>Visit Status</label>
+<select id="dcrStatus">
+<option>Visited</option>
+<option>Missed</option>
+<option>Planned</option>
+</select>
+
+<label>Remarks</label>
+<textarea id="dcrRemarks" rows="4"></textarea>
+
+<div class="actions">
+
+<button class="primary"
+onclick="getGPS()">
+📍 GET GPS LOCATION
+</button>
+
+<button class="secondary"
+onclick="saveDCR()">
+SAVE DCR
+</button>
+
+</div>
+
+<div id="gpsResult"></div>
+
+</div>
+
+</section>
+
+
+<!-- REPORTS -->
+
+<section id="reports" class="page">
+
+<h2>Reports</h2>
+
+<div class="cards">
+
+<div class="card">
+Total DCR
+<div class="number" id="totalDcr">0</div>
+</div>
+
+<div class="card">
+Visited
+<div class="number" id="visitedDcr">0</div>
+</div>
+
+<div class="card">
+Missed
+<div class="number" id="missedDcr">0</div>
+</div>
+
+<div class="card">
+GPS Records
+<div class="number" id="gpsDcr">0</div>
+</div>
+
+</div>
+
+<div class="panel">
+
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>MR</th>
+<th>Client</th>
+<th>Status</th>
+<th>GPS</th>
+</tr>
+</thead>
+
+<tbody id="reportList"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- SETTINGS -->
+
+<section id="settings" class="page">
+
+<h2>Administrator Settings</h2>
+
+<div class="panel">
+
+<h3>Location Permission</h3>
+
+<label>
+<input id="locationSwitch"
+type="checkbox"
+style="width:auto"
+onchange="changeLocation()">
+
+ Allow GPS / Location
+</label>
+
+<p>
+Only the administrator controls this setting in this demo.
+The phone/browser will still ask for GPS permission.
+</p>
+
+<hr>
+
+<h3>Admin Access</h3>
+
+<p>
+✓ Representative activation/deactivation<br>
+✓ Representative ID creation<br>
+✓ Doctor addition/deletion<br>
+✓ Chemist addition/deletion<br>
+✓ Stockist addition/deletion<br>
+✓ Product choice management<br>
+✓ Client assignment<br>
+✓ GPS capture<br>
+✓ DCR entry<br>
+✓ DCR reports
+</p>
+
+<button class="danger"
+onclick="resetData()">
+RESET ALL DEMO DATA
+</button>
+
+</div>
+
+</section>
+
+</main>
+</div>
+</div>
+
+
 <!-- MODAL -->
-<div id="modal" class="modal hidden">
+
+<div id="modal" class="modal">
+
 <div class="modalBox">
-<div id="modalContent"></div>
+
+<h2 id="modalTitle"></h2>
+
+<div id="modalBody"></div>
+
+<div class="actions">
+
+<button class="secondary"
+onclick="closeModal()">
+Cancel
+</button>
+
+<button class="primary"
+onclick="saveForm()">
+SAVE
+</button>
+
+</div>
+
 </div>
 </div>
 
 
 <script>
 
-/* =========================
-   DATABASE
-========================= */
+/* ================= LOGIN ================= */
 
-let db=JSON.parse(localStorage.getItem("VCARERX_DB")||"null")||{
+const ADMIN_ID="Vaibhav";
+const ADMIN_PASSWORD="Vaibhav@123";
 
- representatives:[
-  {
-   id:"MR001",
-   name:"Tanuja",
-   username:"Tanuja",
-   password:"Tanuja@123",
-   active:true,
-   location:true
-  }
- ],
+document.getElementById("loginForm").onsubmit=function(e){
 
- doctors:[],
+e.preventDefault();
 
- chemists:[],
+let id=document.getElementById("adminId").value.trim();
+let password=document.getElementById("adminPassword").value;
 
- stockists:[],
+if(id===ADMIN_ID && password===ADMIN_PASSWORD){
 
- products:[
-  {
-   id:"P001",
-   name:"Sample Product",
-   brand:"V-CareRx",
-   active:true
-  }
- ],
+sessionStorage.setItem("VC_ADMIN","YES");
 
- assignments:[],
+document.getElementById("loginPage").style.display="none";
+document.getElementById("app").style.display="block";
 
- permissions:{
-  location:true,
-  doctors:true,
-  chemists:true,
-  stockists:true,
-  products:true
- }
+render();
+
+}else{
+
+document.getElementById("loginError").textContent=
+"Invalid Admin ID or password";
+
+}
+
+};
+
+
+function logout(){
+
+sessionStorage.removeItem("VC_ADMIN");
+location.reload();
+
+}
+
+
+/* ================= DATABASE ================= */
+
+let db=JSON.parse(localStorage.getItem("VC_DCR_DATA")||"null")||{
+
+representatives:[],
+doctors:[],
+chemists:[],
+stockists:[],
+products:[],
+assignments:[],
+dcr:[],
+location:true
 
 };
 
 function save(){
- localStorage.setItem("VCARERX_DB",JSON.stringify(db));
+
+localStorage.setItem(
+"VC_DCR_DATA",
+JSON.stringify(db)
+);
+
+render();
+
 }
 
-function newID(prefix){
- return prefix+Math.random().toString(36).substring(2,7).toUpperCase();
-}
+function id(){
 
-function esc(x){
- return String(x||"")
- .replace(/&/g,"&amp;")
- .replace(/</g,"&lt;")
- .replace(/>/g,"&gt;")
- .replace(/"/g,"&quot;");
-}
+return Date.now().toString(36)+
+Math.random().toString(36).substring(2,7);
 
-
-/* =========================
-   LOGIN
-========================= */
-
-document.getElementById("loginForm").onsubmit=function(e){
-
- e.preventDefault();
-
- let u=document.getElementById("username").value;
- let p=document.getElementById("password").value;
-
- if(u==="Vaibhav" && p==="Vaibhav@123"){
-
-  sessionStorage.setItem("ADMIN_LOGIN","1");
-
-  document.getElementById("login").classList.add("hidden");
-  document.getElementById("app").classList.remove("hidden");
-
-  page("home");
-
- }else{
-
-  document.getElementById("loginError").textContent=
-  "Invalid Admin ID or password";
-
- }
-};
-
-function logout(){
- sessionStorage.removeItem("ADMIN_LOGIN");
- location.reload();
-}
-
-if(sessionStorage.getItem("ADMIN_LOGIN")==="1"){
- document.getElementById("login").classList.add("hidden");
- document.getElementById("app").classList.remove("hidden");
- page("home");
 }
 
 
-/* =========================
-   PAGE ROUTER
-========================= */
+/* ================= NAVIGATION ================= */
 
-function page(name){
+function page(name,button){
 
- document.querySelectorAll(".nav")
- .forEach(x=>x.classList.remove("active"));
+document.querySelectorAll(".page")
+.forEach(x=>x.classList.remove("active"));
 
- document.querySelectorAll(".nav")
- .forEach(x=>{
-  if(x.textContent.toLowerCase().includes(name))
-   x.classList.add("active");
- });
+document.getElementById(name)
+.classList.add("active");
 
- if(name==="home")home();
- if(name==="representatives")representatives();
- if(name==="doctors")doctors();
- if(name==="chemists")clients("chemists","Chemist");
- if(name==="stockists")clients("stockists","Stockist");
- if(name==="products")products();
- if(name==="assignments")assignments();
- if(name==="permissions")permissions();
- if(name==="reports")reports();
- if(name==="settings")settings();
+document.querySelectorAll(".nav")
+.forEach(x=>x.classList.remove("active"));
+
+button.classList.add("active");
+
+render();
+
 }
 
 
-/* =========================
-   HOME
-========================= */
+/* ================= FORM ================= */
 
-function home(){
+let formType="";
 
- document.getElementById("content").innerHTML=`
+function openForm(type){
 
- <div class="header">
- <div>
- <h2>Quick Summary</h2>
- <span class="muted small">Administrator control panel</span>
- </div>
- </div>
+formType=type;
 
- <div class="cards">
+let title=
+"Add "+
+type.charAt(0).toUpperCase()+
+type.slice(1);
 
- <div class="card stat">
- Representatives
- <b>${db.representatives.filter(x=>x.active).length}</b>
- <span class="muted">Active MR</span>
- </div>
+document.getElementById("modalTitle")
+.textContent=title;
 
- <div class="card stat">
- Doctors
- <b>${db.doctors.filter(x=>x.active!==false).length}</b>
- <span class="muted">Active Doctors</span>
- </div>
+let html="";
 
- <div class="card stat">
- Chemists
- <b>${db.chemists.length}</b>
- <span class="muted">Total Chemists</span>
- </div>
+if(type==="representative"){
 
- <div class="card stat">
- Stockists
- <b>${db.stockists.length}</b>
- <span class="muted">Total Stockists</span>
- </div>
+html=`
 
- </div>
+<label>Representative ID</label>
+<input id="f1" placeholder="Example MR001">
 
- <br>
+<label>Representative Name</label>
+<input id="f2" placeholder="Name">
 
- <div class="grid">
+<label>Phone</label>
+<input id="f3" placeholder="Phone">
 
- <div class="card">
- <h3>Admin Access</h3>
- <p>Location:
- <b>${db.permissions.location?"ON":"OFF"}</b></p>
+<label>Password</label>
+<input id="f4" type="password"
+placeholder="Representative password">
 
- <p>Doctor Management:
- <b>ADMIN ONLY</b></p>
+`;
 
- <p>Representative Management:
- <b>ADMIN ONLY</b></p>
-
- <p>Chemist / Stockist:
- <b>ADMIN ONLY</b></p>
-
- </div>
-
- <div class="card">
- <h3>GPS</h3>
-
- <p class="muted">
- Admin can store Doctor latitude and longitude.
- </p>
-
- <button class="primary" onclick="getGPS()">
- Test Current GPS
- </button>
-
- <p id="gpsResult"></p>
-
- </div>
-
- </div>
- `;
 }
 
+if(type==="doctor"){
 
-/* =========================
-   REPRESENTATIVES
-========================= */
+html=`
 
-function representatives(){
+<label>Doctor Name</label>
+<input id="f1">
 
- let rows=db.representatives.map(r=>`
+<label>Speciality</label>
+<input id="f2">
 
- <tr>
+<label>Phone</label>
+<input id="f3">
 
- <td>${esc(r.id)}</td>
- <td>${esc(r.name)}</td>
- <td>${esc(r.username)}</td>
+<label>City</label>
+<input id="f4">
 
- <td>
- ${r.location?"ON":"OFF"}
- </td>
+`;
 
- <td>
- <span class="badge ${r.active?"active":"inactive"}">
- ${r.active?"ACTIVE":"INACTIVE"}
- </span>
- </td>
-
- <td>
-
- <div class="actions">
-
- <button class="secondary"
- onclick="editMR('${r.id}')">
- Edit
- </button>
-
- <button class="secondary"
- onclick="toggleMR('${r.id}')">
- ${r.active?"Deactivate":"Activate"}
- </button>
-
- <button class="danger"
- onclick="deleteMR('${r.id}')">
- Delete
- </button>
-
- </div>
-
- </td>
-
- </tr>
-
- `).join("");
-
- document.getElementById("content").innerHTML=`
-
- <div class="header">
-
- <h2>Representative Master</h2>
-
- <div class="spacer"></div>
-
- <button class="primary"
- onclick="mrForm()">
- + Create Representative
- </button>
-
- </div>
-
- <div class="tableBox">
-
- <table>
-
- <thead>
- <tr>
- <th>MR ID</th>
- <th>Name</th>
- <th>Username</th>
- <th>Location</th>
- <th>Status</th>
- <th>Actions</th>
- </tr>
- </thead>
-
- <tbody>
-
- ${rows||`
- <tr>
- <td colspan="6">No representatives</td>
- </tr>
- `}
-
- </tbody>
-
- </table>
-
- </div>
- `;
 }
 
-function mrForm(old=null){
+if(type==="chemist" || type==="stockist"){
 
- openModal(`
+html=`
 
- <h3>${old?"Edit":"Create"} Representative</h3>
+<label>Name</label>
+<input id="f1">
 
- <form id="mrForm">
+<label>Phone</label>
+<input id="f2">
 
- <div class="formGrid">
+<label>City</label>
+<input id="f3">
 
- <div class="field">
- <label>MR ID</label>
- <input name="id"
- value="${esc(old?.id||newID("MR"))}" required>
- </div>
+`;
 
- <div class="field">
- <label>Representative Name</label>
- <input name="name"
- value="${esc(old?.name)}" required>
- </div>
-
- <div class="field">
- <label>Username</label>
- <input name="username"
- value="${esc(old?.username)}" required>
- </div>
-
- <div class="field">
- <label>Password</label>
- <input name="password"
- value="${esc(old?.password)}" required>
- </div>
-
- </div>
-
- <p>
- <label>
- <input type="checkbox" name="location"
- ${old?.location!==false?"checked":""}>
- Location Access ON
- </label>
- </p>
-
- <p>
- <label>
- <input type="checkbox" name="active"
- ${old?.active!==false?"checked":""}>
- Active
- </label>
- </p>
-
- <button class="primary">Save</button>
-
- </form>
- `);
-
- document.getElementById("mrForm").onsubmit=function(e){
-
-  e.preventDefault();
-
-  let f=new FormData(e.target);
-
-  let x={
-   id:f.get("id"),
-   name:f.get("name"),
-   username:f.get("username"),
-   password:f.get("password"),
-   location:e.target.location.checked,
-   active:e.target.active.checked
-  };
-
-  let i=db.representatives.findIndex(a=>a.id===x.id);
-
-  if(i>=0)db.representatives[i]=x;
-  else db.representatives.push(x);
-
-  save();
-  closeModal();
-  representatives();
-
- };
 }
 
-function editMR(id){
- let x=db.representatives.find(a=>a.id===id);
- mrForm(x);
+if(type==="product"){
+
+html=`
+
+<label>Product Name</label>
+<input id="f1">
+
+<label>Brand</label>
+<input id="f2">
+
+<label>
+<input id="f3"
+type="checkbox"
+style="width:auto">
+ Enable Product Choice
+</label>
+
+`;
+
 }
 
-function toggleMR(id){
+document.getElementById("modalBody").innerHTML=html;
 
- let x=db.representatives.find(a=>a.id===id);
+document.getElementById("modal")
+.classList.add("show");
 
- x.active=!x.active;
-
- save();
- representatives();
-}
-
-function deleteMR(id){
-
- if(!confirm("Delete this representative?"))return;
-
- db.representatives=
- db.representatives.filter(x=>x.id!==id);
-
- db.assignments=
- db.assignments.filter(x=>x.mrId!==id);
-
- save();
- representatives();
-}
-
-
-/* =========================
-   DOCTORS
-========================= */
-
-function doctors(){
-
- let rows=db.doctors.map(d=>{
-
-  let a=db.assignments.find(
-   x=>x.type==="doctor" && x.clientId===d.id
-  );
-
-  let mr=db.representatives.find(
-   x=>x.id===a?.mrId
-  );
-
-  return `
-
-  <tr>
-
-  <td>${esc(d.id)}</td>
-
-  <td>${esc(d.name)}</td>
-
-  <td>${esc(d.specialty)}</td>
-
-  <td>${esc(d.area)}</td>
-
-  <td>${esc(mr?.name||"Unassigned")}</td>
-
-  <td>
-  ${d.lat&&d.lng?
-  esc(d.lat)+", "+esc(d.lng):
-  "Not Set"}
-  </td>
-
-  <td>
-  <span class="badge ${d.active!==false?"active":"inactive"}">
-  ${d.active!==false?"ACTIVE":"INACTIVE"}
-  </span>
-  </td>
-
-  <td>
-
-  <div class="actions">
-
-  <button class="secondary"
-  onclick="doctorForm('${d.id}')">
-  Edit
-  </button>
-
-  <button class="secondary"
-  onclick="toggleDoctor('${d.id}')">
-  ${d.active!==false?"Deactivate":"Activate"}
-  </button>
-
-  <button class="danger"
-  onclick="deleteDoctor('${d.id}')">
-  Delete
-  </button>
-
-  </div>
-
-  </td>
-
-  </tr>
-
-  `;
-
- }).join("");
-
- document.getElementById("content").innerHTML=`
-
- <div class="header">
-
- <h2>Doctor Master</h2>
-
- <div class="spacer"></div>
-
- <button class="primary"
- onclick="doctorForm()">
- + Add Doctor
- </button>
-
- </div>
-
- <div class="card" style="margin-bottom:15px">
-
- <b>GPS Location:</b>
-
- ${db.permissions.location?"ENABLED":"DISABLED"}
-
- </div>
-
- <div class="tableBox">
-
- <table>
-
- <thead>
- <tr>
- <th>ID</th>
- <th>Doctor</th>
- <th>Specialty</th>
- <th>Area</th>
- <th>Assigned MR</th>
- <th>GPS</th>
- <th>Status</th>
- <th>Actions</th>
- </tr>
- </thead>
-
- <tbody>${rows}</tbody>
-
- </table>
-
- </div>
- `;
-}
-
-function doctorForm(id=null){
-
- let old=id?
- db.doctors.find(x=>x.id===id):null;
-
- openModal(`
-
- <h3>${old?"Edit Doctor":"Add Doctor"}</h3>
-
- <form id="doctorForm">
-
- <div class="formGrid">
-
- <div class="field">
- <label>Doctor ID</label>
- <input name="id"
- value="${esc(old?.id||newID("DR"))}" required>
- </div>
-
- <div class="field">
- <label>Doctor Name</label>
- <input name="name"
- value="${esc(old?.name)}" required>
- </div>
-
- <div class="field">
- <label>Specialty</label>
- <input name="specialty"
- value="${esc(old?.specialty)}">
- </div>
-
- <div class="field">
- <label>Area</label>
- <input name="area"
- value="${esc(old?.area)}">
- </div>
-
- <div class="field">
- <label>Address</label>
- <input name="address"
- value="${esc(old?.address)}">
- </div>
-
- <div class="field">
- <label>Phone</label>
- <input name="phone"
- value="${esc(old?.phone)}">
- </div>
-
- <div class="field">
- <label>Latitude</label>
- <input id="lat" name="lat"
- value="${esc(old?.lat)}">
- </div>
-
- <div class="field">
- <label>Longitude</label>
- <input id="lng" name="lng"
- value="${esc(old?.lng)}">
- </div>
-
- </div>
-
- <button type="button"
- class="secondary"
- onclick="fillGPS()">
- 📍 Use Current GPS
- </button>
-
- <p>
- <label>
- <input type="checkbox" name="active"
- ${old?.active!==false?"checked":""}>
- Active
- </label>
- </p>
-
- <button class="primary">Save Doctor</button>
-
- </form>
- `);
-
- document.getElementById("doctorForm").onsubmit=function(e){
-
-  e.preventDefault();
-
-  let f=new FormData(e.target);
-
-  let x={
-   id:f.get("id"),
-   name:f.get("name"),
-   specialty:f.get("specialty"),
-   area:f.get("area"),
-   address:f.get("address"),
-   phone:f.get("phone"),
-   lat:f.get("lat"),
-   lng:f.get("lng"),
-   active:e.target.active.checked
-  };
-
-  let i=db.doctors.findIndex(a=>a.id===x.id);
-
-  if(i>=0)db.doctors[i]=x;
-  else db.doctors.push(x);
-
-  save();
-  closeModal();
-  doctors();
- };
-}
-
-function toggleDoctor(id){
-
- let x=db.doctors.find(a=>a.id===id);
-
- x.active=x.active===false;
-
- save();
- doctors();
-}
-
-function deleteDoctor(id){
-
- if(!confirm(
- "Delete Doctor and remove all Doctor assignments?"
- ))return;
-
- db.doctors=
- db.doctors.filter(x=>x.id!==id);
-
- db.assignments=
- db.assignments.filter(
- x=>!(x.type==="doctor"&&x.clientId===id)
- );
-
- save();
- doctors();
-}
-
-
-/* =========================
-   CHEMIST / STOCKIST
-========================= */
-
-function clients(type,label){
-
- let rows=db[type].map(x=>`
-
- <tr>
- <td>${esc(x.id)}</td>
- <td>${esc(x.name)}</td>
- <td>${esc(x.area)}</td>
-
- <td>
- <span class="badge ${x.active!==false?"active":"inactive"}">
- ${x.active!==false?"ACTIVE":"INACTIVE"}
- </span>
- </td>
-
- <td>
-
- <button class="secondary"
- onclick="clientForm('${type}','${x.id}')">
- Edit
- </button>
-
- <button class="danger"
- onclick="deleteClient('${type}','${x.id}')">
- Delete
- </button>
-
- </td>
- </tr>
-
- `).join("");
-
- document.getElementById("content").innerHTML=`
-
- <div class="header">
-
- <h2>${label} Master</h2>
-
- <div class="spacer"></div>
-
- <button class="primary"
- onclick="clientForm('${type}')">
- + Add ${label}
- </button>
-
- </div>
-
- <div class="tableBox">
-
- <table>
-
- <thead>
- <tr>
- <th>ID</th>
- <th>Name</th>
- <th>Area</th>
- <th>Status</th>
- <th>Actions</th>
- </tr>
- </thead>
-
- <tbody>${rows}</tbody>
-
- </table>
-
- </div>
- `;
-}
-
-function clientForm(type,id=null){
-
- let old=id?
- db[type].find(x=>x.id===id):null;
-
- let label=type==="chemists"?"Chemist":"Stockist";
-
- openModal(`
-
- <h3>${old?"Edit":"Add"} ${label}</h3>
-
- <form id="clientForm">
-
- <div class="formGrid">
-
- <div class="field">
- <label>ID</label>
- <input name="id"
- value="${esc(old?.id||newID(label.substring(0,2).toUpperCase()))}"
- required>
- </div>
-
- <div class="field">
- <label>Name</label>
- <input name="name"
- value="${esc(old?.name)}" required>
- </div>
-
- <div class="field">
- <label>Area</label>
- <input name="area"
- value="${esc(old?.area)}">
- </div>
-
- </div>
-
- <button class="primary">Save</button>
-
- </form>
- `);
-
- document.getElementById("clientForm").onsubmit=function(e){
-
-  e.preventDefault();
-
-  let f=new FormData(e.target);
-
-  let x={
-   id:f.get("id"),
-   name:f.get("name"),
-   area:f.get("area"),
-   active:true
-  };
-
-  let i=db[type].findIndex(a=>a.id===x.id);
-
-  if(i>=0)db[type][i]=x;
-  else db[type].push(x);
-
-  save();
-  closeModal();
-  clients(type,label);
- };
-}
-
-function deleteClient(type,id){
-
- if(!confirm("Delete this record?"))return;
-
- db[type]=db[type].filter(x=>x.id!==id);
-
- save();
- clients(type,type==="chemists"?"Chemist":"Stockist");
-}
-
-
-/* =========================
-   PRODUCTS
-========================= */
-
-function products(){
-
- let rows=db.products.map(p=>`
-
- <tr>
-
- <td>${esc(p.id)}</td>
- <td>${esc(p.name)}</td>
- <td>${esc(p.brand)}</td>
-
- <td>
- <span class="badge ${p.active?"active":"inactive"}">
- ${p.active?"ACTIVE":"INACTIVE"}
- </span>
- </td>
-
- <td>
- <button class="secondary"
- onclick="productForm('${p.id}')">
- Edit
- </button>
-
- <button class="danger"
- onclick="deleteProduct('${p.id}')">
- Delete
- </button>
- </td>
-
- </tr>
-
- `).join("");
-
- document.getElementById("content").innerHTML=`
-
- <div class="header">
-
- <h2>Product Master</h2>
-
- <div class="spacer"></div>
-
- <button class="primary"
- onclick="productForm()">
- + Add Product
- </button>
-
- </div>
-
- <div class="tableBox">
-
- <table>
-
- <thead>
- <tr>
- <th>ID</th>
- <th>Product</th>
- <th>Brand</th>
- <th>Status</th>
- <th>Actions</th>
- </tr>
- </thead>
-
- <tbody>${rows}</tbody>
-
- </table>
-
- </div>
- `;
-}
-
-function productForm(id=null){
-
- let old=id?
- db.products.find(x=>x.id===id):null;
-
- openModal(`
-
- <h3>${old?"Edit":"Add"} Product</h3>
-
- <form id="productForm">
-
- <div class="formGrid">
-
- <div class="field">
- <label>Product ID</label>
- <input name="id"
- value="${esc(old?.id||newID("P"))}" required>
- </div>
-
- <div class="field">
- <label>Product Name</label>
- <input name="name"
- value="${esc(old?.name)}" required>
- </div>
-
- <div class="field">
- <label>Brand</label>
- <input name="brand"
- value="${esc(old?.brand)}">
- </div>
-
- </div>
-
- <button class="primary">Save Product</button>
-
- </form>
- `);
-
- document.getElementById("productForm").onsubmit=function(e){
-
-  e.preventDefault();
-
-  let f=new FormData(e.target);
-
-  let x={
-   id:f.get("id"),
-   name:f.get("name"),
-   brand:f.get("brand"),
-   active:true
-  };
-
-  let i=db.products.findIndex(a=>a.id===x.id);
-
-  if(i>=0)db.products[i]=x;
-  else db.products.push(x);
-
-  save();
-  closeModal();
-  products();
- };
-}
-
-function deleteProduct(id){
-
- if(!confirm("Delete product?"))return;
-
- db.products=db.products.filter(x=>x.id!==id);
-
- save();
- products();
-}
-
-
-/* =========================
-   ASSIGNMENTS
-========================= */
-
-function assignments(){
-
- let rows=db.assignments.map(a=>{
-
-  let collection=
-  a.type==="doctor"?db.doctors:
-  a.type==="chemist"?db.chemists:
-  db.stockists;
-
-  let client=collection.find(x=>x.id===a.clientId);
-  let mr=db.representatives.find(x=>x.id===a.mrId);
-
-  return `
-
-  <tr>
-
-  <td>${a.type}</td>
-  <td>${esc(client?.name||a.clientId)}</td>
-  <td>${esc(mr?.name||a.mrId)}</td>
-
-  <td>
-  <button class="danger"
-  onclick="removeAssignment('${a.id}')">
-  Remove
-  </button>
-  </td>
-
-  </tr>
-  `;
-
- }).join("");
-
- document.getElementById("content").innerHTML=`
-
- <div class="header">
-
- <h2>Doctor / Chemist / Stockist Assignment</h2>
-
- <div class="spacer"></div>
-
- <button class="primary"
- onclick="assignmentForm()">
- + New Assignment
- </button>
-
- </div>
-
- <div class="tableBox">
-
- <table>
-
- <thead>
- <tr>
- <th>Type</th>
- <th>Client</th>
- <th>Representative</th>
- <th>Action</th>
- </tr>
- </thead>
-
- <tbody>${rows}</tbody>
-
- </table>
-
- </div>
- `;
-}
-
-function assignmentForm(){
-
- openModal(`
-
- <h3>Assign Client</h3>
-
- <form id="assignmentForm">
-
- <div class="field">
-
- <label>Type</label>
-
- <select name="type" id="assignType">
-
- <option value="doctor">Doctor</option>
- <option value="chemist">Chemist</option>
- <option value="stockist">Stockist</option>
-
- </select>
-
- </div>
-
- <div class="field">
-
- <label>Client</label>
-
- <select name="clientId" id="clientSelect"></select>
-
- </div>
-
- <div class="field">
-
- <label>Representative</label>
-
- <select name="mrId">
-
- ${db.representatives.map(r=>
- `<option value="${r.id}">
- ${esc(r.name)} (${r.id})
- </option>`).join("")}
-
- </select>
-
- </div>
-
- <button class="primary">Assign</button>
-
- </form>
- `);
-
- function fill(){
-
-  let type=document.getElementById("assignType").value;
-
-  let list=
-  type==="doctor"?db.doctors:
-  type==="chemist"?db.chemists:
-  db.stockists;
-
-  document.getElementById("clientSelect").innerHTML=
-  list.map(x=>
-  `<option value="${x.id}">
-  ${esc(x.name)} (${x.id})
-  </option>`).join("");
- }
-
- document.getElementById("assignType")
- .onchange=fill;
-
- fill();
-
- document.getElementById("assignmentForm")
- .onsubmit=function(e){
-
-  e.preventDefault();
-
-  let f=new FormData(e.target);
-
-  let x={
-   id:newID("AS"),
-   type:f.get("type"),
-   clientId:f.get("clientId"),
-   mrId:f.get("mrId")
-  };
-
-  db.assignments.push(x);
-
-  save();
-  closeModal();
-  assignments();
- };
-}
-
-function removeAssignment(id){
-
- db.assignments=
- db.assignments.filter(x=>x.id!==id);
-
- save();
- assignments();
-}
-
-
-/* =========================
-   PERMISSIONS
-========================= */
-
-function permissions(){
-
- document.getElementById("content").innerHTML=`
-
- <div class="header">
- <h2>Admin Permissions</h2>
- </div>
-
- <div class="card">
-
- <h3>Access Controls</h3>
-
- ${permissionRow("location","Location / GPS")}
- ${permissionRow("doctors","Doctor Management")}
- ${permissionRow("chemists","Chemist Management")}
- ${permissionRow("stockists","Stockist Management")}
- ${permissionRow("products","Product Management")}
-
- <br>
-
- <button class="primary"
- onclick="savePermissions()">
- Save Permissions
- </button>
-
- <p class="small muted">
- These switches are stored locally in this demo.
- Production API must enforce the same permissions server-side.
- </p>
-
- </div>
- `;
-}
-
-function permissionRow(key,label){
-
- return `
-
- <p>
-
- <label>
-
- <input type="checkbox"
- id="perm_${key}"
- ${db.permissions[key]?"checked":""}>
-
- <b>${label}</b>
-
- </label>
-
- </p>
- `;
-}
-
-function savePermissions(){
-
- Object.keys(db.permissions).forEach(k=>{
-  db.permissions[k]=
-  document.getElementById("perm_"+k).checked;
- });
-
- save();
-
- alert("Permissions saved");
-}
-
-
-/* =========================
-   REPORTS
-========================= */
-
-function reports(){
-
- let list=[
- "Pending Approvals",
- "Expense Report",
- "Visit Report",
- "Order Report",
- "Plan Vs Visit Deviation",
- "Brand Wise Client",
- "Client Wise Stock Report",
- "Visit / Missed Status",
- "Daily Tracking Report",
- "Campaign"
- ];
-
- document.getElementById("content").innerHTML=`
-
- <div class="header">
- <h2>Reports</h2>
- </div>
-
- <div class="reportGrid">
-
- ${list.map(x=>`
-
- <button class="report"
- onclick="alert('${x}\\n\\nConnect this report to your DCR API/database.')">
-
- <b>${x}</b>
-
- <span style="float:right">›</span>
-
- </button>
-
- `).join("")}
-
- </div>
- `;
-}
-
-
-/* =========================
-   SETTINGS
-========================= */
-
-function settings(){
-
- document.getElementById("content").innerHTML=`
-
- <div class="header">
- <h2>Settings</h2>
- </div>
-
- <div class="grid">
-
- <div class="card">
-
- <h3>Database Backup</h3>
-
- <p class="muted">
- Export the current browser data.
- </p>
-
- <button class="primary"
- onclick="exportData()">
- Export JSON
- </button>
-
- </div>
-
- <div class="card">
-
- <h3>GPS Test</h3>
-
- <button class="primary"
- onclick="getGPS()">
- Get Current Location
- </button>
-
- <p id="gpsResult"></p>
-
- </div>
-
- </div>
- `;
-}
-
-
-/* =========================
-   GPS
-========================= */
-
-function getGPS(){
-
- if(!navigator.geolocation){
-
-  alert("GPS is not supported");
-
-  return;
- }
-
- navigator.geolocation.getCurrentPosition(
-
- function(position){
-
-  let lat=position.coords.latitude;
-  let lng=position.coords.longitude;
-
-  let box=document.getElementById("gpsResult");
-
-  if(box){
-
-   box.innerHTML=
-   "Latitude: <b>"+lat.toFixed(6)+
-   "</b><br>Longitude: <b>"+
-   lng.toFixed(6)+"</b>";
-  }
-
- },
-
- function(){
-
-  alert(
-   "Location permission denied or unavailable."
-  );
-
- }
-
- );
-}
-
-function fillGPS(){
-
- if(!navigator.geolocation){
-
-  alert("GPS unavailable");
-  return;
- }
-
- navigator.geolocation.getCurrentPosition(
-
- function(p){
-
-  document.getElementById("lat").value=
-  p.coords.latitude.toFixed(6);
-
-  document.getElementById("lng").value=
-  p.coords.longitude.toFixed(6);
-
- },
-
- function(){
-
-  alert(
-   "Please allow Location permission in your phone browser."
-  );
-
- }
-
- );
-}
-
-
-/* =========================
-   MODAL
-========================= */
-
-function openModal(html){
-
- document.getElementById("modalContent").innerHTML=
- html+
-
- `<br>
- <button class="secondary"
- onclick="closeModal()">
- Cancel
- </button>`;
-
- document.getElementById("modal")
- .classList.remove("hidden");
 }
 
 function closeModal(){
 
- document.getElementById("modal")
- .classList.add("hidden");
+document.getElementById("modal")
+.classList.remove("show");
+
 }
 
 
-/* =========================
-   EXPORT
-========================= */
+function saveForm(){
 
-function exportData(){
+let a=document.getElementById("f1")?.value.trim();
+let b=document.getElementById("f2")?.value.trim();
+let c=document.getElementById("f3")?.value.trim();
+let d=document.getElementById("f4")?.value.trim();
 
- let blob=new Blob(
-  [JSON.stringify(db,null,2)],
-  {type:"application/json"}
- );
+if(!a){
 
- let a=document.createElement("a");
+alert("Please enter required information");
+return;
 
- a.href=URL.createObjectURL(blob);
- a.download="V-CareRx-Backup.json";
-
- a.click();
 }
+
+if(formType==="representative"){
+
+db.representatives.push({
+
+id:id(),
+mr:a,
+name:b,
+phone:c,
+password:d,
+active:true,
+lat:null,
+lng:null
+
+});
+
+}
+
+if(formType==="doctor"){
+
+db.doctors.push({
+
+id:id(),
+name:a,
+speciality:b,
+phone:c,
+city:d
+
+});
+
+}
+
+if(formType==="chemist"){
+
+db.chemists.push({
+
+id:id(),
+name:a,
+phone:b,
+city:c
+
+});
+
+}
+
+if(formType==="stockist"){
+
+db.stockists.push({
+
+id:id(),
+name:a,
+phone:b,
+city:c
+
+});
+
+}
+
+if(formType==="product"){
+
+db.products.push({
+
+id:id(),
+name:a,
+brand:b,
+choice:document.getElementById("f3").checked
+
+});
+
+}
+
+closeModal();
+save();
+
+}
+
+
+/* ================= REPRESENTATIVES ================= */
+
+function toggleRep(x){
+
+let r=db.representatives.find(a=>a.id===x);
+
+r.active=!r.active;
+
+save();
+
+}
+
+
+function deleteRep(x){
+
+if(!confirm(
+"Delete representative? Their assignments and DCR records will also be deleted."
+))return;
+
+db.representatives=
+db.representatives.filter(a=>a.id!==x);
+
+db.assignments=
+db.assignments.filter(a=>a.rep!==x);
+
+db.dcr=
+db.dcr.filter(a=>a.rep!==x);
+
+save();
+
+}
+
+
+function representativeGPS(x){
+
+if(!db.location){
+
+alert("Location access is OFF in Settings.");
+return;
+
+}
+
+if(!navigator.geolocation){
+
+alert("GPS is not available on this phone.");
+return;
+
+}
+
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+let r=db.representatives.find(a=>a.id===x);
+
+r.lat=position.coords.latitude;
+r.lng=position.coords.longitude;
+
+save();
+
+alert("GPS saved for "+r.name);
+
+},
+
+function(error){
+
+alert("GPS permission failed: "+error.message);
+
+},
+
+{
+enableHighAccuracy:true,
+timeout:10000
+}
+
+);
+
+}
+
+
+/* ================= CLIENT DELETE ================= */
+
+function deleteDoctor(x){
+
+if(!confirm("Delete doctor?"))return;
+
+db.doctors=
+db.doctors.filter(a=>a.id!==x);
+
+db.assignments=
+db.assignments.filter(a=>
+!(a.type==="doctor"&&a.client===x));
+
+save();
+
+}
+
+function deleteChemist(x){
+
+if(!confirm("Delete chemist?"))return;
+
+db.chemists=
+db.chemists.filter(a=>a.id!==x);
+
+db.assignments=
+db.assignments.filter(a=>
+!(a.type==="chemist"&&a.client===x));
+
+save();
+
+}
+
+function deleteStockist(x){
+
+if(!confirm("Delete stockist?"))return;
+
+db.stockists=
+db.stockists.filter(a=>a.id!==x);
+
+db.assignments=
+db.assignments.filter(a=>
+!(a.type==="stockist"&&a.client===x));
+
+save();
+
+}
+
+
+/* ================= PRODUCT ================= */
+
+function productChoice(x){
+
+let p=db.products.find(a=>a.id===x);
+
+p.choice=!p.choice;
+
+save();
+
+}
+
+function deleteProduct(x){
+
+if(!confirm("Delete product?"))return;
+
+db.products=
+db.products.filter(a=>a.id!==x);
+
+save();
+
+}
+
+
+/* ================= ASSIGNMENT ================= */
+
+function loadAssignment(){
+
+let type=document.getElementById("assignType").value;
+
+let list=[];
+
+if(type==="doctor")list=db.doctors;
+if(type==="chemist")list=db.chemists;
+if(type==="stockist")list=db.stockists;
+
+document.getElementById("assignClient").innerHTML=
+
+list.map(x=>
+`<option value="${x.id}">${x.name}</option>`
+).join("");
+
+}
+
+document.getElementById("assignType").onchange=
+loadAssignment;
+
+
+function assignClient(){
+
+let rep=document.getElementById("assignRep").value;
+let type=document.getElementById("assignType").value;
+let client=document.getElementById("assignClient").value;
+
+if(!rep||!client){
+
+alert("Select representative and client");
+return;
+
+}
+
+db.assignments.push({
+
+id:id(),
+rep:rep,
+type:type,
+client:client
+
+});
+
+save();
+
+}
+
+
+function removeAssignment(x){
+
+db.assignments=
+db.assignments.filter(a=>a.id!==x);
+
+save();
+
+}
+
+
+/* ================= GPS / DCR ================= */
+
+let currentGPS=null;
+
+function getGPS(){
+
+if(!db.location){
+
+alert("Admin has turned GPS OFF.");
+return;
+
+}
+
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+currentGPS={
+
+lat:position.coords.latitude,
+lng:position.coords.longitude
+
+};
+
+document.getElementById("gpsResult").innerHTML=
+"📍 GPS captured: "+
+currentGPS.lat.toFixed(6)+
+", "+
+currentGPS.lng.toFixed(6);
+
+},
+
+function(error){
+
+alert("GPS error: "+error.message);
+
+},
+
+{
+enableHighAccuracy:true,
+timeout:10000
+}
+
+);
+
+}
+
+
+function saveDCR(){
+
+let rep=document.getElementById("dcrRep").value;
+let date=document.getElementById("dcrDate").value;
+let client=document.getElementById("dcrClient").value;
+let status=document.getElementById("dcrStatus").value;
+let remarks=document.getElementById("dcrRemarks").value;
+
+if(!rep||!date||!client){
+
+alert("Fill Representative, Date and Client");
+return;
+
+}
+
+db.dcr.push({
+
+id:id(),
+rep:rep,
+date:date,
+client:client,
+status:status,
+remarks:remarks,
+lat:currentGPS?currentGPS.lat:null,
+lng:currentGPS?currentGPS.lng:null
+
+});
+
+currentGPS=null;
+
+document.getElementById("gpsResult").innerHTML="";
+
+document.getElementById("dcrClient").value="";
+document.getElementById("dcrRemarks").value="";
+
+save();
+
+alert("DCR saved successfully");
+
+}
+
+
+/* ================= SETTINGS ================= */
+
+function changeLocation(){
+
+db.location=
+document.getElementById("locationSwitch").checked;
+
+save();
+
+}
+
+
+function resetData(){
+
+if(confirm("Delete all demo data?")){
+
+localStorage.removeItem("VC_DCR_DATA");
+
+location.reload();
+
+}
+
+}
+
+
+/* ================= RENDER ================= */
+
+function render(){
+
+document.getElementById("countRep").textContent=
+db.representatives.length;
+
+document.getElementById("countDoctor").textContent=
+db.doctors.length;
+
+document.getElementById("countChemist").textContent=
+db.chemists.length;
+
+document.getElementById("countStockist").textContent=
+db.stockists.length;
+
+
+/* Representatives */
+
+document.getElementById("repList").innerHTML=
+
+db.representatives.map(r=>`
+
+<tr>
+
+<td>${r.mr}</td>
+<td>${r.name}</td>
+<td>${r.phone}</td>
+
+<td>
+<span class="badge ${r.active?"":"off"}">
+${r.active?"ACTIVE":"INACTIVE"}
+</span>
+</td>
+
+<td>
+${r.lat?
+r.lat.toFixed(5)+", "+r.lng.toFixed(5):
+"Not captured"}
+</td>
+
+<td>
+
+<button class="secondary"
+onclick="representativeGPS('${r.id}')">
+GPS
+</button>
+
+<button class="secondary"
+onclick="toggleRep('${r.id}')">
+${r.active?"Deactivate":"Activate"}
+</button>
+
+<button class="danger"
+onclick="deleteRep('${r.id}')">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`).join("");
+
+
+/* Doctors */
+
+document.getElementById("doctorList").innerHTML=
+
+db.doctors.map(d=>`
+
+<tr>
+
+<td>${d.name}</td>
+<td>${d.speciality}</td>
+<td>${d.phone}</td>
+<td>${d.city}</td>
+<td>${assignedMR(d.id,"doctor")}</td>
+
+<td>
+<button class="danger"
+onclick="deleteDoctor('${d.id}')">
+Delete
+</button>
+</td>
+
+</tr>
+
+`).join("");
+
+
+/* Chemists */
+
+document.getElementById("chemistList").innerHTML=
+
+db.chemists.map(d=>`
+
+<tr>
+
+<td>${d.name}</td>
+<td>${d.phone}</td>
+<td>${d.city}</td>
+
+<td>
+<button class="danger"
+onclick="deleteChemist('${d.id}')">
+Delete
+</button>
+</td>
+
+</tr>
+
+`).join("");
+
+
+/* Stockists */
+
+document.getElementById("stockistList").innerHTML=
+
+db.stockists.map(d=>`
+
+<tr>
+
+<td>${d.name}</td>
+<td>${d.phone}</td>
+<td>${d.city}</td>
+
+<td>
+<button class="danger"
+onclick="deleteStockist('${d.id}')">
+Delete
+</button>
+</td>
+
+</tr>
+
+`).join("");
+
+
+/* Products */
+
+document.getElementById("productList").innerHTML=
+
+db.products.map(p=>`
+
+<tr>
+
+<td>${p.name}</td>
+<td>${p.brand}</td>
+<td>${p.choice?"ON":"OFF"}</td>
+
+<td>
+
+<button class="secondary"
+onclick="productChoice('${p.id}')">
+ON / OFF
+</button>
+
+<button class="danger"
+onclick="deleteProduct('${p.id}')">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`).join("");
+
+
+/* Representative dropdowns */
+
+let reps=db.representatives
+.filter(r=>r.active);
+
+let options=reps.map(r=>
+`<option value="${r.id}">
+${r.name} (${r.mr})
+</option>`
+).join("");
+
+document.getElementById("assignRep").innerHTML=options;
+document.getElementById("dcrRep").innerHTML=options;
+
+loadAssignment();
+
+
+/* Assignments */
+
+document.getElementById("assignmentList").innerHTML=
+
+db.assignments.map(a=>`
+
+<tr>
+
+<td>${repName(a.rep)}</td>
+<td>${a.type}</td>
+<td>${clientName(a.type,a.client)}</td>
+
+<td>
+<button class="danger"
+onclick="removeAssignment('${a.id}')">
+Remove
+</button>
+</td>
+
+</tr>
+
+`).join("");
+
+
+/* Reports */
+
+let visited=db.dcr.filter(x=>x.status==="Visited").length;
+let missed=db.dcr.filter(x=>x.status==="Missed").length;
+let gps=db.dcr.filter(x=>x.lat).length;
+
+document.getElementById("totalDcr").textContent=db.dcr.length;
+document.getElementById("visitedDcr").textContent=visited;
+document.getElementById("missedDcr").textContent=missed;
+document.getElementById("gpsDcr").textContent=gps;
+
+document.getElementById("reportList").innerHTML=
+
+db.dcr.map(x=>`
+
+<tr>
+
+<td>${x.date}</td>
+<td>${repName(x.rep)}</td>
+<td>${x.client}</td>
+<td>${x.status}</td>
+
+<td>
+${x.lat?
+x.lat.toFixed(5)+", "+x.lng.toFixed(5):
+"-"}
+</td>
+
+</tr>
+
+`).join("");
+
+document.getElementById("locationSwitch").checked=
+db.location;
+
+}
+
+
+function repName(x){
+
+let r=db.representatives.find(a=>a.id===x);
+
+return r?r.name:"Deleted";
+
+}
+
+
+function assignedMR(client,type){
+
+let a=db.assignments.find(x=>
+x.client===client&&x.type===type);
+
+return a?repName(a.rep):"-";
+
+}
+
+
+function clientName(type,id){
+
+let list=[];
+
+if(type==="doctor")list=db.doctors;
+if(type==="chemist")list=db.chemists;
+if(type==="stockist")list=db.stockists;
+
+let x=list.find(a=>a.id===id);
+
+return x?x.name:"Deleted";
+
+}
+
+
+/* ================= START ================= */
+
+document.getElementById("dcrDate").value=
+new Date().toISOString().slice(0,10);
+
+if(sessionStorage.getItem("VC_ADMIN")==="YES"){
+
+document.getElementById("loginPage").style.display="none";
+document.getElementById("app").style.display="block";
+
+}
+
+render();
 
 </script>
 

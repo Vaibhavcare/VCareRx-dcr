@@ -1,36 +1,40 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>V-CareRx DCR Dashboard</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V-CareRx DCR</title>
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f8f8;color:#173742}
-header{background:#075c69;color:white;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7f8;color:#18343d}
+header{background:#075c69;color:#fff;padding:15px 18px;display:flex;justify-content:space-between;align-items:center}
 header h1{margin:0;font-size:21px}
-.logout{background:white;color:#075c69;border:0;padding:9px 15px;border-radius:8px;font-weight:bold}
-.container{max-width:1100px;margin:auto;padding:20px}
-.welcome{margin-bottom:20px}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-.card{background:white;padding:20px;border-radius:14px;box-shadow:0 3px 12px #00000012}
-.card small{color:#71858b}
-.card strong{display:block;font-size:28px;color:#087f83;margin-top:8px}
-.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:20px}
-.action{background:#087f83;color:white;border:0;border-radius:12px;padding:20px;font-size:16px;font-weight:bold}
-.panel{background:white;border-radius:14px;padding:20px;margin-top:20px}
-label{display:block;margin-top:12px;font-weight:bold;font-size:13px}
-input,select,textarea{width:100%;padding:12px;margin-top:6px;border:1px solid #d5e3e5;border-radius:8px}
-textarea{min-height:80px}
-.submit{margin-top:18px;background:#087f83;color:white;border:0;padding:13px 20px;border-radius:8px;font-weight:bold}
+button{cursor:pointer;border:0;border-radius:8px;padding:11px 15px;font-weight:bold}
+.logout{background:#fff;color:#075c69}
+.container{max-width:1150px;margin:auto;padding:18px}
+.welcome{background:#fff;padding:18px;border-radius:14px;margin-bottom:18px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 2px 8px #0001}
+.card small{color:#687c82}
+.card strong{display:block;font-size:27px;margin-top:7px;color:#087f83}
+.menu{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.menu button{background:#087f83;color:#fff}
+.panel{background:#fff;padding:20px;border-radius:14px;margin-top:18px}
 .hidden{display:none}
-.message{margin-top:12px;padding:10px;border-radius:8px;background:#eaf7ef;color:#257044}
+label{display:block;font-weight:bold;font-size:13px;margin-top:12px}
+input,select,textarea{width:100%;padding:11px;margin-top:6px;border:1px solid #ccdfe2;border-radius:8px}
+textarea{min-height:80px}
+.primary{background:#087f83;color:#fff;margin-top:16px}
+.admin{border:2px solid #e0b84d}
+.admin-title{color:#8a6100}
+.admin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.admin-grid button{background:#f3f6f7;text-align:left}
+.item{border:1px solid #dce5e7;padding:12px;border-radius:9px;margin:8px 0}
+.badge{display:inline-block;padding:5px 9px;border-radius:15px;background:#e8f5e9;color:#286b31;font-size:12px}
 @media(max-width:700px){
 .cards{grid-template-columns:repeat(2,1fr)}
-.actions{grid-template-columns:1fr}
-.container{padding:14px}
+.menu,.admin-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -39,14 +43,17 @@ textarea{min-height:80px}
 
 <header>
 <h1>V-CareRx DCR</h1>
+<div>
+<span id="userInfo"></span>
 <button class="logout" onclick="logout()">Logout</button>
+</div>
 </header>
 
 <div class="container">
 
 <div class="welcome">
 <h2>Daily Call Report</h2>
-<p>Welcome, <b>Vaibhav</b>. Manage your medical representative visits.</p>
+<p id="welcomeText">Loading...</p>
 </div>
 
 <div class="cards">
@@ -56,28 +63,29 @@ textarea{min-height:80px}
 <div class="card"><small>DCR Reports</small><strong id="reports">0</strong></div>
 </div>
 
-<div class="actions">
-<button class="action" onclick="showDCR()">➕ New DCR</button>
-<button class="action" onclick="showHistory()">📋 DCR History</button>
+<div class="menu">
+<button onclick="showPanel('dcrPanel')">➕ New DCR</button>
+<button onclick="showHistory()">📋 DCR History</button>
+<button onclick="showPanel('plannerPanel')">📅 Daily Planner</button>
 </div>
 
+<!-- DCR -->
 <div id="dcrPanel" class="panel hidden">
-
-<h2>New Daily Call Report</h2>
+<h2>➕ New DCR</h2>
 
 <form id="dcrForm">
 
 <label>Representative ID</label>
-<input id="repId" value="VC-ADMIN-001" readonly>
+<input id="repId" readonly>
 
 <label>Date</label>
 <input id="date" type="date" required>
 
 <label>Doctor Name</label>
-<input id="doctorName" placeholder="Enter doctor name" required>
+<input id="doctorName" required placeholder="Doctor name">
 
 <label>Specialty</label>
-<input id="specialty" placeholder="e.g. Cardiologist">
+<input id="specialty" placeholder="Specialty">
 
 <label>Chemist Visited</label>
 <select id="chemistVisited">
@@ -86,7 +94,7 @@ textarea{min-height:80px}
 </select>
 
 <label>Chemist Name</label>
-<input id="chemistName" placeholder="Enter chemist name">
+<input id="chemistName" placeholder="Chemist name">
 
 <label>Samples Given</label>
 <input id="samples" type="number" min="0" value="0">
@@ -95,161 +103,1055 @@ textarea{min-height:80px}
 <input id="gifts" type="number" min="0" value="0">
 
 <label>Remarks</label>
-<textarea id="remarks" placeholder="Enter visit remarks"></textarea>
+<textarea id="remarks"></textarea>
 
-<button class="submit" type="submit">Submit DCR</button>
-
-<div id="message" class="message hidden"></div>
+<button class="primary" type="submit">Submit DCR</button>
 
 </form>
 </div>
 
+<!-- HISTORY -->
 <div id="historyPanel" class="panel hidden">
-<h2>DCR History</h2>
-<div id="history">No DCR reports submitted yet.</div>
+<h2>📋 DCR History</h2>
+<div id="history">Loading...</div>
+</div>
+
+<!-- PLANNER -->
+<div id="plannerPanel" class="panel hidden">
+<h2>📅 Daily Planner</h2>
+<p>Plan and manage today's doctor visits.</p>
+<div id="plannerList">No planned visits.</div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel" class="panel admin hidden">
+
+<h2 class="admin-title">👑 Admin Panel</h2>
+
+<p>
+<span class="badge">ADMIN ACCESS</span>
+Only the administrator can access these controls.
+</p>
+
+<div class="admin-grid">
+
+<button onclick="adminSection('representatives')">
+👥 Representatives
+</button>
+
+<button onclick="adminSection('doctors')">
+👨‍⚕️ Doctor Master
+</button>
+
+<button onclick="adminSection('chemists')">
+💊 Chemist Master
+</button>
+
+<button onclick="adminSection('allDcr')">
+📋 All DCR Reports
+</button>
+
+<button onclick="adminSection('location')">
+📍 Location Reports
+</button>
+
+<button onclick="adminSection('samples')">
+📦 Samples & Gifts
+</button>
+
+<button onclick="adminSection('reports')">
+📊 Reports
+</button>
+
+<button onclick="adminSection('settings')">
+⚙️ Settings
+</button>
+
+<button onclick="adminSection('permissions')">
+🔐 User Permissions
+</button>
+
+</div>
+
+<div id="adminContent" class="panel">
+<h3>Admin Dashboard</h3>
+<p>Select an Admin option above.</p>
+</div>
+
 </div>
 
 </div>
 
 <script>
 
-let reports =
-JSON.parse(localStorage.getItem("vcarerx_dcr_reports") || "[]");
+let token =
+localStorage.getItem("vcarerx_token");
 
-document.getElementById("date").value =
-new Date().toISOString().split("T")[0];
+let currentUser = null;
 
-function updateStats(){
+const API = "/api";
 
-document.getElementById("reports").textContent =
-reports.length;
 
-document.getElementById("calls").textContent =
-reports.length;
+async function loadUser(){
 
-document.getElementById("doctors").textContent =
-new Set(reports.map(r => r.doctorName)).size;
+if(!token){
 
-document.getElementById("chemists").textContent =
-reports.filter(r => r.chemistVisited === "Yes").length;
-
-}
-
-function showDCR(){
-
-document.getElementById("dcrPanel")
-.classList.remove("hidden");
-
-document.getElementById("historyPanel")
-.classList.add("hidden");
-
-}
-
-function showHistory(){
-
-document.getElementById("historyPanel")
-.classList.remove("hidden");
-
-document.getElementById("dcrPanel")
-.classList.add("hidden");
-
-renderHistory();
-
-}
-
-document.getElementById("dcrForm")
-.addEventListener("submit", async function(e){
-
-e.preventDefault();
-
-const report = {
-
-repId: document.getElementById("repId").value,
-date: document.getElementById("date").value,
-doctorName: document.getElementById("doctorName").value,
-specialty: document.getElementById("specialty").value,
-chemistVisited: document.getElementById("chemistVisited").value,
-chemistName: document.getElementById("chemistName").value,
-samples: document.getElementById("samples").value,
-gifts: document.getElementById("gifts").value,
-remarks: document.getElementById("remarks").value,
-createdAt: new Date().toISOString()
-
-};
-
-reports.push(report);
-
-localStorage.setItem(
-"vcarerx_dcr_reports",
-JSON.stringify(reports)
-);
-
-document.getElementById("message").textContent =
-"DCR submitted successfully.";
-
-document.getElementById("message")
-.classList.remove("hidden");
-
-document.getElementById("dcrForm").reset();
-
-document.getElementById("date").value =
-new Date().toISOString().split("T")[0];
-
-updateStats();
-
-});
-
-function renderHistory(){
-
-const box = document.getElementById("history");
-
-if(!reports.length){
-
-box.textContent =
-"No DCR reports submitted yet.";
+window.location.href="/";
 
 return;
 
 }
 
-box.innerHTML = reports.map((r,i)=>`
+try{
 
-<div style="
-border:1px solid #dce8e9;
-padding:15px;
-border-radius:10px;
-margin-bottom:10px;
-">
+const response =
+await fetch(API + "/auth/me",{
 
-<b>${i+1}. ${escapeHtml(r.doctorName)}</b>
+headers:{
+Authorization:"Bearer " + token
+}
 
-<br>
-Specialty: ${escapeHtml(r.specialty || "-")}
+});
+
+if(!response.ok){
+
+throw new Error("Session expired");
+
+}
+
+const data =
+await response.json();
+
+currentUser = data.user;
+
+document.getElementById("userInfo").textContent =
+currentUser.username +
+" (" + currentUser.role + ")";
+
+document.getElementById("welcomeText").textContent =
+"Welcome " +
+currentUser.username +
+". Representative ID: " +
+currentUser.representativeId;
+
+
+/*
+ADMIN PANEL ONLY FOR ADMIN
+*/
+
+if(currentUser.role === "ADMIN"){
+
+document.getElementById("adminPanel")
+.classList.remove("hidden");
+
+}
+
+document.getElementById("repId").value =
+currentUser.representativeId;
+
+loadDcr();
+
+}catch(error){
+
+localStorage.removeItem("vcarerx_token");
+
+window.location.href="/";
+
+}
+
+}
+
+
+function authHeaders(){
+
+return{
+
+"Content-Type":"application/json",
+
+"Authorization":
+"Bearer " + token
+
+};
+
+}
+
+
+function showPanel(id){
+
+document
+.querySelectorAll(".panel")
+.forEach(p=>{
+if(p.id!=="adminPanel")
+p.classList.add("hidden");
+});
+
+document
+.getElementById(id)
+.classList.remove("hidden");
+
+}
+
+
+async function loadDcr(){
+
+try{
+
+const response =
+await fetch(API + "/dcr",{
+
+headers:{
+Authorization:
+"Bearer " + token
+}
+
+});
+
+if(!response.ok)return;
+
+const data =
+await response.json();
+
+const reports =
+data.reports || [];
+
+document.getElementById("reports")
+.textContent =
+reports.length;
+
+document.getElementById("calls")
+.textContent =
+reports.length;
+
+document.getElementById("doctors")
+.textContent =
+new Set(
+reports.map(r=>r.doctorName)
+).size;
+
+document.getElementById("chemists")
+.textContent =
+reports.filter(
+r=>r.chemistVisited==="Yes"
+).length;
+
+}catch(error){
+
+console.log(error);
+
+}
+
+}
+
+
+document
+.getElementById("dcrForm")
+.addEventListener("submit",async function(e){
+
+e.preventDefault();
+
+const payload={
+
+representativeId:
+document.getElementById("repId").value,
+
+date:
+document.getElementById("date").value,
+
+doctorName:
+document.getElementById("doctorName").value,
+
+specialty:
+document.getElementById("specialty").value,
+
+chemistVisited:
+document.getElementById("chemistVisited").value,
+
+chemistName:
+document.getElementById("chemistName").value,
+
+samplesGiven:
+document.getElementById("samples").value,
+
+giftsDistributed:
+document.getElementById("gifts").value,
+
+remarks:
+document.getElementById("remarks").value
+
+};
+
+try{
+
+const response =
+await fetch(API + "/dcr",{
+
+method:"POST",
+
+headers:authHeaders(),
+
+body:JSON.stringify(payload)
+
+});
+
+const data =
+await response.json();
+
+if(!response.ok){
+
+alert(data.message ||
+"DCR submission failed.");
+
+return;
+
+}
+
+alert("DCR submitted successfully.");
+
+document
+.getElementById("dcrForm")
+.reset();
+
+document.getElementById("repId").value =
+currentUser.representativeId;
+
+loadDcr();
+
+}catch(error){
+
+alert("Unable to connect to DCR API.");
+
+}
+
+});
+
+
+async function showHistory(){
+
+showPanel("historyPanel");
+
+const box =
+document.getElementById("history");
+
+box.innerHTML="Loading...";
+
+try{
+
+const response =
+await fetch(API + "/dcr",{
+
+headers:{
+Authorization:
+"Bearer " + token
+}
+
+});
+
+const data =
+await response.json();
+
+if(!response.ok){
+
+box.innerHTML =
+"Unable to load reports.";
+
+return;
+
+}
+
+const reports =
+data.reports || [];
+
+if(!reports.length){
+
+box.innerHTML =
+"No DCR reports.";
+
+return;
+
+}
+
+box.innerHTML =
+reports.map(r=>`
+
+<div class="item">
+
+<b>${escapeHtml(r.doctorName)}</b>
 
 <br>
 Date: ${escapeHtml(r.date)}
 
 <br>
-Chemist: ${escapeHtml(r.chemistVisited)}
+Representative:
+${escapeHtml(r.representativeId)}
 
 <br>
-Samples: ${escapeHtml(r.samples)}
+Specialty:
+${escapeHtml(r.specialty || "-")}
 
 <br>
-Gifts: ${escapeHtml(r.gifts)}
+Samples:
+${escapeHtml(r.samplesGiven || 0)}
 
 <br>
-Remarks: ${escapeHtml(r.remarks || "-")}
+Gifts:
+${escapeHtml(r.giftsDistributed || 0)}
+
+<br>
+Remarks:
+${escapeHtml(r.remarks || "-")}
 
 </div>
 
 `).join("");
 
+}catch(error){
+
+box.innerHTML =
+"Unable to load reports.";
+
 }
+
+}
+
+
+function adminSection(section){
+
+if(!currentUser ||
+currentUser.role !== "ADMIN"){
+
+alert("Admin access only.");
+
+return;
+
+}
+
+const content =
+document.getElementById("adminContent");
+
+if(section==="representatives"){
+
+content.innerHTML=`
+
+<h3>👥 Representatives</h3>
+
+<form onsubmit="addRepresentative(event)">
+
+<label>Representative ID</label>
+<input id="newRepId" required>
+
+<label>Name</label>
+<input id="newRepName" required>
+
+<label>Username</label>
+<input id="newRepUsername" required>
+
+<label>Password</label>
+<input id="newRepPassword" type="password" required>
+
+<button class="primary">
+Add Representative
+</button>
+
+</form>
+
+<hr>
+
+<div id="representativeList">
+Loading...
+</div>
+
+`;
+
+loadRepresentatives();
+
+}
+
+else if(section==="doctors"){
+
+content.innerHTML=`
+
+<h3>👨‍⚕️ Doctor Master</h3>
+
+<form onsubmit="addDoctor(event)">
+
+<label>Doctor Name</label>
+<input id="newDoctorName" required>
+
+<label>Specialty</label>
+<input id="newDoctorSpecialty">
+
+<label>Clinic / Hospital</label>
+<input id="newDoctorClinic">
+
+<label>City</label>
+<input id="newDoctorCity">
+
+<label>Phone</label>
+<input id="newDoctorPhone">
+
+<button class="primary">
+Add Doctor
+</button>
+
+</form>
+
+<div id="doctorList">
+Loading...
+</div>
+
+`;
+
+loadDoctors();
+
+}
+
+else if(section==="chemists"){
+
+content.innerHTML=`
+
+<h3>💊 Chemist Master</h3>
+
+<form onsubmit="addChemist(event)">
+
+<label>Chemist Name</label>
+<input id="newChemistName" required>
+
+<label>Address</label>
+<input id="newChemistAddress">
+
+<label>City</label>
+<input id="newChemistCity">
+
+<label>Phone</label>
+<input id="newChemistPhone">
+
+<button class="primary">
+Add Chemist
+</button>
+
+</form>
+
+<div id="chemistList">
+Loading...
+</div>
+
+`;
+
+loadChemists();
+
+}
+
+else if(section==="allDcr"){
+
+content.innerHTML=`
+
+<h3>📋 All DCR Reports</h3>
+
+<div id="adminDcrList">
+Loading...
+</div>
+
+`;
+
+loadAdminDcr();
+
+}
+
+else if(section==="location"){
+
+content.innerHTML=`
+
+<h3>📍 Location Access</h3>
+
+<p>
+Location data can only be received after the
+device/browser grants location permission.
+</p>
+
+<button class="primary"
+onclick="requestLocation()">
+Request My Current Location
+</button>
+
+<div id="locationResult"></div>
+
+`;
+
+}
+
+else if(section==="samples"){
+
+content.innerHTML=`
+
+<h3>📦 Samples & Gifts</h3>
+
+<p>
+Admin can manage samples and gifts distributed
+during DCR visits.
+</p>
+
+`;
+
+}
+
+else if(section==="reports"){
+
+content.innerHTML=`
+
+<h3>📊 Reports</h3>
+
+<p>
+Admin has access to all DCR reports and
+representative activity.
+</p>
+
+`;
+
+}
+
+else if(section==="settings"){
+
+content.innerHTML=`
+
+<h3>⚙️ Settings</h3>
+
+<div class="item">
+<b>Application</b><br>
+V-CareRx DCR
+</div>
+
+<div class="item">
+<b>Administrator</b><br>
+Vaibhav
+</div>
+
+<div class="item">
+<b>Role</b><br>
+ADMIN
+</div>
+
+<div class="item">
+<b>Doctor Management</b><br>
+Enabled
+</div>
+
+<div class="item">
+<b>Chemist Management</b><br>
+Enabled
+</div>
+
+<div class="item">
+<b>Representative Management</b><br>
+Enabled
+</div>
+
+<div class="item">
+<b>Location Reports</b><br>
+Admin only
+</div>
+
+`;
+
+}
+
+else if(section==="permissions"){
+
+content.innerHTML=`
+
+<h3>🔐 User Permissions</h3>
+
+<div class="item">
+<b>ADMIN</b><br>
+Full system access
+</div>
+
+<div class="item">
+<b>REPRESENTATIVE</b><br>
+Only assigned DCR functions
+</div>
+
+`;
+
+}
+
+}
+
+
+async function loadRepresentatives(){
+
+const box =
+document.getElementById("representativeList");
+
+try{
+
+const response =
+await fetch(
+API+"/admin/representatives",
+{
+headers:{
+Authorization:
+"Bearer "+token
+}
+});
+
+const data =
+await response.json();
+
+box.innerHTML =
+(data.representatives||[])
+.map(r=>`
+
+<div class="item">
+
+<b>${escapeHtml(r.name)}</b>
+
+<br>
+MR ID:
+${escapeHtml(r.representativeId)}
+
+<br>
+Username:
+${escapeHtml(r.username)}
+
+<br>
+Status:
+${r.active ? "Active":"Disabled"}
+
+</div>
+
+`).join("") ||
+"No representatives.";
+
+}catch(e){
+
+box.textContent="Unable to load representatives.";
+
+}
+
+}
+
+
+async function addRepresentative(e){
+
+e.preventDefault();
+
+const payload={
+
+representativeId:
+document.getElementById("newRepId").value,
+
+name:
+document.getElementById("newRepName").value,
+
+username:
+document.getElementById("newRepUsername").value,
+
+password:
+document.getElementById("newRepPassword").value
+
+};
+
+const response =
+await fetch(
+API+"/admin/representatives",
+{
+method:"POST",
+headers:authHeaders(),
+body:JSON.stringify(payload)
+});
+
+const data =
+await response.json();
+
+alert(data.message);
+
+if(response.ok)
+loadRepresentatives();
+
+}
+
+
+async function loadDoctors(){
+
+const box =
+document.getElementById("doctorList");
+
+const response =
+await fetch(
+API+"/admin/doctors",
+{
+headers:{
+Authorization:"Bearer "+token
+}
+});
+
+const data =
+await response.json();
+
+box.innerHTML =
+(data.doctors||[])
+.map(d=>`
+
+<div class="item">
+<b>${escapeHtml(d.doctorName)}</b>
+<br>${escapeHtml(d.specialty)}
+<br>${escapeHtml(d.clinic)}
+<br>${escapeHtml(d.city)}
+</div>
+
+`).join("") ||
+"No doctors.";
+
+}
+
+
+async function addDoctor(e){
+
+e.preventDefault();
+
+const payload={
+
+doctorName:
+document.getElementById("newDoctorName").value,
+
+specialty:
+document.getElementById("newDoctorSpecialty").value,
+
+clinic:
+document.getElementById("newDoctorClinic").value,
+
+city:
+document.getElementById("newDoctorCity").value,
+
+phone:
+document.getElementById("newDoctorPhone").value
+
+};
+
+const response =
+await fetch(
+API+"/admin/doctors",
+{
+method:"POST",
+headers:authHeaders(),
+body:JSON.stringify(payload)
+});
+
+const data =
+await response.json();
+
+alert(data.message);
+
+if(response.ok)
+loadDoctors();
+
+}
+
+
+async function loadChemists(){
+
+const box =
+document.getElementById("chemistList");
+
+const response =
+await fetch(
+API+"/admin/chemists",
+{
+headers:{
+Authorization:"Bearer "+token
+}
+});
+
+const data =
+await response.json();
+
+box.innerHTML =
+(data.chemists||[])
+.map(c=>`
+
+<div class="item">
+<b>${escapeHtml(c.chemistName)}</b>
+<br>${escapeHtml(c.address)}
+<br>${escapeHtml(c.city)}
+</div>
+
+`).join("") ||
+"No chemists.";
+
+}
+
+
+async function addChemist(e){
+
+e.preventDefault();
+
+const payload={
+
+chemistName:
+document.getElementById("newChemistName").value,
+
+address:
+document.getElementById("newChemistAddress").value,
+
+city:
+document.getElementById("newChemistCity").value,
+
+phone:
+document.getElementById("newChemistPhone").value
+
+};
+
+const response =
+await fetch(
+API+"/admin/chemists",
+{
+method:"POST",
+headers:authHeaders(),
+body:JSON.stringify(payload)
+});
+
+const data =
+await response.json();
+
+alert(data.message);
+
+if(response.ok)
+loadChemists();
+
+}
+
+
+async function loadAdminDcr(){
+
+const box =
+document.getElementById("adminDcrList");
+
+const response =
+await fetch(
+API+"/dcr",
+{
+headers:{
+Authorization:"Bearer "+token
+}
+});
+
+const data =
+await response.json();
+
+box.innerHTML =
+(data.reports||[])
+.map(r=>`
+
+<div class="item">
+
+<b>${escapeHtml(r.doctorName)}</b>
+
+<br>
+MR ID:
+${escapeHtml(r.representativeId)}
+
+<br>
+Date:
+${escapeHtml(r.date)}
+
+<br>
+Samples:
+${escapeHtml(r.samplesGiven)}
+
+<br>
+Gifts:
+${escapeHtml(r.giftsDistributed)}
+
+</div>
+
+`).join("") ||
+"No DCR reports.";
+
+}
+
+
+function requestLocation(){
+
+if(!navigator.geolocation){
+
+alert("Location is not supported by this device.");
+
+return;
+
+}
+
+navigator.geolocation.getCurrentPosition(
+
+async position=>{
+
+const latitude =
+position.coords.latitude;
+
+const longitude =
+position.coords.longitude;
+
+const response =
+await fetch(
+API+"/location",
+{
+method:"POST",
+headers:authHeaders(),
+body:JSON.stringify({
+latitude,
+longitude
+})
+});
+
+const data =
+await response.json();
+
+document.getElementById(
+"locationResult"
+).innerHTML=`
+
+<div class="item">
+
+Location received successfully.
+
+<br>
+Latitude: ${latitude}
+
+<br>
+Longitude: ${longitude}
+
+</div>
+
+`;
+
+},
+
+error=>{
+
+alert(
+"Location permission was denied or unavailable."
+);
+
+}
+
+);
+
+}
+
+
+function logout(){
+
+localStorage.removeItem(
+"vcarerx_token"
+);
+
+window.location.href="/";
+
+}
+
 
 function escapeHtml(value){
 
-return String(value)
+return String(value ?? "")
 .replace(/&/g,"&amp;")
 .replace(/</g,"&lt;")
 .replace(/>/g,"&gt;")
@@ -258,15 +1160,11 @@ return String(value)
 
 }
 
-function logout(){
 
-localStorage.removeItem("vcarerx_token");
+document.getElementById("date").value =
+new Date().toISOString().split("T")[0];
 
-window.location.href="/";
-
-}
-
-updateStats();
+loadUser();
 
 </script>
 

@@ -2,32 +2,1114 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>V-CareRx DCR - Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V-CareRx DCR Admin</title>
 
 <style>
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family:Arial,sans-serif;
-  background:#f1f3f4;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f4f6f8;
   color:#263238
 }
-button,input,select,textarea{font:inherit}
+button,input,select{font:inherit}
 
 .login{
   min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(135deg,#075074,#00a890);
-  padding:20px
+  padding:20px;
+  background:linear-gradient(135deg,#064c6b,#00a98f)
 }
-.login-box{
+.loginBox{
   width:100%;
-  max-width:430px;
-  background:white;
+  max-width:420px;
+  background:#fff;
   border-radius:28px;
   padding:35px 28px;
-  box-shadow:0 15px 45px #0005;
+  box-shadow:0 15px 40px #0005;
+  text-align:center
+}
+.logo{
+  width:105px;
+  height:105px;
+  border:3px solid #14536d;
+  border-radius:50%;
+  margin:0 auto 25px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#14536d;
+  font-size:18px;
+  font-weight:bold
+}
+.loginBox h1{margin:0;font-size:30px}
+.loginBox h3{color:#777;font-weight:normal}
+.loginBox input{
+  width:100%;
+  padding:15px;
+  margin:8px 0;
+  border:1px solid #ccc;
+  border-radius:10px
+}
+.btn{
+  border:0;
+  border-radius:9px;
+  padding:13px 20px;
+  cursor:pointer;
+  background:#08ad98;
+  color:white;
+  font-weight:bold
+}
+.loginBtn{width:100%;margin-top:12px;font-size:17px}
+.error{color:#c62828;margin-top:15px}
+.demo{color:#777;font-size:13px;margin-top:15px}
+
+.app{display:none;min-height:100vh}
+
+.top{
+  height:64px;
+  background:#111;
+  color:white;
+  display:flex;
+  align-items:center;
+  padding:0 18px;
+  gap:18px;
+  position:sticky;
+  top:0;
+  z-index:10
+}
+.menuBtn{
+  border:0;
+  background:none;
+  color:white;
+  font-size:29px;
+  cursor:pointer
+}
+.topTitle{font-size:22px;flex:1}
+.logout{
+  background:#d32f2f;
+  border:0;
+  color:white;
+  padding:9px 13px;
+  border-radius:7px
+}
+
+.side{
+  position:fixed;
+  top:64px;
+  left:0;
+  bottom:0;
+  width:245px;
+  background:white;
+  border-right:1px solid #ddd;
+  overflow:auto;
+  z-index:8
+}
+.side button{
+  width:100%;
+  text-align:left;
+  padding:16px 20px;
+  border:0;
+  border-bottom:1px solid #eee;
+  background:white;
+  color:#263238;
+  cursor:pointer;
+  font-size:15px
+}
+.side button:hover{background:#e9f8f5}
+
+.content{
+  margin-left:245px;
+  padding:22px
+}
+.page{display:none}
+.page.active{display:block}
+
+.hero{
+  background:#08ad98;
+  color:white;
+  border-radius:12px;
+  padding:25px;
+  margin-bottom:20px
+}
+.hero h2{margin:0 0 8px}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px
+}
+.card{
+  background:white;
+  border-radius:12px;
+  padding:20px;
+  box-shadow:0 2px 7px #0001
+}
+.card b{font-size:28px;display:block;margin-top:8px}
+
+.panel{
+  background:white;
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 2px 7px #0001
+}
+.panel h2{margin-top:0}
+
+.formGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px
+}
+.formGrid input,.formGrid select{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:7px
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px
+}
+th,td{
+  padding:12px 8px;
+  border-bottom:1px solid #ddd;
+  text-align:left
+}
+th{background:#f2f5f6}
+
+.smallBtn{
+  border:0;
+  border-radius:6px;
+  padding:7px 10px;
+  margin:2px;
+  cursor:pointer
+}
+.green{background:#08ad98;color:white}
+.red{background:#d32f2f;color:white}
+.blue{background:#1976d2;color:white}
+.gray{background:#777;color:white}
+
+.toggle{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #eee;
+  padding:16px 0
+}
+.switch{
+  width:52px;
+  height:28px;
+  background:#bbb;
+  border-radius:20px;
+  cursor:pointer;
+  position:relative
+}
+.switch:after{
+  content:"";
+  position:absolute;
+  width:22px;
+  height:22px;
+  top:3px;
+  left:4px;
+  border-radius:50%;
+  background:white;
+  transition:.2s
+}
+.switch.on{background:#08ad98}
+.switch.on:after{left:26px}
+
+.status{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:12px
+}
+.status.on{background:#d9f5ec;color:#08795f}
+.status.off{background:#eee;color:#777}
+
+@media(max-width:800px){
+  .side{
+    transform:translateX(-100%);
+    transition:.2s
+  }
+  .side.open{transform:translateX(0)}
+  .content{margin-left:0;padding:14px}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .formGrid{grid-template-columns:1fr}
+  table{font-size:13px}
+  .topTitle{font-size:18px}
+}
+@media(max-width:480px){
+  .cards{grid-template-columns:1fr 1fr}
+  .card{padding:14px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div class="login" id="login">
+  <div class="loginBox">
+    <div class="logo">V-CareRx</div>
+    <h1>V-CareRx DCR</h1>
+    <h3>Administrator Login</h3>
+
+    <input id="adminId" placeholder="Admin ID" autocomplete="username">
+    <input id="adminPassword" type="password"
+           placeholder="Password" autocomplete="current-password">
+
+    <button class="btn loginBtn" onclick="login()">LOGIN</button>
+
+    <div id="loginError" class="error"></div>
+
+    <div class="demo">
+      Demo Admin: <b>Vaibhav</b> / <b>Vaibhav@123</b>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app" id="app">
+
+  <div class="top">
+    <button class="menuBtn" onclick="toggleMenu()">☰</button>
+    <div class="topTitle">V-CareRx Admin</div>
+    <button class="logout" onclick="logout()">LOGOUT</button>
+  </div>
+
+  <aside class="side" id="side">
+
+    <button onclick="showPage('dashboard')">🏠 Dashboard</button>
+    <button onclick="showPage('representatives')">👤 Representatives</button>
+    <button onclick="showPage('doctors')">👨‍⚕️ Doctors</button>
+    <button onclick="showPage('chemists')">💊 Chemists</button>
+    <button onclick="showPage('stockists')">🏪 Stockists</button>
+    <button onclick="showPage('products')">📦 Products</button>
+    <button onclick="showPage('assignments')">🔗 Assignments</button>
+    <button onclick="showPage('dcr')">📝 DCR Reports</button>
+    <button onclick="showPage('reports')">📊 Reports</button>
+    <button onclick="showPage('settings')">⚙️ Admin Settings</button>
+
+  </aside>
+
+  <main class="content">
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="page active">
+
+      <div class="hero">
+        <h2>Administrator Dashboard</h2>
+        <div>Welcome, Vaibhav</div>
+      </div>
+
+      <div class="cards">
+        <div class="card">Representatives<b id="repCount">0</b></div>
+        <div class="card">Doctors<b id="doctorCount">0</b></div>
+        <div class="card">Chemists<b id="chemistCount">0</b></div>
+        <div class="card">Stockists<b id="stockistCount">0</b></div>
+      </div>
+
+      <div class="panel">
+        <h2>Location Access</h2>
+        <div class="toggle">
+          <span>GPS / Location Access</span>
+          <div class="switch" id="gpsSwitch"
+               onclick="toggleGPS()"></div>
+        </div>
+        <p id="gpsText">Location access is OFF</p>
+      </div>
+
+    </section>
+
+    <!-- REPRESENTATIVES -->
+    <section id="representatives" class="page">
+      <div class="panel">
+        <h2>Representative Management</h2>
+
+        <div class="formGrid">
+          <input id="repName" placeholder="Representative Name">
+          <input id="repId" placeholder="Representative ID">
+          <input id="repPassword" placeholder="Password">
+          <input id="repMobile" placeholder="Mobile">
+        </div>
+
+        <br>
+        <button class="btn" onclick="addRep()">+ Add Representative</button>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>MR ID</th>
+              <th>Mobile</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="repTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- DOCTORS -->
+    <section id="doctors" class="page">
+      <div class="panel">
+        <h2>Doctor Management</h2>
+
+        <div class="formGrid">
+          <input id="doctorName" placeholder="Doctor Name">
+          <input id="doctorSpeciality" placeholder="Speciality">
+          <input id="doctorMobile" placeholder="Mobile">
+          <input id="doctorAddress" placeholder="Address">
+        </div>
+
+        <br>
+        <button class="btn" onclick="addDoctor()">+ Add Doctor</button>
+
+        <table>
+          <thead>
+          <tr>
+            <th>Doctor</th>
+            <th>Speciality</th>
+            <th>Mobile</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody id="doctorTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CHEMISTS -->
+    <section id="chemists" class="page">
+      <div class="panel">
+        <h2>Chemist Management</h2>
+
+        <div class="formGrid">
+          <input id="chemistName" placeholder="Chemist Name">
+          <input id="chemistMobile" placeholder="Mobile">
+          <input id="chemistAddress" placeholder="Address">
+        </div>
+
+        <br>
+        <button class="btn" onclick="addChemist()">+ Add Chemist</button>
+
+        <table>
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Address</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody id="chemistTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- STOCKISTS -->
+    <section id="stockists" class="page">
+      <div class="panel">
+        <h2>Stockist Management</h2>
+
+        <div class="formGrid">
+          <input id="stockistName" placeholder="Stockist Name">
+          <input id="stockistMobile" placeholder="Mobile">
+          <input id="stockistAddress" placeholder="Address">
+        </div>
+
+        <br>
+        <button class="btn" onclick="addStockist()">+ Add Stockist</button>
+
+        <table>
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Address</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody id="stockistTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products" class="page">
+      <div class="panel">
+        <h2>Product Management</h2>
+
+        <div class="formGrid">
+          <input id="productName" placeholder="Product Name">
+          <input id="productCode" placeholder="Product Code">
+        </div>
+
+        <br>
+        <button class="btn" onclick="addProduct()">+ Add Product</button>
+
+        <table>
+          <thead>
+          <tr>
+            <th>Product</th>
+            <th>Code</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody id="productTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ASSIGNMENTS -->
+    <section id="assignments" class="page">
+      <div class="panel">
+        <h2>Doctor / Chemist / Stockist Assignment</h2>
+
+        <div class="formGrid">
+          <select id="assignRep"></select>
+          <select id="assignType">
+            <option value="Doctor">Doctor</option>
+            <option value="Chemist">Chemist</option>
+            <option value="Stockist">Stockist</option>
+          </select>
+          <input id="assignClient" placeholder="Client name">
+        </div>
+
+        <br>
+        <button class="btn" onclick="addAssignment()">Assign</button>
+
+        <table>
+          <thead>
+          <tr>
+            <th>Representative</th>
+            <th>Type</th>
+            <th>Client</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody id="assignmentTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- DCR -->
+    <section id="dcr" class="page">
+      <div class="panel">
+        <h2>DCR Reports</h2>
+        <p>Daily Call Report records submitted by representatives will appear here.</p>
+
+        <table>
+          <thead>
+          <tr>
+            <th>Date</th>
+            <th>MR ID</th>
+            <th>Client</th>
+            <th>Visit Type</th>
+            <th>Location</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td colspan="5">No DCR records yet.</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- REPORTS -->
+    <section id="reports" class="page">
+      <div class="panel">
+        <h2>Reports</h2>
+
+        <p>Available Admin Reports</p>
+
+        <button class="btn">Pending Approvals</button>
+        <button class="btn">Expense Report</button>
+        <button class="btn">Visit Report</button>
+        <button class="btn">Order Report</button>
+        <button class="btn">Plan Vs Visit</button>
+        <button class="btn">Daily Tracking</button>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="settings" class="page">
+      <div class="panel">
+        <h2>Admin Settings</h2>
+
+        <div class="toggle">
+          <span>Representative Login</span>
+          <div class="switch on"></div>
+        </div>
+
+        <div class="toggle">
+          <span>GPS / Location Tracking</span>
+          <div class="switch" id="gpsSwitch2"
+               onclick="toggleGPS()"></div>
+        </div>
+
+        <div class="toggle">
+          <span>Doctor Addition</span>
+          <div class="switch on"></div>
+        </div>
+
+        <div class="toggle">
+          <span>Chemist Addition</span>
+          <div class="switch on"></div>
+        </div>
+
+        <div class="toggle">
+          <span>Stockist Addition</span>
+          <div class="switch on"></div>
+        </div>
+
+        <div class="toggle">
+          <span>Product Management</span>
+          <div class="switch on"></div>
+        </div>
+
+        <div class="toggle">
+          <span>Client Assignment</span>
+          <div class="switch on"></div>
+        </div>
+
+        <h3>Admin Account</h3>
+        <p><b>Admin ID:</b> Vaibhav</p>
+        <p><b>Role:</b> Administrator</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* =========================
+   LOGIN
+========================= */
+
+function login(){
+
+  const id=document.getElementById("adminId").value.trim();
+  const password=document.getElementById("adminPassword").value;
+
+  if(id==="Vaibhav" && password==="Vaibhav@123"){
+
+    document.getElementById("login").style.display="none";
+    document.getElementById("app").style.display="block";
+    document.getElementById("loginError").innerText="";
+
+    loadAll();
+
+  }else{
+    document.getElementById("loginError").innerText=
+      "Invalid Admin ID or password";
+  }
+}
+
+function logout(){
+  document.getElementById("app").style.display="none";
+  document.getElementById("login").style.display="flex";
+  document.getElementById("adminPassword").value="";
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function showPage(id){
+
+  document.querySelectorAll(".page").forEach(
+    p=>p.classList.remove("active")
+  );
+
+  const page=document.getElementById(id);
+
+  if(page) page.classList.add("active");
+
+  document.getElementById("side").classList.remove("open");
+}
+
+function toggleMenu(){
+  document.getElementById("side").classList.toggle("open");
+}
+
+/* =========================
+   STORAGE
+========================= */
+
+let reps=JSON.parse(localStorage.getItem("vcare_reps")||"[]");
+let doctors=JSON.parse(localStorage.getItem("vcare_doctors")||"[]");
+let chemists=JSON.parse(localStorage.getItem("vcare_chemists")||"[]");
+let stockists=JSON.parse(localStorage.getItem("vcare_stockists")||"[]");
+let products=JSON.parse(localStorage.getItem("vcare_products")||"[]");
+let assignments=JSON.parse(localStorage.getItem("vcare_assignments")||"[]");
+
+function save(){
+  localStorage.setItem("vcare_reps",JSON.stringify(reps));
+  localStorage.setItem("vcare_doctors",JSON.stringify(doctors));
+  localStorage.setItem("vcare_chemists",JSON.stringify(chemists));
+  localStorage.setItem("vcare_stockists",JSON.stringify(stockists));
+  localStorage.setItem("vcare_products",JSON.stringify(products));
+  localStorage.setItem("vcare_assignments",JSON.stringify(assignments));
+}
+
+/* =========================
+   REPRESENTATIVES
+========================= */
+
+function addRep(){
+
+  const name=document.getElementById("repName").value.trim();
+  const id=document.getElementById("repId").value.trim();
+  const password=document.getElementById("repPassword").value;
+  const mobile=document.getElementById("repMobile").value.trim();
+
+  if(!name||!id||!password){
+    alert("Enter representative name, ID and password");
+    return;
+  }
+
+  reps.push({
+    id:Date.now(),
+    name,
+    mrId:id,
+    password,
+    mobile,
+    active:true
+  });
+
+  save();
+
+  document.getElementById("repName").value="";
+  document.getElementById("repId").value="";
+  document.getElementById("repPassword").value="";
+  document.getElementById("repMobile").value="";
+
+  render();
+}
+
+function toggleRep(i){
+  reps[i].active=!reps[i].active;
+  save();
+  render();
+}
+
+function deleteRep(i){
+
+  if(!confirm(
+    "Delete this representative and ALL assignments belonging to this representative?"
+  )) return;
+
+  const deletedId=reps[i].mrId;
+
+  reps.splice(i,1);
+
+  assignments=assignments.filter(
+    a=>a.repId!==deletedId
+  );
+
+  save();
+  render();
+}
+
+function renderReps(){
+
+  const body=document.getElementById("repTable");
+
+  body.innerHTML=reps.map((r,i)=>`
+    <tr>
+      <td>${escapeHTML(r.name)}</td>
+      <td>${escapeHTML(r.mrId)}</td>
+      <td>${escapeHTML(r.mobile||"")}</td>
+      <td>
+        <span class="status ${r.active?"on":"off"}">
+          ${r.active?"ACTIVE":"INACTIVE"}
+        </span>
+      </td>
+      <td>
+        <button class="smallBtn blue"
+          onclick="toggleRep(${i})">
+          ${r.active?"Deactivate":"Activate"}
+        </button>
+        <button class="smallBtn red"
+          onclick="deleteRep(${i})">
+          Delete
+        </button>
+      </td>
+    </tr>
+  `).join("");
+}
+
+/* =========================
+   DOCTORS
+========================= */
+
+function addDoctor(){
+
+  const name=document.getElementById("doctorName").value.trim();
+
+  if(!name){
+    alert("Enter doctor name");
+    return;
+  }
+
+  doctors.push({
+    id:Date.now(),
+    name,
+    speciality:document.getElementById("doctorSpeciality").value,
+    mobile:document.getElementById("doctorMobile").value,
+    address:document.getElementById("doctorAddress").value
+  });
+
+  save();
+  render();
+}
+
+function deleteDoctor(i){
+  if(confirm("Delete doctor?")){
+    doctors.splice(i,1);
+    save();
+    render();
+  }
+}
+
+function renderDoctors(){
+
+  document.getElementById("doctorTable").innerHTML=
+    doctors.map((d,i)=>`
+      <tr>
+        <td>${escapeHTML(d.name)}</td>
+        <td>${escapeHTML(d.speciality)}</td>
+        <td>${escapeHTML(d.mobile)}</td>
+        <td>
+          <button class="smallBtn red"
+          onclick="deleteDoctor(${i})">Delete</button>
+        </td>
+      </tr>
+    `).join("");
+}
+
+/* =========================
+   CHEMISTS
+========================= */
+
+function addChemist(){
+
+  const name=document.getElementById("chemistName").value.trim();
+
+  if(!name){
+    alert("Enter chemist name");
+    return;
+  }
+
+  chemists.push({
+    id:Date.now(),
+    name,
+    mobile:document.getElementById("chemistMobile").value,
+    address:document.getElementById("chemistAddress").value
+  });
+
+  save();
+  render();
+}
+
+function deleteChemist(i){
+  if(confirm("Delete chemist?")){
+    chemists.splice(i,1);
+    save();
+    render();
+  }
+}
+
+function renderChemists(){
+
+  document.getElementById("chemistTable").innerHTML=
+    chemists.map((c,i)=>`
+      <tr>
+        <td>${escapeHTML(c.name)}</td>
+        <td>${escapeHTML(c.mobile)}</td>
+        <td>${escapeHTML(c.address)}</td>
+        <td>
+          <button class="smallBtn red"
+          onclick="deleteChemist(${i})">Delete</button>
+        </td>
+      </tr>
+    `).join("");
+}
+
+/* =========================
+   STOCKISTS
+========================= */
+
+function addStockist(){
+
+  const name=document.getElementById("stockistName").value.trim();
+
+  if(!name){
+    alert("Enter stockist name");
+    return;
+  }
+
+  stockists.push({
+    id:Date.now(),
+    name,
+    mobile:document.getElementById("stockistMobile").value,
+    address:document.getElementById("stockistAddress").value
+  });
+
+  save();
+  render();
+}
+
+function deleteStockist(i){
+  if(confirm("Delete stockist?")){
+    stockists.splice(i,1);
+    save();
+    render();
+  }
+}
+
+function renderStockists(){
+
+  document.getElementById("stockistTable").innerHTML=
+    stockists.map((s,i)=>`
+      <tr>
+        <td>${escapeHTML(s.name)}</td>
+        <td>${escapeHTML(s.mobile)}</td>
+        <td>${escapeHTML(s.address)}</td>
+        <td>
+          <button class="smallBtn red"
+          onclick="deleteStockist(${i})">Delete</button>
+        </td>
+      </tr>
+    `).join("");
+}
+
+/* =========================
+   PRODUCTS
+========================= */
+
+function addProduct(){
+
+  const name=document.getElementById("productName").value.trim();
+
+  if(!name){
+    alert("Enter product name");
+    return;
+  }
+
+  products.push({
+    id:Date.now(),
+    name,
+    code:document.getElementById("productCode").value
+  });
+
+  save();
+  render();
+}
+
+function deleteProduct(i){
+  if(confirm("Delete product?")){
+    products.splice(i,1);
+    save();
+    render();
+  }
+}
+
+function renderProducts(){
+
+  document.getElementById("productTable").innerHTML=
+    products.map((p,i)=>`
+      <tr>
+        <td>${escapeHTML(p.name)}</td>
+        <td>${escapeHTML(p.code)}</td>
+        <td>
+          <button class="smallBtn red"
+          onclick="deleteProduct(${i})">Delete</button>
+        </td>
+      </tr>
+    `).join("");
+}
+
+/* =========================
+   ASSIGNMENTS
+========================= */
+
+function addAssignment(){
+
+  const rep=document.getElementById("assignRep").value;
+  const type=document.getElementById("assignType").value;
+  const client=document.getElementById("assignClient").value.trim();
+
+  if(!rep||!client){
+    alert("Select representative and enter client");
+    return;
+  }
+
+  assignments.push({
+    id:Date.now(),
+    repId:rep,
+    type,
+    client
+  });
+
+  save();
+
+  document.getElementById("assignClient").value="";
+
+  render();
+}
+
+function deleteAssignment(i){
+
+  if(confirm("Remove assignment?")){
+    assignments.splice(i,1);
+    save();
+    render();
+  }
+}
+
+function renderAssignments(){
+
+  const select=document.getElementById("assignRep");
+
+  select.innerHTML=
+    `<option value="">Select Representative</option>`+
+    reps.map(r=>
+      `<option value="${escapeHTML(r.mrId)}">
+        ${escapeHTML(r.name)} (${escapeHTML(r.mrId)})
+       </option>`
+    ).join("");
+
+  document.getElementById("assignmentTable").innerHTML=
+    assignments.map((a,i)=>{
+
+      const r=reps.find(x=>x.mrId===a.repId);
+
+      return `
+      <tr>
+        <td>${escapeHTML(r?r.name:a.repId)}</td>
+        <td>${escapeHTML(a.type)}</td>
+        <td>${escapeHTML(a.client)}</td>
+        <td>
+          <button class="smallBtn red"
+          onclick="deleteAssignment(${i})">
+          Delete
+          </button>
+        </td>
+      </tr>`;
+    }).join("");
+}
+
+/* =========================
+   GPS
+========================= */
+
+let gps=localStorage.getItem("vcare_gps")==="true";
+
+function toggleGPS(){
+
+  gps=!gps;
+
+  localStorage.setItem("vcare_gps",gps);
+
+  updateGPS();
+
+  if(gps && navigator.geolocation){
+
+    navigator.geolocation.getCurrentPosition(
+      position=>{
+        alert(
+          "GPS enabled.\nLatitude: "+
+          position.coords.latitude+
+          "\nLongitude: "+
+          position.coords.longitude
+        );
+      },
+      ()=>{
+        alert(
+          "GPS permission was not granted by the browser."
+        );
+      }
+    );
+
+  }
+}
+
+function updateGPS(){
+
+  document.getElementById("gpsSwitch").classList.toggle("on",gps);
+  document.getElementById("gpsSwitch2").classList.toggle("on",gps);
+
+  document.getElementById("gpsText").innerText=
+    gps ? "Location access is ON" :
+          "Location access is OFF";
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function updateCounts(){
+
+  document.getElementById("repCount").innerText=reps.length;
+  document.getElementById("doctorCount").innerText=doctors.length;
+  document.getElementById("chemistCount").innerText=chemists.length;
+  document.getElementById("stockistCount").innerText=stockists.length;
+}
+
+/* =========================
+   RENDER
+========================= */
+
+function render(){
+
+  renderReps();
+  renderDoctors();
+  renderChemists();
+  renderStockists();
+  renderProducts();
+  renderAssignments();
+  updateCounts();
+  updateGPS();
+}
+
+function loadAll(){
+  render();
+}
+
+/* =========================
+   SAFETY
+========================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+/* Enter key login */
+document.getElementById("adminPassword").addEventListener(
+  "keydown",
+  function(e){
+    if(e.key==="Enter") login();
+  }
+);
+</script>
+
+</body>
+</html>

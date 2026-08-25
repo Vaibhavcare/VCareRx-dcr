@@ -2,197 +2,1155 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>V-CareRx DCR</title>
+<meta name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1">
+
+<title>V-CareRx DCR Admin</title>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f7f8;color:#18343d}
-header{background:#075c69;color:#fff;padding:15px 18px;display:flex;justify-content:space-between;align-items:center}
-header h1{margin:0;font-size:21px}
-button{cursor:pointer;border:0;border-radius:8px;padding:11px 15px;font-weight:bold}
-.logout{background:#fff;color:#075c69}
-.container{max-width:1150px;margin:auto;padding:18px}
-.welcome{background:#fff;padding:18px;border-radius:14px;margin-bottom:18px}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 2px 8px #0001}
-.card small{color:#687c82}
-.card strong{display:block;font-size:27px;margin-top:7px;color:#087f83}
-.menu{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
-.menu button{background:#087f83;color:#fff}
-.panel{background:#fff;padding:20px;border-radius:14px;margin-top:18px}
-.hidden{display:none}
-label{display:block;font-weight:bold;font-size:13px;margin-top:12px}
-input,select,textarea{width:100%;padding:11px;margin-top:6px;border:1px solid #ccdfe2;border-radius:8px}
-textarea{min-height:80px}
-.primary{background:#087f83;color:#fff;margin-top:16px}
-.admin{border:2px solid #e0b84d}
-.admin-title{color:#8a6100}
-.admin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.admin-grid button{background:#f3f6f7;text-align:left}
-.item{border:1px solid #dce5e7;padding:12px;border-radius:9px;margin:8px 0}
-.badge{display:inline-block;padding:5px 9px;border-radius:15px;background:#e8f5e9;color:#286b31;font-size:12px}
-@media(max-width:700px){
-.cards{grid-template-columns:repeat(2,1fr)}
-.menu,.admin-grid{grid-template-columns:1fr}
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#eeeeee;
+  color:#333;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.topbar{
+  height:65px;
+  background:#111;
+  color:white;
+  display:flex;
+  align-items:center;
+  padding:0 16px;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:21px;
+  font-weight:bold;
+}
+
+.top-icons{
+  display:flex;
+  gap:18px;
+  font-size:22px;
+}
+
+.profile{
+  background:#08b39c;
+  color:white;
+  min-height:280px;
+  text-align:center;
+  padding:28px 15px;
+  position:relative;
+}
+
+.profile-icon{
+  width:82px;
+  height:82px;
+  border-radius:50%;
+  background:white;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:42px;
+  color:#08b39c;
+}
+
+.profile h2{
+  margin:15px 0 4px;
+  font-weight:normal;
+}
+
+.profile p{
+  margin:4px;
+  font-size:17px;
+}
+
+.admin-badge{
+  display:inline-block;
+  margin-top:12px;
+  padding:7px 14px;
+  border-radius:20px;
+  background:#087c6d;
+  color:white;
+  font-size:13px;
+}
+
+.settings-btn{
+  position:absolute;
+  right:18px;
+  bottom:18px;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#078f80;
+  color:white;
+}
+
+.section{
+  padding:12px;
+}
+
+.section-title{
+  font-size:20px;
+  margin:7px 0 12px;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+}
+
+.card{
+  background:white;
+  min-height:100px;
+  padding:15px;
+  text-align:center;
+  border:1px solid #ddd;
+}
+
+.card-number{
+  display:block;
+  font-size:28px;
+  color:#08a991;
+  margin-bottom:7px;
+}
+
+.admin-menu{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+}
+
+.admin-menu button{
+  background:white;
+  padding:18px 8px;
+  border:1px solid #ddd;
+  color:#333;
+  border-radius:4px;
+}
+
+.admin-menu button:active{
+  background:#08b39c;
+  color:white;
+}
+
+.panel{
+  display:none;
+  background:white;
+  margin:10px 0;
+  padding:15px;
+  border-radius:5px;
+}
+
+.panel.active{
+  display:block;
+}
+
+.panel h2{
+  margin-top:0;
+  color:#087d70;
+}
+
+.form-group{
+  margin-bottom:12px;
+}
+
+.form-group label{
+  display:block;
+  margin-bottom:5px;
+  font-size:14px;
+  font-weight:bold;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:5px;
+  font-size:15px;
+}
+
+textarea{
+  min-height:80px;
+}
+
+.primary{
+  width:100%;
+  padding:13px;
+  background:#08ad97;
+  color:white;
+  border-radius:5px;
+  margin-top:7px;
+}
+
+.danger{
+  background:#d93636 !important;
+  color:white !important;
+}
+
+.warning{
+  background:#e2a400 !important;
+  color:white !important;
+}
+
+.list-item{
+  border:1px solid #ddd;
+  padding:12px;
+  margin:8px 0;
+  border-radius:5px;
+}
+
+.list-actions{
+  display:flex;
+  gap:6px;
+  margin-top:9px;
+}
+
+.list-actions button{
+  padding:8px 11px;
+  border-radius:4px;
+  background:#08ad97;
+  color:white;
+}
+
+.switch-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 0;
+  border-bottom:1px solid #ddd;
+}
+
+.switch{
+  width:52px;
+  height:28px;
+  border-radius:20px;
+  background:#aaa;
+  padding:3px;
+}
+
+.switch.on{
+  background:#08ad97;
+}
+
+.switch-circle{
+  width:22px;
+  height:22px;
+  background:white;
+  border-radius:50%;
+  transition:.2s;
+}
+
+.switch.on .switch-circle{
+  margin-left:24px;
+}
+
+.assignment{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:67px;
+  background:#222;
+  color:white;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  z-index:100;
+}
+
+.bottom-nav button{
+  background:#222;
+  color:white;
+  font-size:11px;
+}
+
+.bottom-nav span{
+  display:block;
+  font-size:22px;
+  margin-bottom:3px;
+}
+
+.content{
+  padding-bottom:80px;
+}
+
+.message{
+  padding:10px;
+  margin:8px 0;
+  border-radius:4px;
+  display:none;
+}
+
+.success{
+  background:#dff4ea;
+  color:#176b49;
+}
+
+.error{
+  background:#ffe1e1;
+  color:#a40000;
+}
+
+@media(min-width:700px){
+
+  .content{
+    max-width:900px;
+    margin:auto;
+  }
+
+  .admin-menu{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .cards{
+    grid-template-columns:repeat(4,1fr);
+  }
+
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>V-CareRx DCR</h1>
-<div>
-<span id="userInfo"></span>
-<button class="logout" onclick="logout()">Logout</button>
-</div>
-</header>
+<div class="topbar">
 
-<div class="container">
+  <div class="logo">
+    ☰ &nbsp; V-CareRx DCR
+  </div>
 
-<div class="welcome">
-<h2>Daily Call Report</h2>
-<p id="welcomeText">Loading...</p>
+  <div class="top-icons">
+    🔍 &nbsp; 🔄 &nbsp; 📊
+  </div>
+
 </div>
+
+<div class="content">
+
+<!-- PROFILE -->
+
+<div class="profile">
+
+  <div class="profile-icon">👤</div>
+
+  <h2 id="adminName">
+    Vaibhav
+  </h2>
+
+  <p>
+    ADMINISTRATOR
+  </p>
+
+  <div class="admin-badge">
+    👑 FULL ADMIN ACCESS
+  </div>
+
+  <button
+    class="settings-btn"
+    onclick="openPanel('settingsPanel')">
+    ⚙
+  </button>
+
+</div>
+
+
+<!-- SUMMARY -->
+
+<div class="section">
+
+<h2 class="section-title">
+Admin Summary
+</h2>
 
 <div class="cards">
-<div class="card"><small>Today's Calls</small><strong id="calls">0</strong></div>
-<div class="card"><small>Doctors Visited</small><strong id="doctors">0</strong></div>
-<div class="card"><small>Chemists Visited</small><strong id="chemists">0</strong></div>
-<div class="card"><small>DCR Reports</small><strong id="reports">0</strong></div>
+
+<div class="card">
+<span class="card-number"
+      id="repCount">0</span>
+Representatives
 </div>
 
-<div class="menu">
-<button onclick="showPanel('dcrPanel')">➕ New DCR</button>
-<button onclick="showHistory()">📋 DCR History</button>
-<button onclick="showPanel('plannerPanel')">📅 Daily Planner</button>
+<div class="card">
+<span class="card-number"
+      id="doctorCount">0</span>
+Doctors
 </div>
 
-<!-- DCR -->
-<div id="dcrPanel" class="panel hidden">
-<h2>➕ New DCR</h2>
+<div class="card">
+<span class="card-number"
+      id="chemistCount">0</span>
+Chemists
+</div>
 
-<form id="dcrForm">
+<div class="card">
+<span class="card-number"
+      id="stockistCount">0</span>
+Stockists
+</div>
 
-<label>Representative ID</label>
-<input id="repId" readonly>
+</div>
 
-<label>Date</label>
-<input id="date" type="date" required>
+</div>
 
-<label>Doctor Name</label>
-<input id="doctorName" required placeholder="Doctor name">
 
-<label>Specialty</label>
-<input id="specialty" placeholder="Specialty">
+<!-- ADMIN MENU -->
 
-<label>Chemist Visited</label>
-<select id="chemistVisited">
-<option value="No">No</option>
-<option value="Yes">Yes</option>
-</select>
+<div class="section">
 
-<label>Chemist Name</label>
-<input id="chemistName" placeholder="Chemist name">
+<h2 class="section-title">
+Administration
+</h2>
 
-<label>Samples Given</label>
-<input id="samples" type="number" min="0" value="0">
+<div class="admin-menu">
 
-<label>Gifts Distributed</label>
-<input id="gifts" type="number" min="0" value="0">
+<button onclick="openPanel('repPanel')">
+👥<br>
+Representatives
+</button>
 
-<label>Remarks</label>
-<textarea id="remarks"></textarea>
+<button onclick="openPanel('doctorPanel')">
+👨‍⚕️<br>
+Doctors
+</button>
 
-<button class="primary" type="submit">Submit DCR</button>
+<button onclick="openPanel('chemistPanel')">
+💊<br>
+Chemists
+</button>
+
+<button onclick="openPanel('stockistPanel')">
+🏪<br>
+Stockists
+</button>
+
+<button onclick="openPanel('productPanel')">
+📦<br>
+Products
+</button>
+
+<button onclick="openPanel('assignmentPanel')">
+🔗<br>
+Assignments
+</button>
+
+<button onclick="openPanel('dcrPanel')">
+📋<br>
+All DCR
+</button>
+
+<button onclick="openPanel('locationPanel')">
+📍<br>
+Location
+</button>
+
+<button onclick="openPanel('permissionPanel')">
+🔐<br>
+Permissions
+</button>
+
+<button onclick="openPanel('settingsPanel')">
+⚙️<br>
+Settings
+</button>
+
+<button onclick="openPanel('importPanel')">
+📥<br>
+Doctor Import
+</button>
+
+<button onclick="openPanel('reportsPanel')">
+📊<br>
+Reports
+</button>
+
+</div>
+
+</div>
+
+
+<!-- REPRESENTATIVE -->
+
+<div id="repPanel"
+     class="panel">
+
+<h2>👥 Representative Management</h2>
+
+<div id="message"
+     class="message"></div>
+
+<form onsubmit="createRepresentative(event)">
+
+<div class="form-group">
+<label>Representative ID / MR ID</label>
+<input id="repId"
+       placeholder="MR-001"
+       required>
+</div>
+
+<div class="form-group">
+<label>Representative Name</label>
+<input id="repName"
+       placeholder="Tanuja"
+       required>
+</div>
+
+<div class="form-group">
+<label>Username</label>
+<input id="repUsername"
+       required>
+</div>
+
+<div class="form-group">
+<label>Password</label>
+<input id="repPassword"
+       type="password"
+       required>
+</div>
+
+<div class="form-group">
+<label>Mobile</label>
+<input id="repMobile"
+       type="tel">
+</div>
+
+<div class="form-group">
+<label>Territory</label>
+<input id="repTerritory">
+</div>
+
+<button class="primary">
+➕ Create Representative
+</button>
 
 </form>
+
+<hr>
+
+<div id="repList">
+Loading representatives...
 </div>
 
-<!-- HISTORY -->
-<div id="historyPanel" class="panel hidden">
-<h2>📋 DCR History</h2>
-<div id="history">Loading...</div>
 </div>
 
-<!-- PLANNER -->
-<div id="plannerPanel" class="panel hidden">
-<h2>📅 Daily Planner</h2>
-<p>Plan and manage today's doctor visits.</p>
-<div id="plannerList">No planned visits.</div>
+
+<!-- DOCTOR -->
+
+<div id="doctorPanel"
+     class="panel">
+
+<h2>👨‍⚕️ Doctor Master</h2>
+
+<form onsubmit="addDoctor(event)">
+
+<div class="form-group">
+<label>Doctor Name</label>
+<input id="doctorName"
+       required>
 </div>
 
-<!-- ADMIN PANEL -->
-<div id="adminPanel" class="panel admin hidden">
+<div class="form-group">
+<label>Specialty</label>
+<input id="doctorSpecialty">
+</div>
 
-<h2 class="admin-title">👑 Admin Panel</h2>
+<div class="form-group">
+<label>Clinic / Hospital</label>
+<input id="doctorClinic">
+</div>
+
+<div class="form-group">
+<label>City</label>
+<input id="doctorCity">
+</div>
+
+<div class="form-group">
+<label>Mobile</label>
+<input id="doctorPhone">
+</div>
+
+<button class="primary">
+➕ Add Doctor
+</button>
+
+</form>
+
+<div id="doctorList"></div>
+
+</div>
+
+
+<!-- CHEMIST -->
+
+<div id="chemistPanel"
+     class="panel">
+
+<h2>💊 Chemist Master</h2>
+
+<form onsubmit="addChemist(event)">
+
+<div class="form-group">
+<label>Chemist Name</label>
+<input id="chemistName"
+       required>
+</div>
+
+<div class="form-group">
+<label>Address</label>
+<input id="chemistAddress">
+</div>
+
+<div class="form-group">
+<label>City</label>
+<input id="chemistCity">
+</div>
+
+<div class="form-group">
+<label>Mobile</label>
+<input id="chemistPhone">
+</div>
+
+<button class="primary">
+➕ Add Chemist
+</button>
+
+</form>
+
+<div id="chemistList"></div>
+
+</div>
+
+
+<!-- STOCKIST -->
+
+<div id="stockistPanel"
+     class="panel">
+
+<h2>🏪 Stockist Master</h2>
+
+<form onsubmit="addStockist(event)">
+
+<div class="form-group">
+<label>Stockist Name</label>
+<input id="stockistName"
+       required>
+</div>
+
+<div class="form-group">
+<label>Address</label>
+<input id="stockistAddress">
+</div>
+
+<div class="form-group">
+<label>City</label>
+<input id="stockistCity">
+</div>
+
+<div class="form-group">
+<label>Mobile</label>
+<input id="stockistPhone">
+</div>
+
+<button class="primary">
+➕ Add Stockist
+</button>
+
+</form>
+
+<div id="stockistList"></div>
+
+</div>
+
+
+<!-- PRODUCT -->
+
+<div id="productPanel"
+     class="panel">
+
+<h2>📦 Product Management</h2>
+
+<form onsubmit="addProduct(event)">
+
+<div class="form-group">
+<label>Product Name</label>
+<input id="productName"
+       required>
+</div>
+
+<div class="form-group">
+<label>Product Code</label>
+<input id="productCode">
+</div>
+
+<div class="form-group">
+<label>Category</label>
+<input id="productCategory">
+</div>
+
+<div class="form-group">
+<label>Stock Quantity</label>
+<input id="productStock"
+       type="number"
+       min="0">
+</div>
+
+<button class="primary">
+➕ Add Product
+</button>
+
+</form>
+
+<div id="productList"></div>
+
+</div>
+
+
+<!-- ASSIGNMENT -->
+
+<div id="assignmentPanel"
+     class="panel">
+
+<h2>🔗 Assignment Management</h2>
 
 <p>
-<span class="badge">ADMIN ACCESS</span>
-Only the administrator can access these controls.
+Assign Doctors, Chemists and Stockists
+to Representatives.
 </p>
 
-<div class="admin-grid">
+<div class="form-group">
 
-<button onclick="adminSection('representatives')">
-👥 Representatives
+<label>Representative</label>
+
+<select id="assignmentRep">
+<option>Select Representative</option>
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Doctor</label>
+
+<select id="assignmentDoctor">
+<option>Select Doctor</option>
+</select>
+
+</div>
+
+<button class="primary"
+        onclick="assignDoctor()">
+
+Assign Doctor
+
 </button>
 
-<button onclick="adminSection('doctors')">
-👨‍⚕️ Doctor Master
+<br><br>
+
+<div class="form-group">
+
+<label>Chemist</label>
+
+<select id="assignmentChemist">
+<option>Select Chemist</option>
+</select>
+
+</div>
+
+<button class="primary"
+        onclick="assignChemist()">
+
+Assign Chemist
+
 </button>
 
-<button onclick="adminSection('chemists')">
-💊 Chemist Master
+<br><br>
+
+<div class="form-group">
+
+<label>Stockist</label>
+
+<select id="assignmentStockist">
+<option>Select Stockist</option>
+</select>
+
+</div>
+
+<button class="primary"
+        onclick="assignStockist()">
+
+Assign Stockist
+
 </button>
 
-<button onclick="adminSection('allDcr')">
-📋 All DCR Reports
+<div id="assignmentList"></div>
+
+</div>
+
+
+<!-- DCR -->
+
+<div id="dcrPanel"
+     class="panel">
+
+<h2>📋 All DCR Reports</h2>
+
+<button class="primary"
+        onclick="loadDCR()">
+
+Refresh DCR Reports
+
 </button>
 
-<button onclick="adminSection('location')">
-📍 Location Reports
+<div id="dcrList">
+Loading...
+</div>
+
+</div>
+
+
+<!-- LOCATION -->
+
+<div id="locationPanel"
+     class="panel">
+
+<h2>📍 Location Permission</h2>
+
+<p>
+Admin controls whether the application may
+request location from representatives.
+</p>
+
+<div class="switch-row">
+
+<div>
+<b>Representative Location</b>
+<br>
+<small>Allow location collection</small>
+</div>
+
+<div id="locationSwitch"
+     class="switch on"
+     onclick="toggleLocation()">
+
+<div class="switch-circle"></div>
+
+</div>
+
+</div>
+
+<div class="switch-row">
+
+<div>
+<b>Location During DCR</b>
+<br>
+<small>Capture location with DCR</small>
+</div>
+
+<div id="dcrLocationSwitch"
+     class="switch on"
+     onclick="toggleDcrLocation()">
+
+<div class="switch-circle"></div>
+
+</div>
+
+</div>
+
+<p>
+Current status:
+<strong id="locationStatus">
+ON
+</strong>
+</p>
+
+</div>
+
+
+<!-- PERMISSIONS -->
+
+<div id="permissionPanel"
+     class="panel">
+
+<h2>🔐 Permissions</h2>
+
+<div class="switch-row">
+
+<div>
+<b>Representative DCR</b>
+<br>
+Submit daily calls
+</div>
+
+<div class="switch on">
+<div class="switch-circle"></div>
+</div>
+
+</div>
+
+<div class="switch-row">
+
+<div>
+<b>Doctor Management</b>
+<br>
+Admin only
+</div>
+
+<div class="switch on">
+<div class="switch-circle"></div>
+</div>
+
+</div>
+
+<div class="switch-row">
+
+<div>
+<b>Chemist Management</b>
+<br>
+Admin only
+</div>
+
+<div class="switch on">
+<div class="switch-circle"></div>
+</div>
+
+</div>
+
+<div class="switch-row">
+
+<div>
+<b>Stockist Management</b>
+<br>
+Admin only
+</div>
+
+<div class="switch on">
+<div class="switch-circle"></div>
+</div>
+
+</div>
+
+<div class="switch-row">
+
+<div>
+<b>Product Management</b>
+<br>
+Admin only
+</div>
+
+<div class="switch on">
+<div class="switch-circle"></div>
+</div>
+
+</div>
+
+<div class="switch-row">
+
+<div>
+<b>All Reports</b>
+<br>
+Admin only
+</div>
+
+<div class="switch on">
+<div class="switch-circle"></div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SETTINGS -->
+
+<div id="settingsPanel"
+     class="panel">
+
+<h2>⚙️ Admin Settings</h2>
+
+<div class="list-item">
+<b>Application</b>
+<br>
+V-CareRx DCR
+</div>
+
+<div class="list-item">
+<b>Admin</b>
+<br>
+Vaibhav
+</div>
+
+<div class="list-item">
+<b>Access Level</b>
+<br>
+FULL ADMIN
+</div>
+
+<div class="list-item">
+<b>Representative Management</b>
+<br>
+Create / Activate / Deactivate
+</div>
+
+<div class="list-item">
+<b>Master Data</b>
+<br>
+Doctor / Chemist / Stockist / Product
+</div>
+
+<div class="list-item">
+<b>Assignments</b>
+<br>
+Representative-wise assignment
+</div>
+
+</div>
+
+
+<!-- IMPORT -->
+
+<div id="importPanel"
+     class="panel">
+
+<h2>📥 Doctor List Import</h2>
+
+<p>
+When you provide the Doctor list source,
+we can import the complete list here.
+</p>
+
+<div class="form-group">
+
+<label>Doctor List File</label>
+
+<input id="doctorFile"
+       type="file"
+       accept=".csv,.xlsx,.xls">
+
+</div>
+
+<button class="primary"
+        onclick="importDoctors()">
+
+📥 Import Doctor List
+
 </button>
 
-<button onclick="adminSection('samples')">
-📦 Samples & Gifts
+<div id="importResult"></div>
+
+</div>
+
+
+<!-- REPORTS -->
+
+<div id="reportsPanel"
+     class="panel">
+
+<h2>📊 Reports</h2>
+
+<div class="cards">
+
+<div class="card">
+<span class="card-number"
+      id="reportDcr">0</span>
+DCR
+</div>
+
+<div class="card">
+<span class="card-number"
+      id="reportSamples">0</span>
+Samples
+</div>
+
+<div class="card">
+<span class="card-number"
+      id="reportGifts">0</span>
+Gifts
+</div>
+
+<div class="card">
+<span class="card-number"
+      id="reportCalls">0</span>
+Calls
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+
+<div class="bottom-nav">
+
+<button onclick="goHome()">
+<span>⌂</span>
+Home
 </button>
 
-<button onclick="adminSection('reports')">
-📊 Reports
+<button onclick="openPanel('assignmentPanel')">
+<span>▣</span>
+Task
 </button>
 
-<button onclick="adminSection('settings')">
-⚙️ Settings
+<button onclick="openPanel('reportsPanel')">
+<span>▥</span>
+Reports
 </button>
 
-<button onclick="adminSection('permissions')">
-🔐 User Permissions
+<button onclick="openPanel('dcrPanel')">
+<span>🔔</span>
+DCR
+</button>
+
+<button onclick="openPanel('settingsPanel')">
+<span>⚙</span>
+Admin
 </button>
 
 </div>
 
-<div id="adminContent" class="panel">
-<h3>Admin Dashboard</h3>
-<p>Select an Admin option above.</p>
-</div>
-
-</div>
-
-</div>
 
 <script>
+
+const API = "/api";
 
 let token =
 localStorage.getItem("vcarerx_token");
 
 let currentUser = null;
 
-const API = "/api";
+let locationEnabled = true;
+
+let dcrLocationEnabled = true;
 
 
-async function loadUser(){
+/* =========================
+AUTHENTICATION
+========================= */
+
+async function loadAdmin(){
 
 if(!token){
 
@@ -205,55 +1163,58 @@ return;
 try{
 
 const response =
-await fetch(API + "/auth/me",{
+await fetch(API+"/auth/me",{
 
 headers:{
-Authorization:"Bearer " + token
+Authorization:"Bearer "+token
 }
 
 });
 
 if(!response.ok){
 
-throw new Error("Session expired");
+throw new Error("Not logged in");
 
 }
 
 const data =
 await response.json();
 
-currentUser = data.user;
+currentUser =
+data.user;
 
-document.getElementById("userInfo").textContent =
-currentUser.username +
-" (" + currentUser.role + ")";
+if(currentUser.role !== "ADMIN"){
 
-document.getElementById("welcomeText").textContent =
-"Welcome " +
-currentUser.username +
-". Representative ID: " +
-currentUser.representativeId;
+document.body.innerHTML = `
+<div style="
+padding:40px;
+text-align:center;
+font-family:Arial">
 
+<h1>Access Denied</h1>
 
-/*
-ADMIN PANEL ONLY FOR ADMIN
-*/
+<p>Administrator access is required.</p>
 
-if(currentUser.role === "ADMIN"){
+</div>
+`;
 
-document.getElementById("adminPanel")
-.classList.remove("hidden");
+return;
 
 }
 
-document.getElementById("repId").value =
-currentUser.representativeId;
+document.getElementById(
+"adminName"
+).textContent =
+currentUser.username;
 
-loadDcr();
+loadAll();
 
-}catch(error){
+}
+catch(error){
 
-localStorage.removeItem("vcarerx_token");
+localStorage.removeItem(
+"vcarerx_token"
+);
 
 window.location.href="/";
 
@@ -262,515 +1223,124 @@ window.location.href="/";
 }
 
 
-function authHeaders(){
+/* =========================
+PANELS
+========================= */
 
-return{
-
-"Content-Type":"application/json",
-
-"Authorization":
-"Bearer " + token
-
-};
-
-}
-
-
-function showPanel(id){
+function openPanel(id){
 
 document
 .querySelectorAll(".panel")
 .forEach(p=>{
-if(p.id!=="adminPanel")
-p.classList.add("hidden");
+p.classList.remove("active");
 });
 
-document
-.getElementById(id)
-.classList.remove("hidden");
+const panel =
+document.getElementById(id);
 
-}
+if(panel){
 
+panel.classList.add("active");
 
-async function loadDcr(){
-
-try{
-
-const response =
-await fetch(API + "/dcr",{
-
-headers:{
-Authorization:
-"Bearer " + token
-}
-
+window.scrollTo({
+top:panel.offsetTop-70,
+behavior:"smooth"
 });
 
-if(!response.ok)return;
-
-const data =
-await response.json();
-
-const reports =
-data.reports || [];
-
-document.getElementById("reports")
-.textContent =
-reports.length;
-
-document.getElementById("calls")
-.textContent =
-reports.length;
-
-document.getElementById("doctors")
-.textContent =
-new Set(
-reports.map(r=>r.doctorName)
-).size;
-
-document.getElementById("chemists")
-.textContent =
-reports.filter(
-r=>r.chemistVisited==="Yes"
-).length;
-
-}catch(error){
-
-console.log(error);
-
 }
 
 }
 
 
-document
-.getElementById("dcrForm")
-.addEventListener("submit",async function(e){
+/* =========================
+API HEADERS
+========================= */
+
+function headers(){
+
+return{
+
+"Content-Type":
+"application/json",
+
+"Authorization":
+"Bearer "+token
+
+};
+
+}
+
+
+/* =========================
+REPRESENTATIVES
+========================= */
+
+async function createRepresentative(e){
 
 e.preventDefault();
 
-const payload={
+const data={
 
 representativeId:
 document.getElementById("repId").value,
 
-date:
-document.getElementById("date").value,
+name:
+document.getElementById("repName").value,
 
-doctorName:
-document.getElementById("doctorName").value,
+username:
+document.getElementById("repUsername").value,
 
-specialty:
-document.getElementById("specialty").value,
+password:
+document.getElementById("repPassword").value,
 
-chemistVisited:
-document.getElementById("chemistVisited").value,
+mobile:
+document.getElementById("repMobile").value,
 
-chemistName:
-document.getElementById("chemistName").value,
-
-samplesGiven:
-document.getElementById("samples").value,
-
-giftsDistributed:
-document.getElementById("gifts").value,
-
-remarks:
-document.getElementById("remarks").value
+territory:
+document.getElementById("repTerritory").value
 
 };
 
 try{
 
 const response =
-await fetch(API + "/dcr",{
+await fetch(
+API+"/admin/representatives",
+{
 
 method:"POST",
 
-headers:authHeaders(),
+headers:headers(),
 
-body:JSON.stringify(payload)
+body:JSON.stringify(data)
 
 });
 
-const data =
+const result =
 await response.json();
 
 if(!response.ok){
 
-alert(data.message ||
-"DCR submission failed.");
+showError(result.message);
 
 return;
 
 }
 
-alert("DCR submitted successfully.");
+showSuccess(
+"Representative created successfully."
+);
 
-document
-.getElementById("dcrForm")
-.reset();
-
-document.getElementById("repId").value =
-currentUser.representativeId;
-
-loadDcr();
-
-}catch(error){
-
-alert("Unable to connect to DCR API.");
-
-}
-
-});
-
-
-async function showHistory(){
-
-showPanel("historyPanel");
-
-const box =
-document.getElementById("history");
-
-box.innerHTML="Loading...";
-
-try{
-
-const response =
-await fetch(API + "/dcr",{
-
-headers:{
-Authorization:
-"Bearer " + token
-}
-
-});
-
-const data =
-await response.json();
-
-if(!response.ok){
-
-box.innerHTML =
-"Unable to load reports.";
-
-return;
-
-}
-
-const reports =
-data.reports || [];
-
-if(!reports.length){
-
-box.innerHTML =
-"No DCR reports.";
-
-return;
-
-}
-
-box.innerHTML =
-reports.map(r=>`
-
-<div class="item">
-
-<b>${escapeHtml(r.doctorName)}</b>
-
-<br>
-Date: ${escapeHtml(r.date)}
-
-<br>
-Representative:
-${escapeHtml(r.representativeId)}
-
-<br>
-Specialty:
-${escapeHtml(r.specialty || "-")}
-
-<br>
-Samples:
-${escapeHtml(r.samplesGiven || 0)}
-
-<br>
-Gifts:
-${escapeHtml(r.giftsDistributed || 0)}
-
-<br>
-Remarks:
-${escapeHtml(r.remarks || "-")}
-
-</div>
-
-`).join("");
-
-}catch(error){
-
-box.innerHTML =
-"Unable to load reports.";
-
-}
-
-}
-
-
-function adminSection(section){
-
-if(!currentUser ||
-currentUser.role !== "ADMIN"){
-
-alert("Admin access only.");
-
-return;
-
-}
-
-const content =
-document.getElementById("adminContent");
-
-if(section==="representatives"){
-
-content.innerHTML=`
-
-<h3>👥 Representatives</h3>
-
-<form onsubmit="addRepresentative(event)">
-
-<label>Representative ID</label>
-<input id="newRepId" required>
-
-<label>Name</label>
-<input id="newRepName" required>
-
-<label>Username</label>
-<input id="newRepUsername" required>
-
-<label>Password</label>
-<input id="newRepPassword" type="password" required>
-
-<button class="primary">
-Add Representative
-</button>
-
-</form>
-
-<hr>
-
-<div id="representativeList">
-Loading...
-</div>
-
-`;
+e.target.reset();
 
 loadRepresentatives();
 
 }
-
-else if(section==="doctors"){
-
-content.innerHTML=`
-
-<h3>👨‍⚕️ Doctor Master</h3>
-
-<form onsubmit="addDoctor(event)">
-
-<label>Doctor Name</label>
-<input id="newDoctorName" required>
-
-<label>Specialty</label>
-<input id="newDoctorSpecialty">
-
-<label>Clinic / Hospital</label>
-<input id="newDoctorClinic">
-
-<label>City</label>
-<input id="newDoctorCity">
-
-<label>Phone</label>
-<input id="newDoctorPhone">
-
-<button class="primary">
-Add Doctor
-</button>
-
-</form>
-
-<div id="doctorList">
-Loading...
-</div>
-
-`;
-
-loadDoctors();
-
-}
-
-else if(section==="chemists"){
-
-content.innerHTML=`
-
-<h3>💊 Chemist Master</h3>
-
-<form onsubmit="addChemist(event)">
-
-<label>Chemist Name</label>
-<input id="newChemistName" required>
-
-<label>Address</label>
-<input id="newChemistAddress">
-
-<label>City</label>
-<input id="newChemistCity">
-
-<label>Phone</label>
-<input id="newChemistPhone">
-
-<button class="primary">
-Add Chemist
-</button>
-
-</form>
-
-<div id="chemistList">
-Loading...
-</div>
-
-`;
-
-loadChemists();
-
-}
-
-else if(section==="allDcr"){
-
-content.innerHTML=`
-
-<h3>📋 All DCR Reports</h3>
-
-<div id="adminDcrList">
-Loading...
-</div>
-
-`;
-
-loadAdminDcr();
-
-}
-
-else if(section==="location"){
-
-content.innerHTML=`
-
-<h3>📍 Location Access</h3>
-
-<p>
-Location data can only be received after the
-device/browser grants location permission.
-</p>
-
-<button class="primary"
-onclick="requestLocation()">
-Request My Current Location
-</button>
-
-<div id="locationResult"></div>
-
-`;
-
-}
-
-else if(section==="samples"){
-
-content.innerHTML=`
-
-<h3>📦 Samples & Gifts</h3>
-
-<p>
-Admin can manage samples and gifts distributed
-during DCR visits.
-</p>
-
-`;
-
-}
-
-else if(section==="reports"){
-
-content.innerHTML=`
-
-<h3>📊 Reports</h3>
-
-<p>
-Admin has access to all DCR reports and
-representative activity.
-</p>
-
-`;
-
-}
-
-else if(section==="settings"){
-
-content.innerHTML=`
-
-<h3>⚙️ Settings</h3>
-
-<div class="item">
-<b>Application</b><br>
-V-CareRx DCR
-</div>
-
-<div class="item">
-<b>Administrator</b><br>
-Vaibhav
-</div>
-
-<div class="item">
-<b>Role</b><br>
-ADMIN
-</div>
-
-<div class="item">
-<b>Doctor Management</b><br>
-Enabled
-</div>
-
-<div class="item">
-<b>Chemist Management</b><br>
-Enabled
-</div>
-
-<div class="item">
-<b>Representative Management</b><br>
-Enabled
-</div>
-
-<div class="item">
-<b>Location Reports</b><br>
-Admin only
-</div>
-
-`;
-
-}
-
-else if(section==="permissions"){
-
-content.innerHTML=`
-
-<h3>🔐 User Permissions</h3>
-
-<div class="item">
-<b>ADMIN</b><br>
-Full system access
-</div>
-
-<div class="item">
-<b>REPRESENTATIVE</b><br>
-Only assigned DCR functions
-</div>
-
-`;
+catch(error){
+
+showError(
+"Unable to connect to server."
+);
 
 }
 
@@ -778,9 +1348,6 @@ Only assigned DCR functions
 
 
 async function loadRepresentatives(){
-
-const box =
-document.getElementById("representativeList");
 
 try{
 
@@ -797,361 +1364,1277 @@ Authorization:
 const data =
 await response.json();
 
-box.innerHTML =
-(data.representatives||[])
-.map(r=>`
+const list =
+document.getElementById(
+"repList"
+);
 
-<div class="item">
+const reps =
+data.representatives || [];
 
-<b>${escapeHtml(r.name)}</b>
+document.getElementById(
+"repCount"
+).textContent =
+reps.length;
+
+list.innerHTML =
+reps.map(r=>`
+
+<div class="list-item">
+
+<b>${safe(r.name)}</b>
 
 <br>
+
 MR ID:
-${escapeHtml(r.representativeId)}
+${safe(r.representativeId)}
 
 <br>
+
 Username:
-${escapeHtml(r.username)}
+${safe(r.username)}
 
 <br>
+
 Status:
-${r.active ? "Active":"Disabled"}
+${r.active ?
+"🟢 Active":
+"🔴 Inactive"}
+
+<div class="list-actions">
+
+<button
+onclick="changeRepStatus(
+'${safe(r.representativeId)}',
+${!r.active}
+)">
+
+${r.active ?
+"Deactivate":
+"Activate"}
+
+</button>
+
+</div>
 
 </div>
 
 `).join("") ||
-"No representatives.";
+"No representatives found.";
 
-}catch(e){
+}
+catch(error){
 
-box.textContent="Unable to load representatives.";
+document.getElementById(
+"repList"
+).textContent =
+"Unable to load representatives.";
 
 }
 
 }
 
 
-async function addRepresentative(e){
+async function changeRepStatus(id,status){
 
-e.preventDefault();
+/*
+This calls the endpoint that will be added
+to server.js for representative activation.
+*/
 
-const payload={
-
-representativeId:
-document.getElementById("newRepId").value,
-
-name:
-document.getElementById("newRepName").value,
-
-username:
-document.getElementById("newRepUsername").value,
-
-password:
-document.getElementById("newRepPassword").value
-
-};
+try{
 
 const response =
 await fetch(
-API+"/admin/representatives",
+API+"/admin/representatives/status",
 {
-method:"POST",
-headers:authHeaders(),
-body:JSON.stringify(payload)
+
+method:"PUT",
+
+headers:headers(),
+
+body:JSON.stringify({
+
+representativeId:id,
+
+active:status
+
+})
+
 });
 
-const data =
+const result =
 await response.json();
 
-alert(data.message);
+alert(result.message ||
+"Status updated.");
 
-if(response.ok)
 loadRepresentatives();
+
+}
+catch(error){
+
+alert(
+"Representative status API is not available yet."
+);
+
+}
+
+}
+
+
+/* =========================
+DOCTORS
+========================= */
+
+async function addDoctor(e){
+
+e.preventDefault();
+
+const data={
+
+doctorName:
+document.getElementById(
+"doctorName"
+).value,
+
+specialty:
+document.getElementById(
+"doctorSpecialty"
+).value,
+
+clinic:
+document.getElementById(
+"doctorClinic"
+).value,
+
+city:
+document.getElementById(
+"doctorCity"
+).value,
+
+phone:
+document.getElementById(
+"doctorPhone"
+).value
+
+};
+
+try{
+
+const response =
+await fetch(
+API+"/admin/doctors",
+{
+
+method:"POST",
+
+headers:headers(),
+
+body:JSON.stringify(data)
+
+});
+
+const result =
+await response.json();
+
+alert(
+result.message ||
+"Doctor saved."
+);
+
+if(response.ok){
+
+e.target.reset();
+
+loadDoctors();
+
+}
+
+}
+catch(error){
+
+alert("Doctor API error.");
+
+}
 
 }
 
 
 async function loadDoctors(){
 
-const box =
-document.getElementById("doctorList");
+try{
 
 const response =
 await fetch(
 API+"/admin/doctors",
 {
 headers:{
-Authorization:"Bearer "+token
+Authorization:
+"Bearer "+token
 }
 });
 
 const data =
 await response.json();
 
-box.innerHTML =
-(data.doctors||[])
-.map(d=>`
+const doctors =
+data.doctors || [];
 
-<div class="item">
-<b>${escapeHtml(d.doctorName)}</b>
-<br>${escapeHtml(d.specialty)}
-<br>${escapeHtml(d.clinic)}
-<br>${escapeHtml(d.city)}
+document.getElementById(
+"doctorCount"
+).textContent =
+doctors.length;
+
+document.getElementById(
+"doctorList"
+).innerHTML =
+
+doctors.map(d=>`
+
+<div class="list-item">
+
+<b>${safe(d.doctorName)}</b>
+
+<br>
+${safe(d.specialty)}
+
+<br>
+${safe(d.city)}
+
+<div class="list-actions">
+
+<button
+class="danger"
+onclick="deleteDoctor('${safe(d.id)}')">
+
+Delete
+
+</button>
+
+</div>
+
 </div>
 
 `).join("") ||
-"No doctors.";
+
+"No doctors found.";
+
+fillSelect(
+"assignmentDoctor",
+doctors,
+"d.id",
+"d.doctorName"
+);
+
+}
+catch(error){
+
+console.log(error);
+
+}
 
 }
 
 
-async function addDoctor(e){
+async function deleteDoctor(id){
+
+if(!confirm(
+"Delete this doctor?"
+)) return;
+
+try{
+
+const response =
+await fetch(
+API+"/admin/doctors/"+id,
+{
+
+method:"DELETE",
+
+headers:headers()
+
+});
+
+const result =
+await response.json();
+
+alert(
+result.message ||
+"Doctor deleted."
+);
+
+loadDoctors();
+
+}
+catch(error){
+
+alert(
+"Delete Doctor API is not available yet."
+);
+
+}
+
+}
+
+
+/* =========================
+CHEMISTS
+========================= */
+
+async function addChemist(e){
 
 e.preventDefault();
 
-const payload={
+const data={
 
-doctorName:
-document.getElementById("newDoctorName").value,
+chemistName:
+document.getElementById(
+"chemistName"
+).value,
 
-specialty:
-document.getElementById("newDoctorSpecialty").value,
-
-clinic:
-document.getElementById("newDoctorClinic").value,
+address:
+document.getElementById(
+"chemistAddress"
+).value,
 
 city:
-document.getElementById("newDoctorCity").value,
+document.getElementById(
+"chemistCity"
+).value,
 
 phone:
-document.getElementById("newDoctorPhone").value
+document.getElementById(
+"chemistPhone"
+).value
 
 };
 
 const response =
 await fetch(
-API+"/admin/doctors",
+API+"/admin/chemists",
 {
+
 method:"POST",
-headers:authHeaders(),
-body:JSON.stringify(payload)
+
+headers:headers(),
+
+body:JSON.stringify(data)
+
 });
 
-const data =
+const result =
 await response.json();
 
-alert(data.message);
+alert(
+result.message ||
+"Chemist saved."
+);
 
-if(response.ok)
-loadDoctors();
+if(response.ok){
+
+e.target.reset();
+
+loadChemists();
+
+}
 
 }
 
 
 async function loadChemists(){
 
-const box =
-document.getElementById("chemistList");
+try{
 
 const response =
 await fetch(
 API+"/admin/chemists",
 {
 headers:{
-Authorization:"Bearer "+token
+Authorization:
+"Bearer "+token
 }
 });
 
 const data =
 await response.json();
 
-box.innerHTML =
-(data.chemists||[])
-.map(c=>`
+const chemists =
+data.chemists || [];
 
-<div class="item">
-<b>${escapeHtml(c.chemistName)}</b>
-<br>${escapeHtml(c.address)}
-<br>${escapeHtml(c.city)}
+document.getElementById(
+"chemistCount"
+).textContent =
+chemists.length;
+
+document.getElementById(
+"chemistList"
+).innerHTML =
+
+chemists.map(c=>`
+
+<div class="list-item">
+
+<b>${safe(c.chemistName)}</b>
+
+<br>
+${safe(c.city)}
+
+<div class="list-actions">
+
+<button
+class="danger"
+onclick="deleteChemist('${safe(c.id)}')">
+
+Delete
+
+</button>
+
+</div>
+
 </div>
 
 `).join("") ||
-"No chemists.";
+
+"No chemists found.";
+
+fillSelect(
+"assignmentChemist",
+chemists,
+"c.id",
+"c.chemistName"
+);
+
+}
+catch(error){
+
+console.log(error);
+
+}
 
 }
 
 
-async function addChemist(e){
+async function deleteChemist(id){
 
-e.preventDefault();
-
-const payload={
-
-chemistName:
-document.getElementById("newChemistName").value,
-
-address:
-document.getElementById("newChemistAddress").value,
-
-city:
-document.getElementById("newChemistCity").value,
-
-phone:
-document.getElementById("newChemistPhone").value
-
-};
+if(!confirm(
+"Delete this chemist?"
+)) return;
 
 const response =
 await fetch(
-API+"/admin/chemists",
+API+"/admin/chemists/"+id,
 {
-method:"POST",
-headers:authHeaders(),
-body:JSON.stringify(payload)
+
+method:"DELETE",
+
+headers:headers()
+
 });
 
-const data =
+const result =
 await response.json();
 
-alert(data.message);
+alert(
+result.message ||
+"Chemist deleted."
+);
 
-if(response.ok)
 loadChemists();
 
 }
 
 
-async function loadAdminDcr(){
+/* =========================
+STOCKISTS
+========================= */
 
-const box =
-document.getElementById("adminDcrList");
+async function addStockist(e){
+
+e.preventDefault();
+
+const data={
+
+stockistName:
+document.getElementById(
+"stockistName"
+).value,
+
+address:
+document.getElementById(
+"stockistAddress"
+).value,
+
+city:
+document.getElementById(
+"stockistCity"
+).value,
+
+phone:
+document.getElementById(
+"stockistPhone"
+).value
+
+};
+
+const response =
+await fetch(
+API+"/admin/stockists",
+{
+
+method:"POST",
+
+headers:headers(),
+
+body:JSON.stringify(data)
+
+});
+
+const result =
+await response.json();
+
+alert(
+result.message ||
+"Stockist saved."
+);
+
+if(response.ok){
+
+e.target.reset();
+
+loadStockists();
+
+}
+
+}
+
+
+async function loadStockists(){
+
+try{
+
+const response =
+await fetch(
+API+"/admin/stockists",
+{
+headers:{
+Authorization:
+"Bearer "+token
+}
+});
+
+const data =
+await response.json();
+
+const stockists =
+data.stockists || [];
+
+document.getElementById(
+"stockistCount"
+).textContent =
+stockists.length;
+
+document.getElementById(
+"stockistList"
+).innerHTML =
+
+stockists.map(s=>`
+
+<div class="list-item">
+
+<b>${safe(s.stockistName)}</b>
+
+<br>
+${safe(s.city)}
+
+<div class="list-actions">
+
+<button
+class="danger"
+onclick="deleteStockist('${safe(s.id)}')">
+
+Delete
+
+</button>
+
+</div>
+
+</div>
+
+`).join("") ||
+
+"No stockists found.";
+
+fillSelect(
+"assignmentStockist",
+stockists,
+"s.id",
+"s.stockistName"
+);
+
+}
+catch(error){
+
+document.getElementById(
+"stockistList"
+).innerHTML =
+"No stockists found.";
+
+}
+
+}
+
+
+async function deleteStockist(id){
+
+if(!confirm(
+"Delete this stockist?"
+)) return;
+
+const response =
+await fetch(
+API+"/admin/stockists/"+id,
+{
+
+method:"DELETE",
+
+headers:headers()
+
+});
+
+const result =
+await response.json();
+
+alert(
+result.message ||
+"Stockist deleted."
+);
+
+loadStockists();
+
+}
+
+
+/* =========================
+PRODUCTS
+========================= */
+
+let products = [];
+
+
+function addProduct(e){
+
+e.preventDefault();
+
+const product={
+
+id:
+"PROD-"+Date.now(),
+
+name:
+document.getElementById(
+"productName"
+).value,
+
+code:
+document.getElementById(
+"productCode"
+).value,
+
+category:
+document.getElementById(
+"productCategory"
+).value,
+
+stock:
+document.getElementById(
+"productStock"
+).value
+
+};
+
+products.push(product);
+
+e.target.reset();
+
+renderProducts();
+
+}
+
+
+function renderProducts(){
+
+document.getElementById(
+"productList"
+).innerHTML =
+
+products.map(p=>`
+
+<div class="list-item">
+
+<b>${safe(p.name)}</b>
+
+<br>
+Code:
+${safe(p.code)}
+
+<br>
+Category:
+${safe(p.category)}
+
+<br>
+Stock:
+${safe(p.stock)}
+
+<div class="list-actions">
+
+<button
+class="danger"
+onclick="removeProduct('${p.id}')">
+
+Delete
+
+</button>
+
+</div>
+
+</div>
+
+`).join("") ||
+"No products added.";
+
+}
+
+
+function removeProduct(id){
+
+products =
+products.filter(
+p=>p.id!==id
+);
+
+renderProducts();
+
+}
+
+
+/* =========================
+ASSIGNMENTS
+========================= */
+
+async function loadAssignmentReps(){
+
+try{
+
+const response =
+await fetch(
+API+"/admin/representatives",
+{
+headers:{
+Authorization:
+"Bearer "+token
+}
+});
+
+const data =
+await response.json();
+
+fillSelect(
+"assignmentRep",
+data.representatives || [],
+"r.representativeId",
+"r.name"
+);
+
+}
+catch(error){}
+
+}
+
+
+function fillSelect(
+id,
+items,
+valueExpression,
+textExpression
+){
+
+const select =
+document.getElementById(id);
+
+if(!select)return;
+
+select.innerHTML =
+"<option value=''>Select</option>";
+
+items.forEach(item=>{
+
+let value =
+eval(valueExpression);
+
+let text =
+eval(textExpression);
+
+select.innerHTML +=
+`<option value="${safe(value)}">
+${safe(text)}
+</option>`;
+
+});
+
+}
+
+
+async function assignDoctor(){
+
+await sendAssignment(
+"doctor"
+);
+
+}
+
+
+async function assignChemist(){
+
+await sendAssignment(
+"chemist"
+);
+
+}
+
+
+async function assignStockist(){
+
+await sendAssignment(
+"stockist"
+);
+
+}
+
+
+async function sendAssignment(type){
+
+const rep =
+document.getElementById(
+"assignmentRep"
+).value;
+
+let target;
+
+if(type==="doctor"){
+
+target =
+document.getElementById(
+"assignmentDoctor"
+).value;
+
+}
+
+if(type==="chemist"){
+
+target =
+document.getElementById(
+"assignmentChemist"
+).value;
+
+}
+
+if(type==="stockist"){
+
+target =
+document.getElementById(
+"assignmentStockist"
+).value;
+
+}
+
+if(!rep || !target){
+
+alert(
+"Select representative and item."
+);
+
+return;
+
+}
+
+try{
+
+const response =
+await fetch(
+API+"/admin/assignments",
+{
+
+method:"POST",
+
+headers:headers(),
+
+body:JSON.stringify({
+
+representativeId:rep,
+
+type:type,
+
+itemId:target
+
+})
+
+});
+
+const result =
+await response.json();
+
+alert(
+result.message ||
+"Assignment saved."
+);
+
+}
+catch(error){
+
+alert(
+"Assignment API is not available yet."
+);
+
+}
+
+}
+
+
+/* =========================
+DCR
+========================= */
+
+async function loadDCR(){
+
+try{
 
 const response =
 await fetch(
 API+"/dcr",
 {
 headers:{
-Authorization:"Bearer "+token
+Authorization:
+"Bearer "+token
 }
 });
 
 const data =
 await response.json();
 
-box.innerHTML =
-(data.reports||[])
-.map(r=>`
+const reports =
+data.reports || [];
 
-<div class="item">
+document.getElementById(
+"dcrList"
+).innerHTML =
 
-<b>${escapeHtml(r.doctorName)}</b>
+reports.map(r=>`
+
+<div class="list-item">
+
+<b>
+${safe(r.doctorName)}
+</b>
 
 <br>
-MR ID:
-${escapeHtml(r.representativeId)}
+
+MR:
+${safe(r.representativeId)}
 
 <br>
+
 Date:
-${escapeHtml(r.date)}
+${safe(r.date)}
 
 <br>
+
 Samples:
-${escapeHtml(r.samplesGiven)}
+${safe(r.samplesGiven)}
 
 <br>
+
 Gifts:
-${escapeHtml(r.giftsDistributed)}
+${safe(r.giftsDistributed)}
+
+<br>
+
+Remarks:
+${safe(r.remarks)}
 
 </div>
 
 `).join("") ||
+
 "No DCR reports.";
+
+document.getElementById(
+"reportDcr"
+).textContent =
+reports.length;
+
+document.getElementById(
+"reportSamples"
+).textContent =
+reports.reduce(
+(a,r)=>a+Number(r.samplesGiven||0),
+0
+);
+
+document.getElementById(
+"reportGifts"
+).textContent =
+reports.reduce(
+(a,r)=>a+Number(r.giftsDistributed||0),
+0
+);
+
+document.getElementById(
+"reportCalls"
+).textContent =
+reports.length;
+
+}
+catch(error){
+
+document.getElementById(
+"dcrList"
+).textContent =
+"Unable to load DCR.";
+
+}
 
 }
 
 
-function requestLocation(){
+/* =========================
+LOCATION
+========================= */
 
-if(!navigator.geolocation){
+function toggleLocation(){
 
-alert("Location is not supported by this device.");
+locationEnabled =
+!locationEnabled;
+
+const sw =
+document.getElementById(
+"locationSwitch"
+);
+
+sw.classList.toggle(
+"on",
+locationEnabled
+);
+
+document.getElementById(
+"locationStatus"
+).textContent =
+locationEnabled ?
+"ON":
+"OFF";
+
+/*
+Later this setting should be saved
+in the server/database.
+*/
+
+saveSettings();
+
+}
+
+
+function toggleDcrLocation(){
+
+dcrLocationEnabled =
+!dcrLocationEnabled;
+
+document.getElementById(
+"dcrLocationSwitch"
+)
+.classList.toggle(
+"on",
+dcrLocationEnabled
+);
+
+saveSettings();
+
+}
+
+
+async function saveSettings(){
+
+try{
+
+await fetch(
+API+"/admin/settings",
+{
+
+method:"PUT",
+
+headers:headers(),
+
+body:JSON.stringify({
+
+locationEnabled:
+locationEnabled,
+
+dcrLocationEnabled:
+dcrLocationEnabled
+
+})
+
+});
+
+}
+catch(error){
+
+console.log(
+"Settings API not connected yet."
+);
+
+}
+
+}
+
+
+/* =========================
+IMPORT
+========================= */
+
+function importDoctors(){
+
+const file =
+document.getElementById(
+"doctorFile"
+).files[0];
+
+if(!file){
+
+alert(
+"Select the Doctor List file first."
+);
 
 return;
 
 }
 
-navigator.geolocation.getCurrentPosition(
-
-async position=>{
-
-const latitude =
-position.coords.latitude;
-
-const longitude =
-position.coords.longitude;
-
-const response =
-await fetch(
-API+"/location",
-{
-method:"POST",
-headers:authHeaders(),
-body:JSON.stringify({
-latitude,
-longitude
-})
-});
-
-const data =
-await response.json();
-
 document.getElementById(
-"locationResult"
-).innerHTML=`
+"importResult"
+).innerHTML = `
 
-<div class="item">
+<div class="list-item">
 
-Location received successfully.
-
-<br>
-Latitude: ${latitude}
+<b>File selected:</b>
 
 <br>
-Longitude: ${longitude}
+
+${safe(file.name)}
+
+<br><br>
+
+The Doctor List import endpoint
+will be connected when you provide
+the actual source list.
 
 </div>
 
 `;
 
-},
-
-error=>{
-
-alert(
-"Location permission was denied or unavailable."
-);
-
-}
-
-);
-
 }
 
 
-function logout(){
+/* =========================
+LOAD ALL
+========================= */
 
-localStorage.removeItem(
-"vcarerx_token"
-);
+function loadAll(){
 
-window.location.href="/";
+loadRepresentatives();
+
+loadDoctors();
+
+loadChemists();
+
+loadStockists();
+
+loadAssignmentReps();
+
+loadDCR();
 
 }
 
 
-function escapeHtml(value){
+/* =========================
+HOME
+========================= */
 
-return String(value ?? "")
+function goHome(){
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+document
+.querySelectorAll(".panel")
+.forEach(p=>{
+p.classList.remove("active");
+});
+
+}
+
+
+/* =========================
+MESSAGES
+========================= */
+
+function showSuccess(text){
+
+const box =
+document.getElementById(
+"message"
+);
+
+box.className =
+"message success";
+
+box.style.display =
+"block";
+
+box.textContent =
+text;
+
+}
+
+
+function showError(text){
+
+const box =
+document.getElementById(
+"message"
+);
+
+box.className =
+"message error";
+
+box.style.display =
+"block";
+
+box.textContent =
+text;
+
+}
+
+
+/* =========================
+SAFE TEXT
+========================= */
+
+function safe(value){
+
+return String(
+value ?? ""
+)
 .replace(/&/g,"&amp;")
 .replace(/</g,"&lt;")
 .replace(/>/g,"&gt;")
@@ -1161,10 +2644,9 @@ return String(value ?? "")
 }
 
 
-document.getElementById("date").value =
-new Date().toISOString().split("T")[0];
+/* START */
 
-loadUser();
+loadAdmin();
 
 </script>
 

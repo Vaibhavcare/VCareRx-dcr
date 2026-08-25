@@ -4,142 +4,2148 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>V-CareRx DCR</title>
-
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f3f6f7;color:#263238}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6f8;color:#263238}
 button,input,select,textarea{font:inherit}
-button{cursor:pointer;border:0}
-
-.login{
- min-height:100vh;
- display:flex;
- align-items:center;
- justify-content:center;
- background:linear-gradient(135deg,#075074,#08ad98);
- padding:20px
-}
-.loginBox{
- width:100%;
- max-width:420px;
- background:white;
- padding:32px;
- border-radius:25px;
- box-shadow:0 15px 40px #0005
-}
-.logo{
- width:100px;height:100px;border:3px solid #075074;
- border-radius:50%;display:grid;place-items:center;
- margin:auto;color:#075074;font-weight:bold
-}
-.loginBox h1{text-align:center;margin:18px 0 5px}
-.loginBox p{text-align:center;color:#777}
-.loginBox input{
- width:100%;padding:14px;margin:7px 0;
- border:1px solid #ccc;border-radius:9px
-}
-.btn{
- background:#08ad98;color:white;
- padding:12px 17px;border-radius:8px;font-weight:bold
-}
-.full{width:100%;margin-top:10px}
-.error{color:#d32f2f;text-align:center;margin-top:10px}
-
-.app{display:none;min-height:100vh}
-.top{
- height:64px;background:#071b25;color:white;
- display:flex;align-items:center;padding:0 16px;
- position:sticky;top:0;z-index:10
-}
-.menu{font-size:27px;background:none;color:white;margin-right:15px}
-.brand{font-size:20px;font-weight:bold}
-.logout{margin-left:auto;background:#d32f2f;color:white;padding:9px 14px;border-radius:7px}
-
-.side{
- position:fixed;top:64px;bottom:0;left:0;
- width:245px;background:white;border-right:1px solid #ddd;
- overflow:auto
-}
-.profile{
- background:#075074;color:white;text-align:center;padding:22px
-}
-.avatar{
- width:65px;height:65px;border-radius:50%;
- background:white;color:#075074;
- display:grid;place-items:center;
- margin:auto;font-size:30px;font-weight:bold
-}
-.nav button{
- width:100%;background:white;text-align:left;
- padding:14px 18px;border-bottom:1px solid #eee
-}
-.nav button:hover{background:#e7f7f4}
-
-.main{margin-left:245px;padding:20px}
-.page{display:none}
-.page.active{display:block}
-
-.hero{
- background:#08ad98;color:white;
- border-radius:12px;padding:24px;margin-bottom:18px
-}
-.hero h2{margin:0 0 7px}
-
-.cards{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:14px
-}
-.card{
- background:white;padding:20px;
- border-radius:10px;
- box-shadow:0 2px 7px #0001
-}
-.number{font-size:30px;font-weight:bold;margin-top:7px}
-
-.panel{
- background:white;padding:20px;
- border-radius:10px;
- margin-top:18px;
- box-shadow:0 2px 7px #0001
-}
+button{cursor:pointer}
+.hidden{display:none!important}
+.loginPage{min-height:100vh;background:linear-gradient(135deg,#075078,#08ad98);display:flex;align-items:center;justify-content:center;padding:20px}
+.loginBox{width:100%;max-width:430px;background:#fff;border-radius:22px;padding:30px;box-shadow:0 15px 40px #0004}
+.logo{width:100px;height:100px;border:3px solid #075078;border-radius:50%;display:grid;place-items:center;margin:0 auto 20px;font-weight:bold;color:#075078}
+.loginBox h1{text-align:center;margin:0}
+.loginBox p{text-align:center;color:#68757b}
+.field{margin:12px 0}
+label{display:block;font-weight:bold;margin-bottom:6px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #ccd5d9;border-radius:7px;background:white}
+textarea{min-height:90px}
+.btn{border:0;background:#08a994;color:white;border-radius:7px;padding:10px 15px;font-weight:bold}
+.btn.blue{background:#075078}.btn.red{background:#c62828}.btn.gray{background:#68757b}
+.loginBtn{width:100%;padding:13px;font-size:17px}
+.error{color:#c62828;text-align:center;margin-top:12px;font-weight:bold}
+.app{min-height:100vh}
+.top{height:62px;background:#081b24;color:white;display:flex;align-items:center;padding:0 15px;position:sticky;top:0;z-index:20}
+.menu{background:none;color:white;border:0;font-size:28px;margin-right:16px}
+.brand{font-size:20px;font-weight:bold}.topRight{margin-left:auto}
+.topRight button{background:none;color:white;border:0;font-size:20px;margin-left:10px}
+.sidebar{position:fixed;left:0;top:62px;bottom:0;width:245px;background:white;border-right:1px solid #ddd;overflow:auto}
+.profile{background:#075078;color:white;text-align:center;padding:20px}
+.avatar{width:65px;height:65px;background:white;color:#075078;border-radius:50%;display:grid;place-items:center;margin:auto;font-size:30px;font-weight:bold}
+.nav button{width:100%;border:0;background:white;text-align:left;padding:14px 18px}
+.nav button:hover,.nav button.active{background:#e4f7f4;color:#008d7e;font-weight:bold}
+.main{margin-left:245px;padding:18px}
+.hero{background:#08a994;color:white;padding:23px;border-radius:12px;margin-bottom:18px}
+.hero h2{margin:0 0 6px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+.card{background:white;padding:18px;border-radius:10px;box-shadow:0 1px 5px #0001}
+.number{font-size:29px;font-weight:bold;margin-top:8px}
+.panel{background:white;padding:18px;border-radius:10px;margin-top:18px;box-shadow:0 1px 5px #0001}
 .panel h2{margin-top:0}
-
-.formGrid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:12px
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px 7px;border-bottom:1px solid #ddd;text-align:left;font-size:13px}
+th{background:#f2f5f6}
+.tableWrap{overflow:auto}
+.badge{padding:4px 8px;border-radius:20px;background:#dff5ef;color:#087d6e;font-size:12px}
+.off{background:#eee;color:#777}
+.location{background:#edf9f7;padding:15px;border-radius:8px}
+.small{padding:7px 9px;font-size:12px}
+.muted{color:#69777d}
+.switch{display:flex;gap:10px;align-items:center;padding:15px 0;border-bottom:1px solid #eee}
+.switch input{width:auto}
+@media(max-width:800px){
+.sidebar{transform:translateX(-100%);transition:.2s;width:270px}
+.sidebar.open{transform:translateX(0)}
+.main{margin-left:0}
+.cards{grid-template-columns:repeat(2,1fr)}
+.grid,.grid3{grid-template-columns:1fr}
 }
-.formGrid input,.formGrid select,.formGrid textarea{
- width:100%;padding:11px;
- border:1px solid #ccd4d8;
- border-radius:7px
+@media(max-width:450px){.cards{grid-template-columns:1fr 1fr}.card{padding:13px}}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage" class="loginPage">
+<div class="loginBox">
+<div class="logo">V-CareRx</div>
+<h1>V-CareRx DCR</h1>
+<p>Medical Representative Reporting System</p>
+
+<div class="field">
+<label>Login ID</label>
+<input id="loginId" placeholder="Admin ID / MR ID">
+</div>
+
+<div class="field">
+<label>Password</label>
+<input id="loginPassword" type="password" placeholder="Password">
+</div>
+
+<button class="btn loginBtn" onclick="login()">LOGIN</button>
+<div id="loginError" class="error"></div>
+
+<p style="font-size:12px">
+Admin demo: <b>Vaibhav</b> / <b>Vaibhav@123</b>
+</p>
+</div>
+</div>
+
+<!-- APPLICATION -->
+<div id="app" class="app hidden">
+
+<header class="top">
+<button class="menu" onclick="toggleMenu()">☰</button>
+<div class="brand">V-CareRx DCR</div>
+<div class="topRight">
+<button onclick="logout()">Logout</button>
+</div>
+</header>
+
+<aside id="sidebar" class="sidebar">
+<div class="profile">
+<div class="avatar" id="profileAvatar">V</div>
+<h3 id="profileName">Vaibhav</h3>
+<small id="profileRole">Administrator</small>
+</div>
+
+<div class="nav" id="adminNav">
+<button data-page="dashboard" onclick="page('dashboard')">🏠 Dashboard</button>
+<button data-page="summary" onclick="page('summary')">📊 Quick Summary</button>
+<button data-page="representatives" onclick="page('representatives')">👥 Representatives</button>
+<button data-page="doctors" onclick="page('doctors')">🩺 Doctors</button>
+<button data-page="chemists" onclick="page('chemists')">💊 Chemists</button>
+<button data-page="stockists" onclick="page('stockists')">📦 Stockists</button>
+<button data-page="products" onclick="page('products')">🧴 Products</button>
+<button data-page="assignments" onclick="page('assignments')">🔗 Assignments</button>
+<button data-page="dcr" onclick="page('dcr')">📝 DCR</button>
+<button data-page="visitStatus" onclick="page('visitStatus')">📅 Doctor Visit Status</button>
+<button data-page="tour" onclick="page('tour')">🗺️ Tour Plan</button>
+<button data-page="reports" onclick="page('reports')">📈 Reports</button>
+<button data-page="settings" onclick="page('settings')">⚙️ Admin Settings</button>
+<button onclick="logout()">🚪 Sign Out</button>
+</div>
+
+<div class="nav hidden" id="repNav">
+<button data-page="repHome" onclick="page('repHome')">🏠 My Dashboard</button>
+<button data-page="myClients" onclick="page('myClients')">👨‍⚕️ My Clients</button>
+<button data-page="dcr" onclick="page('dcr')">📝 DCR Entry</button>
+<button data-page="tour" onclick="page('tour')">🗺️ My Tour Plan</button>
+<button data-page="repSummary" onclick="page('repSummary')">📊 My Summary</button>
+<button onclick="logout()">🚪 Sign Out</button>
+</div>
+</aside>
+
+<main id="main" class="main"></main>
+</div>
+
+<script>
+/* =====================================================
+   BASIC DATABASE
+===================================================== */
+
+const ADMIN_ID="Vaibhav";
+const ADMIN_PASSWORD="Vaibhav@123";
+
+let db=JSON.parse(localStorage.getItem("VCARERX_DATABASE")||"null");
+
+if(!db){
+db={
+ representatives:[
+   {
+    id:"MR001",
+    name:"Tanuja",
+    password:"Tanuja@123",
+    phone:"",
+    active:true
+   }
+ ],
+ doctors:[],
+ chemists:[],
+ stockists:[],
+ products:[],
+ assignments:[],
+ dcr:[],
+ tours:[],
+ settings:{gpsRequired:true}
+};
+
+save();
 }
 
-table{width:100%;border-collapse:collapse;margin-top:15px}
-th,td{
- padding:11px 7px;
- border-bottom:1px solid #ddd;
- text-align:left
-}
-th{background:#f1f5f6}
+let currentUser=null;
+let dcrGPS=null;
 
-.small{
- padding:7px 10px;
- border-radius:6px;
- font-size:13px;
- margin:2px
+function save(){
+localStorage.setItem("VCARERX_DATABASE",JSON.stringify(db));
 }
-.red{background:#d32f2f;color:white}
-.blue{background:#1976d2;color:white}
-.gray{background:#777;color:white}
 
-.badge{
- padding:5px 9px;border-radius:20px;
- background:#d9f5ec;color:#08795f;
- font-size:12px
+function esc(v){
+return String(v??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#39;");
 }
-.badge.off{background:#eee;color:#777}
 
-.gps{
- background
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function login(){
+
+let id=document.getElementById("loginId").value.trim();
+let password=document.getElementById("loginPassword").value;
+
+if(id===ADMIN_ID && password===ADMIN_PASSWORD){
+
+currentUser={
+ type:"admin",
+ id:"ADMIN",
+ name:"Vaibhav"
+};
+
+openApp();
+return;
+}
+
+let rep=db.representatives.find(
+r=>r.id.toLowerCase()===id.toLowerCase()
+&& r.password===password
+);
+
+if(rep){
+
+if(!rep.active){
+document.getElementById("loginError").innerText=
+"Your representative account is inactive.";
+return;
+}
+
+currentUser={
+ type:"rep",
+ id:rep.id,
+ name:rep.name
+};
+
+openApp();
+return;
+}
+
+document.getElementById("loginError").innerText=
+"Invalid ID or password";
+}
+
+document.getElementById("loginPassword").addEventListener(
+"keydown",function(e){
+if(e.key==="Enter") login();
+});
+
+function openApp(){
+
+document.getElementById("loginPage").classList.add("hidden");
+document.getElementById("app").classList.remove("hidden");
+
+if(currentUser.type==="admin"){
+
+document.getElementById("adminNav").classList.remove("hidden");
+document.getElementById("repNav").classList.add("hidden");
+
+document.getElementById("profileName").innerText="Vaibhav";
+document.getElementById("profileRole").innerText="Administrator";
+
+page("dashboard");
+
+}else{
+
+document.getElementById("adminNav").classList.add("hidden");
+document.getElementById("repNav").classList.remove("hidden");
+
+document.getElementById("profileName").innerText=currentUser.name;
+document.getElementById("profileRole").innerText=
+"Representative • "+currentUser.id;
+
+page("repHome");
+}
+}
+
+function logout(){
+
+currentUser=null;
+
+document.getElementById("app").classList.add("hidden");
+document.getElementById("loginPage").classList.remove("hidden");
+
+document.getElementById("loginId").value="";
+document.getElementById("loginPassword").value="";
+}
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function toggleMenu(){
+document.getElementById("sidebar").classList.toggle("open");
+}
+
+function page(name){
+
+document.getElementById("sidebar")
+.classList.remove("open");
+
+if(name==="dashboard") dashboard();
+if(name==="summary") summary();
+if(name==="representatives") representatives();
+if(name==="doctors") doctors();
+if(name==="chemists") chemists();
+if(name==="stockists") stockists();
+if(name==="products") products();
+if(name==="assignments") assignments();
+if(name==="dcr") dcr();
+if(name==="visitStatus") visitStatus();
+if(name==="tour") tour();
+if(name==="reports") reports();
+if(name==="settings") settings();
+
+if(name==="repHome") repHome();
+if(name==="myClients") myClients();
+if(name==="repSummary") repSummary();
+}
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function dashboard(){
+
+document.getElementById("main").innerHTML=`
+
+<div class="hero">
+<h2>Administrator Dashboard</h2>
+<p>Welcome Vaibhav</p>
+<p>Manage all V-CareRx DCR operations.</p>
+</div>
+
+<div class="cards">
+
+<div class="card">
+Representatives
+<div class="number">${db.representatives.length}</div>
+</div>
+
+<div class="card">
+Doctors
+<div class="number">${db.doctors.length}</div>
+</div>
+
+<div class="card">
+Chemists
+<div class="number">${db.chemists.length}</div>
+</div>
+
+<div class="card">
+Stockists
+<div class="number">${db.stockists.length}</div>
+</div>
+
+</div>
+
+<div class="panel">
+<h2>Quick Actions</h2>
+
+<div class="actions">
+<button class="btn" onclick="page('representatives')">
++ Create Representative
+</button>
+
+<button class="btn" onclick="page('doctors')">
++ Add Doctor
+</button>
+
+<button class="btn" onclick="page('assignments')">
+🔗 Assign Doctor
+</button>
+
+<button class="btn blue" onclick="page('summary')">
+📊 Quick Summary
+</button>
+
+<button class="btn blue" onclick="page('tour')">
+🗺️ Tour Plan
+</button>
+</div>
+</div>
+`;
+}
+
+/* =====================================================
+   REPRESENTATIVES
+===================================================== */
+
+function representatives(){
+
+let rows=db.representatives.map((r,i)=>`
+
+<tr>
+
+<td>${esc(r.id)}</td>
+<td>${esc(r.name)}</td>
+<td>${esc(r.phone)}</td>
+
+<td>
+<span class="badge ${r.active?"":"off"}">
+${r.active?"ACTIVE":"INACTIVE"}
+</span>
+</td>
+
+<td>
+
+<button class="btn small"
+onclick="toggleRep(${i})">
+${r.active?"Deactivate":"Activate"}
+</button>
+
+<button class="btn red small"
+onclick="deleteRep(${i})">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`).join("");
+
+document.getElementById("main").innerHTML=`
+
+<div class="panel">
+
+<h2>Create Representative</h2>
+
+<div class="grid">
+
+<div>
+<label>Representative ID</label>
+<input id="repId" placeholder="Example MR002">
+</div>
+
+<div>
+<label>Name</label>
+<input id="repName" placeholder="Representative name">
+</div>
+
+<div>
+<label>Password</label>
+<input id="repPassword" type="password"
+placeholder="Create password">
+</div>
+
+<div>
+<label>Mobile</label>
+<input id="repPhone">
+</div>
+
+</div>
+
+<div class="actions">
+
+<button class="btn" onclick="createRep()">
+CREATE REPRESENTATIVE
+</button>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Representatives</h2>
+
+<div class="tableWrap">
+
+<table>
+
+<tr>
+<th>MR ID</th>
+<th>Name</th>
+<th>Mobile</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+${rows||"<tr><td colspan=5>No representatives</td></tr>"}
+
+</table>
+
+</div>
+</div>
+`;
+}
+
+function createRep(){
+
+let id=document.getElementById("repId").value.trim();
+let name=document.getElementById("repName").value.trim();
+let password=document.getElementById("repPassword").value;
+let phone=document.getElementById("repPhone").value.trim();
+
+if(!id||!name||!password){
+alert("Enter ID, name and password.");
+return;
+}
+
+if(db.representatives.some(
+r=>r.id.toLowerCase()===id.toLowerCase()
+)){
+alert("Representative ID already exists.");
+return;
+}
+
+db.representatives.push({
+id:id,
+name:name,
+password:password,
+phone:phone,
+active:true
+});
+
+save();
+
+alert(
+"Representative created successfully.\n\n"+
+"ID: "+id+
+"\nPassword: "+password
+);
+
+representatives();
+}
+
+function toggleRep(i){
+
+db.representatives[i].active=
+!db.representatives[i].active;
+
+save();
+representatives();
+}
+
+function deleteRep(i){
+
+let rep=db.representatives[i];
+
+if(!confirm(
+"Delete "+rep.name+"?\n"+
+"The representative will also lose all assignments."
+))return;
+
+db.representatives.splice(i,1);
+
+db.assignments=
+db.assignments.filter(a=>a.repId!==rep.id);
+
+save();
+
+representatives();
+}
+
+/* =====================================================
+   DOCTORS
+===================================================== */
+
+function doctors(){
+
+let rows=db.doctors.map((d,i)=>`
+
+<tr>
+
+<td>${esc(d.id)}</td>
+<td>${esc(d.name)}</td>
+<td>${esc(d.speciality)}</td>
+<td>${esc(d.phone)}</td>
+
+<td>
+${d.lat&&d.lng?
+"📍 "+esc(d.lat)+", "+esc(d.lng):
+"—"}
+</td>
+
+<td>
+
+<button class="btn red small"
+onclick="deleteDoctor(${i})">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`).join("");
+
+document.getElementById("main").innerHTML=`
+
+<div class="panel">
+
+<h2>Add Doctor</h2>
+
+<div class="grid">
+
+<div>
+<label>Doctor ID</label>
+<input id="doctorId">
+</div>
+
+<div>
+<label>Doctor Name</label>
+<input id="doctorName">
+</div>
+
+<div>
+<label>Speciality</label>
+<input id="doctorSpeciality">
+</div>
+
+<div>
+<label>Phone</label>
+<input id="doctorPhone">
+</div>
+
+<div>
+<label>Latitude</label>
+<input id="doctorLat">
+</div>
+
+<div>
+<label>Longitude</label>
+<input id="doctorLng">
+</div>
+
+</div>
+
+<div class="actions">
+
+<button class="btn blue"
+onclick="getDoctorGPS()">
+📍 GET CURRENT LOCATION
+</button>
+
+<button class="btn"
+onclick="addDoctor()">
+ADD DOCTOR
+</button>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Doctor List</h2>
+
+<div class="tableWrap">
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Doctor</th>
+<th>Speciality</th>
+<th>Phone</th>
+<th>GPS</th>
+<th>Action</th>
+</tr>
+
+${rows||"<tr><td colspan=6>No doctors</td></tr>"}
+
+</table>
+
+</div>
+
+</div>
+`;
+}
+
+function getDoctorGPS(){
+
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+document.getElementById("doctorLat").value=
+position.coords.latitude.toFixed(6);
+
+document.getElementById("doctorLng").value=
+position.coords.longitude.toFixed(6);
+
+alert("Doctor location captured.");
+
+},
+
+function(){
+
+alert(
+"Location permission denied. "+
+"Allow location permission in Chrome."
+);
+
+},
+
+{
+enableHighAccuracy:true,
+timeout:15000
+}
+
+);
+}
+
+function addDoctor(){
+
+let d={
+id:document.getElementById("doctorId").value.trim(),
+name:document.getElementById("doctorName").value.trim(),
+speciality:document.getElementById("doctorSpeciality").value.trim(),
+phone:document.getElementById("doctorPhone").value.trim(),
+lat:document.getElementById("doctorLat").value.trim(),
+lng:document.getElementById("doctorLng").value.trim()
+};
+
+if(!d.id||!d.name){
+alert("Doctor ID and name are required.");
+return;
+}
+
+if(db.doctors.some(x=>x.id===d.id)){
+alert("Doctor ID already exists.");
+return;
+}
+
+db.doctors.push(d);
+save();
+
+doctors();
+}
+
+/* =====================================================
+   CHEMISTS
+===================================================== */
+
+function chemists(){
+
+let rows=db.chemists.map((c,i)=>`
+
+<tr>
+<td>${esc(c.id)}</td>
+<td>${esc(c.name)}</td>
+<td>${esc(c.phone)}</td>
+<td>${esc(c.address)}</td>
+<td>
+<button class="btn red small"
+onclick="deleteItem('chemists',${i})">
+Delete
+</button>
+</td>
+</tr>
+
+`).join("");
+
+document.getElementById("main").innerHTML=`
+
+<div class="panel">
+
+<h2>Add Chemist</h2>
+
+<div class="grid">
+
+<div>
+<label>Chemist ID</label>
+<input id="chemId">
+</div>
+
+<div>
+<label>Chemist Name</label>
+<input id="chemName">
+</div>
+
+<div>
+<label>Phone</label>
+<input id="chemPhone">
+</div>
+
+<div>
+<label>Address</label>
+<input id="chemAddress">
+</div>
+
+</div>
+
+<br>
+
+<button class="btn"
+onclick="addChemist()">
+ADD CHEMIST
+</button>
+
+</div>
+
+<div class="panel">
+
+<h2>Chemist List</h2>
+
+<div class="tableWrap">
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Phone</th>
+<th>Address</th>
+<th>Action</th>
+</tr>
+
+${rows||"<tr><td colspan=5>No chemists</td></tr>"}
+
+</table>
+
+</div>
+</div>
+`;
+}
+
+function addChemist(){
+
+let c={
+id:document.getElementById("chemId").value.trim(),
+name:document.getElementById("chemName").value.trim(),
+phone:document.getElementById("chemPhone").value.trim(),
+address:document.getElementById("chemAddress").value.trim()
+};
+
+if(!c.id||!c.name){
+alert("Chemist ID and name required.");
+return;
+}
+
+db.chemists.push(c);
+save();
+chemists();
+}
+
+function deleteItem(type,i){
+
+if(!confirm("Delete this record?"))return;
+
+db[type].splice(i,1);
+save();
+
+if(type==="chemists")chemists();
+if(type==="stockists")stockists();
+if(type==="products")products();
+}
+
+/* =====================================================
+   STOCKISTS
+===================================================== */
+
+function stockists(){
+
+let rows=db.stockists.map((s,i)=>`
+
+<tr>
+<td>${esc(s.id)}</td>
+<td>${esc(s.name)}</td>
+<td>${esc(s.phone)}</td>
+<td>${esc(s.address)}</td>
+
+<td>
+<button class="btn red small"
+onclick="deleteItem('stockists',${i})">
+Delete
+</button>
+</td>
+</tr>
+
+`).join("");
+
+document.getElementById("main").innerHTML=`
+
+<div class="panel">
+
+<h2>Add Stockist</h2>
+
+<div class="grid">
+
+<div>
+<label>Stockist ID</label>
+<input id="stockId">
+</div>
+
+<div>
+<label>Stockist Name</label>
+<input id="stockName">
+</div>
+
+<div>
+<label>Phone</label>
+<input id="stockPhone">
+</div>
+
+<div>
+<label>Address</label>
+<input id="stockAddress">
+</div>
+
+</div>
+
+<br>
+
+<button class="btn"
+onclick="addStockist()">
+ADD STOCKIST
+</button>
+
+</div>
+
+<div class="panel">
+
+<h2>Stockist List</h2>
+
+<div class="tableWrap">
+
+<table>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Phone</th>
+<th>Address</th>
+<th>Action</th>
+</tr>
+
+${rows||"<tr><td colspan=5>No stockists</td></tr>"}
+
+</table>
+
+</div>
+</div>
+`;
+}
+
+function addStockist(){
+
+let s={
+id:document.getElementById("stockId").value.trim(),
+name:document.getElementById("stockName").value.trim(),
+phone:document.getElementById("stockPhone").value.trim(),
+address:document.getElementById("stockAddress").value.trim()
+};
+
+if(!s.id||!s.name){
+alert("Stockist ID and name required.");
+return;
+}
+
+db.stockists.push(s);
+save();
+stockists();
+}
+
+/* =====================================================
+   PRODUCTS
+===================================================== */
+
+function products(){
+
+let rows=db.products.map((p,i)=>`
+
+<tr>
+<td>${esc(p.id)}</td>
+<td>${esc(p.name)}</td>
+<td>${esc(p.brand)}</td>
+<td>
+<button class="btn red small"
+onclick="deleteItem('products',${i})">
+Delete
+</button>
+</td>
+</tr>
+
+`).join("");
+
+document.getElementById("main").innerHTML=`
+
+<div class="panel">
+
+<h2>Product Management</h2>
+
+<div class="grid">
+
+<div>
+<label>Product ID</label>
+<input id="productId">
+</div>
+
+<div>
+<label>Product Name</label>
+<input id="productName">
+</div>
+
+<div>
+<label>Brand</label>
+<input id="productBrand">
+</div>
+
+</div>
+
+<br>
+
+<button class="btn"
+onclick="addProduct()">
+ADD PRODUCT
+</button>
+
+</div>
+
+<div class="panel">
+
+<h2>Products</h2>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Product</th>
+<th>Brand</th>
+<th>Action</th>
+</tr>
+
+${rows||"<tr><td colspan=4>No products</td></tr>"}
+
+</table>
+
+</div>
+`;
+}
+
+function addProduct(){
+
+let p={
+id:document.getElementById("productId").value.trim(),
+name:document.getElementById("productName").value.trim(),
+brand:document.getElementById("productBrand").value.trim()
+};
+
+if(!p.id||!p.name){
+alert("Product ID and name required.");
+return;
+}
+
+db.products.push(p);
+save();
+products();
+}
+
+/* =====================================================
+   ASSIGNMENTS
+===================================================== */
+
+function assignments(){
+
+let repOptions=db.representatives
+.filter(r=>r.active)
+.map(r=>`
+<option value="${esc(r.id)}">
+${esc(r.name)} (${esc(r.id)})
+</option>
+`).join("");
+
+let doctorOptions=db.doctors.map(d=>`
+<option value="${esc(d.id)}">
+${esc(d.name)}
+</option>
+`).join("");
+
+let chemOptions=db.chemists.map(c=>`
+<option value="${esc(c.id)}">
+${esc(c.name)}
+</option>
+`).join("");
+
+let stockOptions=db.stockists.map(s=>`
+<option value="${esc(s.id)}">
+${esc(s.name)}
+</option>
+`).join("");
+
+let rows=db.assignments.map((a,i)=>`
+
+<tr>
+
+<td>${esc(a.repId)}</td>
+<td>${esc(a.doctorId||"—")}</td>
+<td>${esc(a.chemistId||"—")}</td>
+<td>${esc(a.stockistId||"—")}</td>
+
+<td>
+<button class="btn red small"
+onclick="deleteAssignment(${i})">
+Delete
+</button>
+</td>
+
+</tr>
+
+`).join("");
+
+document.getElementById("main").innerHTML=`
+
+<div class="panel">
+
+<h2>Assign Doctor / Chemist / Stockist</h2>
+
+<div class="grid">
+
+<div>
+<label>Representative</label>
+<select id="assignRep">
+<option value="">Select Representative</option>
+${repOptions}
+</select>
+</div>
+
+<div>
+<label>Doctor</label>
+<select id="assignDoctor">
+<option value="">Select Doctor</option>
+${doctorOptions}
+</select>
+</div>
+
+<div>
+<label>Chemist</label>
+<select id="assignChemist">
+<option value="">Optional Chemist</option>
+${chemOptions}
+</select>
+</div>
+
+<div>
+<label>Stockist</label>
+<select id="assignStockist">
+<option value="">Optional Stockist</option>
+${stockOptions}
+</select>
+</div>
+
+</div>
+
+<div class="actions">
+
+<button class="btn"
+onclick="saveAssignment()">
+SAVE ASSIGNMENT
+</button>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Current Assignments</h2>
+
+<table>
+
+<tr>
+<th>Representative</th>
+<th>Doctor</th>
+<th>Chemist</th>
+<th>Stockist</th>
+<th>Action</th>
+</tr>
+
+${rows||"<tr><td colspan=5>No assignments</td></tr>"}
+
+</table>
+
+</div>
+`;
+}
+
+function saveAssignment(){
+
+let rep=document.getElementById("assignRep").value;
+let doctor=document.getElementById("assignDoctor").value;
+let chem=document.getElementById("assignChemist").value;
+let stock=document.getElementById("assignStockist").value;
+
+if(!rep){
+alert("Select representative.");
+return;
+}
+
+if(!doctor&&!chem&&!stock){
+alert("Select at least one client.");
+return;
+}
+
+db.assignments.push({
+repId:rep,
+doctorId:doctor,
+chemistId:chem,
+stockistId:stock
+});
+
+save();
+
+alert("Assignment saved.");
+assignments();
+}
+
+function deleteAssignment(i){
+
+db.assignments.splice(i,1);
+save();
+assignments();
+}
+
+/* =====================================================
+   DCR
+===================================================== */
+
+function dcr(){
+
+let repOptions=db.representatives
+.filter(r=>r.active)
+.map(r=>`
+<option value="${esc(r.id)}">
+${esc(r.name)} (${esc(r.id)})
+</option>
+`).join("");
+
+let doctorOptions=db.doctors.map(d=>`
+<option value="${esc(d.id)}">
+${esc(d.name)}
+</option>
+`).join("");
+
+if(currentUser.type==="rep"){
+
+repOptions=`
+<option value="${esc(currentUser.id)}">
+${esc(currentUser.name)} (${esc(currentUser.id)})
+</option>
+`;
+
+let allowed=db.assignments
+.filter(a=>a.repId===currentUser.id)
+.map(a=>a.doctorId)
+.filter(Boolean);
+
+doctorOptions=db.doctors
+.filter(d=>allowed.includes(d.id))
+.map(d=>`
+<option value="${esc(d.id)}">
+${esc(d.name)}
+</option>
+`).join("");
+
+}
+
+document.getElementById("main").innerHTML=`
+
+<div class="panel">
+
+<h2>📝 DCR Entry</h2>
+
+<div class="grid">
+
+<div>
+<label>Representative</label>
+<select id="dcrRep">
+<option value="">Select Representative</option>
+${repOptions}
+</select>
+</div>
+
+<div>
+<label>Doctor</label>
+<select id="dcrDoctor">
+<option value="">Select Doctor</option>
+${doctorOptions}
+</select>
+</div>
+
+<div>
+<label>Visit Date</label>
+<input type="date" id="dcrDate"
+value="${new Date().toISOString().slice(0,10)}">
+</div>
+
+<div>
+<label>Visit Status</label>
+<select id="dcrStatus">
+<option>Visited</option>
+<option>Missed</option>
+</select>
+</div>
+
+</div>
+
+<div class="location" style="margin-top:15px">
+
+<h3>📍 Doctor Visit GPS</h3>
+
+<p id="gpsStatus">Location not captured</p>
+
+<p>Latitude:
+<b id="gpsLat">—</b>
+</p>
+
+<p>Longitude:
+<b id="gpsLng">—</b>
+</p>
+
+<p>Accuracy:
+<b id="gpsAccuracy">—</b>
+</p>
+
+<button class="btn blue"
+onclick="captureDCRGPS()">
+GET CURRENT LOCATION
+</button>
+
+</div>
+
+<br>
+
+<label>Remarks</label>
+<textarea id="dcrRemarks"
+placeholder="Enter visit details"></textarea>
+
+<div class="actions">
+
+<button class="btn"
+onclick="saveDCR()">
+SAVE DCR
+</button>
+
+</div>
+
+</div>
+`;
+}
+
+function captureDCRGPS(){
+
+if(!navigator.geolocation){
+
+alert("GPS not supported.");
+return;
+}
+
+document.getElementById("gpsStatus").innerText=
+"Getting location...";
+
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+dcrGPS={
+lat:position.coords.latitude,
+lng:position.coords.longitude,
+accuracy:position.coords.accuracy
+};
+
+document.getElementById("gpsLat").innerText=
+dcrGPS.lat.toFixed(6);
+
+document.getElementById("gpsLng").innerText=
+dcrGPS.lng.toFixed(6);
+
+document.getElementById("gpsAccuracy").innerText=
+Math.round(dcrGPS.accuracy)+" metres";
+
+document.getElementById("gpsStatus").innerText=
+"Location captured successfully.";
+
+},
+
+function(){
+
+document.getElementById("gpsStatus").innerText=
+"Location permission denied.";
+
+alert(
+"Allow Location permission for this website in Chrome."
+);
+
+},
+
+{
+enableHighAccuracy:true,
+timeout:15000,
+maximumAge:0
+}
+
+);
+}
+
+function saveDCR(){
+
+let rep=document.getElementById("dcrRep").value;
+let doctor=document.getElementById("dcrDoctor").value;
+let date=document.getElementById("dcrDate").value;
+
+if(!rep||!doctor){
+
+alert("Select representative and doctor.");
+return;
+}
+
+if(db.settings.gpsRequired&&!dcrGPS){
+
+alert("GPS location is required.");
+return;
+}
+
+db.dcr.push({
+
+id:Date.now(),
+
+repId:rep,
+
+doctorId:doctor,
+
+date:date,
+
+status:document.getElementById("dcrStatus").value,
+
+remarks:document.getElementById("dcrRemarks").value,
+
+gps:dcrGPS?{
+lat:dcrGPS.lat,
+lng:dcrGPS.lng,
+accuracy:dcrGPS.accuracy
+}:null
+
+});
+
+save();
+
+dcrGPS=null;
+
+alert("DCR saved successfully.");
+
+if(currentUser.type==="admin")page("reports");
+else page("repSummary");
+}
+
+/* =====================================================
+   QUICK SUMMARY
+===================================================== */
+
+function getRepStats(repId){
+
+let assignments=db.assignments
+.filter(a=>a.repId===repId);
+
+let doctorsAssigned=
+assignments.map(a=>a.doctorId).filter(Boolean);
+
+let chemAssigned=
+assignments.map(a=>a.chemistId).filter(Boolean);
+
+let stockAssigned=
+assignments.map(a=>a.stockistId).filter(Boolean);
+
+let records=db.dcr.filter(
+d=>d.repId===repId
+);
+
+let doctorVisits=
+new Set(records
+.filter(d=>d.status==="Visited")
+.map(d=>d.doctorId)
+).size;
+
+let activeDates=
+new Set(records
+.filter(d=>d.status==="Visited")
+.map(d=>d.date)
+);
+
+let visits=records.filter(
+d=>d.status==="Visited"
+).length;
+
+return{
+
+doctors:doctorsAssigned.length,
+doctorVisits:doctorVisits,
+
+chemists:chemAssigned.length,
+
+stockists:stockAssigned.length,
+
+totalVisits:visits,
+
+activeDays:activeDates.size,
+
+average:activeDates.size?
+(visits/activeDates.size).toFixed(2):"0.00"
+
+};
+}
+
+function summary(){
+
+let rows=db.representatives.map(r=>{
+
+let s=getRepStats(r.id);
+
+return`
+
+<tr>
+
+<td>${esc(r.name)}</td>
+<td>${esc(r.id)}</td>
+
+<td>${s.doctors}</td>
+<td>${s.doctorVisits}</td>
+
+<td>${s.chemists}</td>
+
+<td>${s.stockists}</td>
+
+<td>${s.totalVisits}</td>
+
+<td>${s.activeDays}</td>
+
+<td>${s.average}</td>
+
+</tr>
+`;
+
+}).join("");
+
+document.getElementById("main").innerHTML=`
+
+<div class="hero">
+
+<h2>📊 Quick Summary</h2>
+
+<p>Representative-wise field performance.</p>
+
+</div>
+
+<div class="panel">
+
+<h2>Representative Summary</h2>
+
+<div class="tableWrap">
+
+<table>
+
+<tr>
+
+<th>Representative</th>
+<th>MR ID</th>
+<th>Total Doctors</th>
+<th>Doctors Visited</th>
+<th>Total Chemists</th>
+<th>Total Stockists</th>
+<th>Total Visits</th>
+<th>Field Active Days</th>
+<th>Visits / Active Day</th>
+
+</tr>
+
+${rows||"<tr><td colspan=9>No data</td></tr>"}
+
+</table>
+
+</div>
+
+</div>
+`;
+}
+
+/* =====================================================
+   DOCTOR VISIT STATUS
+===================================================== */
+
+function visitStatus(){
+
+let rows=db.doctors.map(d=>{
+
+let records=db.dcr
+.filter(x=>x.doctorId===d.id)
+.sort((a,b)=>b.date.localeCompare(a.date));
+
+let last=records.length?
+records[0].date:"Not visited";
+
+let reps=[
+...new Set(records.map(x=>x.repId))
+].join(", ");
+
+return`
+
+<tr>
+
+<td>${esc(d.name)}</td>
+<td>${esc(reps||"—")}</td>
+<td>${records.length}</td>
+<td>${esc(last)}</td>
+
+<td>
+
+${records.length?
+records.map(x=>
+`<div>${esc(x.date)} — ${esc(x.status)}</div>`
+).join(""):
+"—"}
+
+</td>
+
+</tr>
+`;
+
+}).join("");
+
+document.getElementById("main").innerHTML=`
+
+<div class="panel">
+
+<h2>📅 Doctor Visit Status</h2>
+
+<div class="tableWrap">
+
+<table>
+
+<tr>
+
+<th>Doctor</th>
+<th>Representative</th>
+<th>Total Visits</th>
+<th>Last Visit</th>
+<th>Visit Dates / Status</th>
+
+</tr>
+
+${rows||"<tr><td colspan=5>No doctors</td></tr>"}
+
+</table>
+
+</div>
+
+</div>
+`;
+}
+
+/* =====================================================
+   TOUR PLAN
+===================================================== */
+
+function tour(){
+
+let reps=db.representatives
+.filter(r=>r.active)
+.map(r=>`
+<option value="${esc(r.id)}">
+${esc(r.name)}
+</option>
+`).join("");
+
+let doctors=db.doctors.map(d=>`
+<option value="${esc(d.id)}">
+${esc(d.name)}
+</option>
+`).join("");
+
+let rows=db.tours.map((t,i)=>`
+
+<tr>
+
+<td>${esc(t.date)}</td>
+<td>${esc(t.repId)}</td>
+<td>${esc(t.doctorId)}</td>
+<td>${esc(t.type)}</td>
+<td>${esc(t.status)}</td>
+
+<td>
+
+<button class="btn red small"
+onclick="deleteTour(${i})">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`).join("");
+
+document.getElementById("main").innerHTML=`
+
+<div class="panel">
+
+<h2>🗺️ Create Tour Plan</h2>
+
+<div class="grid">
+
+<div>
+<label>Representative</label>
+
+<select id="tourRep">
+
+<option value="">Select Representative</option>
+
+${reps}
+
+</select>
+
+</div>
+
+<div>
+<label>Date</label>
+
+<input type="date" id="tourDate"
+value="${new Date().toISOString().slice(0,10)}">
+
+</div>
+
+<div>
+<label>Doctor</label>
+
+<select id="tourDoctor">
+
+<option value="">Select Doctor</option>
+
+${doctors}
+
+</select>
+
+</div>
+
+<div>
+<label>Visit Type</label>
+
+<select id="tourType">
+
+<option>Doctor</option>
+<option>Chemist</option>
+<option>Stockist</option>
+
+</select>
+
+</div>
+
+</div>
+
+<br>
+
+<button class="btn"
+onclick="saveTour()">
+CREATE TOUR PLAN
+</button>
+
+</div>
+
+<div class="panel">
+
+<h2>Tour Plans</h2>
+
+<table>
+
+<tr>
+
+<th>Date</th>
+<th>Representative</th>
+<th>Client</th>
+<th>Type</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+${rows||"<tr><td colspan=6>No tour plans</td></tr>"}
+
+</table>
+
+</div>
+`;
+}
+
+function saveTour(){
+
+let rep=document.getElementById("tourRep").value;
+let date=document.getElementById("tourDate").value;
+let doctor=document.getElementById("tourDoctor").value;
+
+if(!rep||!date||!doctor){
+
+alert("Select representative, date and doctor.");
+return;
+}
+
+db.tours.push({
+
+id:Date.now(),
+
+repId:rep,
+
+date:date,
+
+doctorId:doctor,
+
+type:document.getElementById("tourType").value,
+
+status:"Planned"
+
+});
+
+save();
+
+alert("Tour plan created.");
+
+tour();
+}
+
+function deleteTour(i){
+
+db.tours.splice(i,1);
+save();
+tour();
+}
+
+/* =====================================================
+   REPORTS
+===================================================== */
+
+function reports(){
+
+let rows=db.dcr.slice().reverse().map(d=>`
+
+<tr>
+
+<td>${esc(d.date)}</td>
+<td>${esc(d.repId)}</td>
+<td>${esc(d.doctorId)}</td>
+<td>${esc(d.status)}</td>
+
+<td>
+
+${d.gps?
+"📍 "+d.gps.lat.toFixed(5)+
+", "+d.gps.lng.toFixed(5):
+"—"}
+
+</td>
+
+</tr>
+
+`).join("");
+
+document.getElementById("main").innerHTML=`
+
+<div class="cards">
+
+<div class="card">
+Total DCR
+<div class="number">${db.dcr.length}</div>
+</div>
+
+<div class="card">
+Visited
+<div class="number">
+${db.dcr.filter(x=>x.status==="Visited").length}
+</div>
+</div>
+
+<div class="card">
+Missed
+<div class="number">
+${db.dcr.filter(x=>x.status==="Missed").length}
+</div>
+</div>
+
+<div class="card">
+Tour Plans
+<div class="number">${db.tours.length}</div>
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>DCR Report</h2>
+
+<div class="tableWrap">
+
+<table>
+
+<tr>
+<th>Date</th>
+<th>MR</th>
+<th>Doctor</th>
+<th>Status</th>
+<th>GPS</th>
+</tr>
+
+${rows||"<tr><td colspan=5>No DCR records</td></tr>"}
+
+</table>
+
+</div>
+
+</div>
+`;
+}
+
+/* =====================================================
+   ADMIN SETTINGS
+===================================================== */
+
+function settings(){
+
+document.getElementById("main").innerHTML=`
+
+<div class="panel">
+
+<h2>⚙️ Admin Settings</h2>
+
+<div class="switch">
+
+<input id="gpsRequired"
+type="checkbox"
+${db.settings.gpsRequired?"checked":""}
+onchange="changeGPSSetting()">
+
+<label>
+Require GPS for DCR visits
+</label>
+
+</div>
+
+<div class="panel">
+
+<h3>Admin Access</h3>
+
+<p>
+Only Admin can create/delete representatives,
+assign doctors, manage master data and change settings.
+</p>
+
+<p>
+<b>Admin ID:</b> Vaibhav
+</p>
+
+</div>
+
+</div>
+`;
+}
+
+function changeGPSSetting(){
+
+db.settings.gpsRequired=
+document.getElementById("gpsRequired").checked;
+
+save();
+}
+
+/* =====================================================
+   REPRESENTATIVE HOME
+===================================================== */
+
+function repHome(){
+
+let s=getRepStats(currentUser.id);
+
+document.getElementById("main").innerHTML=`
+
+<div class="hero">
+
+<h2>Welcome ${esc(currentUser.name)}</h2>
+
+<p>MR ID: ${esc(currentUser.id)}</p>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+My Doctors
+<div class="number">${s.doctors}</div>
+</div>
+
+<div class="card">
+Doctors Visited
+<div class="number">${s.doctorVisits}</div>
+</div>
+
+<div class="card">
+Chemists
+<div class="number">${s.chemists}</div>
+</div>
+
+<div class="card">
+Stockists
+<div class="number">${s.stockists}</div>
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Quick Actions</h2>
+
+<div class="actions">
+
+<button class="btn"
+onclick="page('dcr')">
+📝 Fill DCR
+</button>
+
+<button class="btn blue"
+onclick="page('tour')">
+🗺️ My Tour Plan
+</button>
+
+<button class="btn blue"
+onclick="page('repSummary')">
+📊 My Summary
+</button>
+
+</div>
+
+</div>
+`;
+}
+
+/* =====================================================
+   REPRESENTATIVE CLIENTS
+===================================================== */
+
+function myClients(){
+
+let assignments=db.assignments
+.filter(a=>a.repId===currentUser.id);
+
+let doctors=assignments
+.map(a=>db.doctors.find(d=>d.id===a.doctorId))
+.filter(Boolean);
+
+let rows=doctors.map(d=>`
+
+<tr>
+
+<td>${esc(d.id)}</td>
+<td>${esc(d.name)}</td>
+<td>${esc(d.speciality)}</td>
+
+</tr>
+
+`).join("");
+
+document.getElementById("main").innerHTML=`
+
+<div class="panel">
+
+<h2>My Assigned Doctors</h2>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Doctor</th>
+<th>Speciality</th>
+</tr>
+
+${rows||"<tr><td colspan=3>No assigned doctors</td></tr>"}
+
+</table>
+
+</div>
+`;
+}
+
+/* =====================================================
+   REPRESENTATIVE SUMMARY
+===================================================== */
+
+function repSummary(){
+
+let s=getRepStats(currentUser.id);
+
+document.getElementById("main").innerHTML=`
+
+<div class="hero">
+
+<h2>My Quick Summary</h2>
+
+<p>${esc(currentUser.name)}
+(${esc(currentUser.id)})</p>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+Total Doctors
+<div class="number">${s.doctors}</div>
+</div>
+
+<div class="card">
+Doctors Visited
+<div class="number">${s.doctorVisits}</div>
+</div>
+
+<div class="card">
+Chemists
+<div class="number">${s.chemists}</div>
+</div>
+
+<div class="card">
+Stockists
+<div class="number">${s.stockists}</div>
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Field Performance</h2>
+
+<p>Total Visits: <b>${s.totalVisits}</b></p>
+
+<p>Field Active Days: <b>${s.activeDays}</b></p>
+
+<p>Average Visits / Active Day:
+<b>${s.average}</b>
+</p>
+
+</div>
+`;
+
+}
+
+/* =====================================================
+   START
+===================================================== */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+document.getElementById("loginId").focus();
+
+});
+
+</script>
+
+</body>
+</html>

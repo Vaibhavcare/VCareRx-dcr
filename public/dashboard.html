@@ -1,1 +1,274 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V-CareRx DCR Dashboard</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f8f8;color:#173742}
+header{background:#075c69;color:white;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+header h1{margin:0;font-size:21px}
+.logout{background:white;color:#075c69;border:0;padding:9px 15px;border-radius:8px;font-weight:bold}
+.container{max-width:1100px;margin:auto;padding:20px}
+.welcome{margin-bottom:20px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.card{background:white;padding:20px;border-radius:14px;box-shadow:0 3px 12px #00000012}
+.card small{color:#71858b}
+.card strong{display:block;font-size:28px;color:#087f83;margin-top:8px}
+.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:20px}
+.action{background:#087f83;color:white;border:0;border-radius:12px;padding:20px;font-size:16px;font-weight:bold}
+.panel{background:white;border-radius:14px;padding:20px;margin-top:20px}
+label{display:block;margin-top:12px;font-weight:bold;font-size:13px}
+input,select,textarea{width:100%;padding:12px;margin-top:6px;border:1px solid #d5e3e5;border-radius:8px}
+textarea{min-height:80px}
+.submit{margin-top:18px;background:#087f83;color:white;border:0;padding:13px 20px;border-radius:8px;font-weight:bold}
+.hidden{display:none}
+.message{margin-top:12px;padding:10px;border-radius:8px;background:#eaf7ef;color:#257044}
+@media(max-width:700px){
+.cards{grid-template-columns:repeat(2,1fr)}
+.actions{grid-template-columns:1fr}
+.container{padding:14px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>V-CareRx DCR</h1>
+<button class="logout" onclick="logout()">Logout</button>
+</header>
+
+<div class="container">
+
+<div class="welcome">
+<h2>Daily Call Report</h2>
+<p>Welcome, <b>Vaibhav</b>. Manage your medical representative visits.</p>
+</div>
+
+<div class="cards">
+<div class="card"><small>Today's Calls</small><strong id="calls">0</strong></div>
+<div class="card"><small>Doctors Visited</small><strong id="doctors">0</strong></div>
+<div class="card"><small>Chemists Visited</small><strong id="chemists">0</strong></div>
+<div class="card"><small>DCR Reports</small><strong id="reports">0</strong></div>
+</div>
+
+<div class="actions">
+<button class="action" onclick="showDCR()">➕ New DCR</button>
+<button class="action" onclick="showHistory()">📋 DCR History</button>
+</div>
+
+<div id="dcrPanel" class="panel hidden">
+
+<h2>New Daily Call Report</h2>
+
+<form id="dcrForm">
+
+<label>Representative ID</label>
+<input id="repId" value="VC-ADMIN-001" readonly>
+
+<label>Date</label>
+<input id="date" type="date" required>
+
+<label>Doctor Name</label>
+<input id="doctorName" placeholder="Enter doctor name" required>
+
+<label>Specialty</label>
+<input id="specialty" placeholder="e.g. Cardiologist">
+
+<label>Chemist Visited</label>
+<select id="chemistVisited">
+<option value="No">No</option>
+<option value="Yes">Yes</option>
+</select>
+
+<label>Chemist Name</label>
+<input id="chemistName" placeholder="Enter chemist name">
+
+<label>Samples Given</label>
+<input id="samples" type="number" min="0" value="0">
+
+<label>Gifts Distributed</label>
+<input id="gifts" type="number" min="0" value="0">
+
+<label>Remarks</label>
+<textarea id="remarks" placeholder="Enter visit remarks"></textarea>
+
+<button class="submit" type="submit">Submit DCR</button>
+
+<div id="message" class="message hidden"></div>
+
+</form>
+</div>
+
+<div id="historyPanel" class="panel hidden">
+<h2>DCR History</h2>
+<div id="history">No DCR reports submitted yet.</div>
+</div>
+
+</div>
+
+<script>
+
+let reports =
+JSON.parse(localStorage.getItem("vcarerx_dcr_reports") || "[]");
+
+document.getElementById("date").value =
+new Date().toISOString().split("T")[0];
+
+function updateStats(){
+
+document.getElementById("reports").textContent =
+reports.length;
+
+document.getElementById("calls").textContent =
+reports.length;
+
+document.getElementById("doctors").textContent =
+new Set(reports.map(r => r.doctorName)).size;
+
+document.getElementById("chemists").textContent =
+reports.filter(r => r.chemistVisited === "Yes").length;
+
+}
+
+function showDCR(){
+
+document.getElementById("dcrPanel")
+.classList.remove("hidden");
+
+document.getElementById("historyPanel")
+.classList.add("hidden");
+
+}
+
+function showHistory(){
+
+document.getElementById("historyPanel")
+.classList.remove("hidden");
+
+document.getElementById("dcrPanel")
+.classList.add("hidden");
+
+renderHistory();
+
+}
+
+document.getElementById("dcrForm")
+.addEventListener("submit", async function(e){
+
+e.preventDefault();
+
+const report = {
+
+repId: document.getElementById("repId").value,
+date: document.getElementById("date").value,
+doctorName: document.getElementById("doctorName").value,
+specialty: document.getElementById("specialty").value,
+chemistVisited: document.getElementById("chemistVisited").value,
+chemistName: document.getElementById("chemistName").value,
+samples: document.getElementById("samples").value,
+gifts: document.getElementById("gifts").value,
+remarks: document.getElementById("remarks").value,
+createdAt: new Date().toISOString()
+
+};
+
+reports.push(report);
+
+localStorage.setItem(
+"vcarerx_dcr_reports",
+JSON.stringify(reports)
+);
+
+document.getElementById("message").textContent =
+"DCR submitted successfully.";
+
+document.getElementById("message")
+.classList.remove("hidden");
+
+document.getElementById("dcrForm").reset();
+
+document.getElementById("date").value =
+new Date().toISOString().split("T")[0];
+
+updateStats();
+
+});
+
+function renderHistory(){
+
+const box = document.getElementById("history");
+
+if(!reports.length){
+
+box.textContent =
+"No DCR reports submitted yet.";
+
+return;
+
+}
+
+box.innerHTML = reports.map((r,i)=>`
+
+<div style="
+border:1px solid #dce8e9;
+padding:15px;
+border-radius:10px;
+margin-bottom:10px;
+">
+
+<b>${i+1}. ${escapeHtml(r.doctorName)}</b>
+
+<br>
+Specialty: ${escapeHtml(r.specialty || "-")}
+
+<br>
+Date: ${escapeHtml(r.date)}
+
+<br>
+Chemist: ${escapeHtml(r.chemistVisited)}
+
+<br>
+Samples: ${escapeHtml(r.samples)}
+
+<br>
+Gifts: ${escapeHtml(r.gifts)}
+
+<br>
+Remarks: ${escapeHtml(r.remarks || "-")}
+
+</div>
+
+`).join("");
+
+}
+
+function escapeHtml(value){
+
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+function logout(){
+
+localStorage.removeItem("vcarerx_token");
+
+window.location.href="/";
+
+}
+
+updateStats();
+
+</script>
+
+</body>
+</html>

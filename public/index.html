@@ -3,378 +3,429 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>V-CareRx DCR</title>
+<title>VCareRx-DCR</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f4fbff;
-  color:#263238
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f3faff;
+    color:#263238;
 }
+
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
+
 .hidden{display:none!important}
 
+/* LOGIN */
 .loginPage{
-  min-height:100vh;
-  background:linear-gradient(145deg,#e9f9ff,#ffffff 48%,#dff7ff);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:18px
+    min-height:100vh;
+    background:linear-gradient(135deg,#075078,#54c9e8,#ffffff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
 }
 
 .loginBox{
-  width:100%;
-  max-width:430px;
-  background:#fff;
-  border:1px solid #d8eef7;
-  border-radius:26px;
-  padding:28px;
-  box-shadow:0 18px 50px rgba(0,90,130,.15)
+    width:100%;
+    max-width:430px;
+    background:#fff;
+    border-radius:24px;
+    padding:30px;
+    box-shadow:0 18px 45px #07507855;
+    border:1px solid #d8f2fa;
 }
 
 .logo{
-  width:90px;
-  height:90px;
-  border-radius:24px;
-  background:linear-gradient(145deg,#08aeea,#075078);
-  color:#fff;
-  display:grid;
-  place-items:center;
-  margin:0 auto 18px;
-  font-weight:bold;
-  font-size:17px;
-  box-shadow:0 10px 25px rgba(0,120,180,.22)
+    width:100px;
+    height:100px;
+    border-radius:22px;
+    background:linear-gradient(135deg,#075078,#51c9e8);
+    color:white;
+    display:grid;
+    place-items:center;
+    margin:0 auto 18px;
+    font-weight:bold;
+    font-size:18px;
+    box-shadow:0 8px 20px #07507844;
 }
 
-.loginBox h1{text-align:center;margin:0;color:#075078}
-.loginBox p{text-align:center;color:#68757b}
+.loginBox h1{
+    text-align:center;
+    margin:0;
+    color:#075078;
+}
 
-.field{margin:13px 0}
-label{display:block;font-weight:bold;margin-bottom:6px;color:#34505b}
+.loginBox p{
+    text-align:center;
+    color:#68757b;
+}
+
+.field{margin:14px 0}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:6px;
+}
 
 input,select,textarea{
-  width:100%;
-  padding:12px;
-  border:1px solid #c9e1eb;
-  border-radius:10px;
-  background:#fff;
-  outline:none
+    width:100%;
+    padding:12px;
+    border:1px solid #c9dce3;
+    border-radius:9px;
+    background:white;
+    outline:none;
 }
 
 input:focus,select:focus,textarea:focus{
-  border-color:#08aeea;
-  box-shadow:0 0 0 3px #08aeea22
+    border-color:#25afd2;
+    box-shadow:0 0 0 3px #25afd222;
 }
 
 textarea{min-height:90px}
 
 .btn{
-  border:0;
-  background:#08aeea;
-  color:white;
-  border-radius:10px;
-  padding:10px 15px;
-  font-weight:bold
+    border:0;
+    background:#08a994;
+    color:white;
+    border-radius:8px;
+    padding:10px 15px;
+    font-weight:bold;
 }
 
 .btn.blue{background:#075078}
 .btn.red{background:#c62828}
 .btn.gray{background:#68757b}
-.btn.green{background:#08a994}
 
 .loginBtn{
-  width:100%;
-  padding:14px;
-  font-size:17px;
-  margin-top:5px
+    width:100%;
+    padding:14px;
+    font-size:17px;
 }
 
 .error{
-  color:#c62828;
-  text-align:center;
-  margin-top:12px;
-  font-weight:bold
+    color:#c62828;
+    text-align:center;
+    margin-top:12px;
+    font-weight:bold;
 }
 
+/* APPLICATION */
 .app{min-height:100vh}
 
 .top{
-  height:62px;
-  background:linear-gradient(90deg,#075078,#08aeea);
-  color:white;
-  display:flex;
-  align-items:center;
-  padding:0 15px;
-  position:sticky;
-  top:0;
-  z-index:20
+    height:62px;
+    background:#075078;
+    color:white;
+    display:flex;
+    align-items:center;
+    padding:0 15px;
+    position:sticky;
+    top:0;
+    z-index:20;
 }
 
 .menu{
-  background:none;
-  color:white;
-  border:0;
-  font-size:28px;
-  margin-right:16px
+    background:none;
+    color:white;
+    border:0;
+    font-size:28px;
+    margin-right:16px;
 }
 
-.brand{font-size:20px;font-weight:bold}
-.topRight{margin-left:auto}
+.brand{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.topRight{
+    margin-left:auto;
+}
+
 .topRight button{
-  background:white;
-  color:#075078;
-  border:0;
-  border-radius:8px;
-  padding:8px 12px;
-  font-weight:bold
+    background:#ffffff22;
+    color:white;
+    border:1px solid #ffffff44;
+    border-radius:7px;
+    padding:8px 12px;
 }
 
+/* SIDEBAR */
 .sidebar{
-  position:fixed;
-  left:0;
-  top:62px;
-  bottom:0;
-  width:250px;
-  background:white;
-  border-right:1px solid #dcebf1;
-  overflow:auto;
-  z-index:10
+    position:fixed;
+    left:0;
+    top:62px;
+    bottom:0;
+    width:245px;
+    background:white;
+    border-right:1px solid #dbe6ea;
+    overflow:auto;
 }
 
 .profile{
-  background:linear-gradient(145deg,#075078,#08aeea);
-  color:white;
-  text-align:center;
-  padding:20px
+    background:linear-gradient(135deg,#075078,#27b9dc);
+    color:white;
+    text-align:center;
+    padding:20px;
 }
 
 .avatar{
-  width:65px;
-  height:65px;
-  background:white;
-  color:#075078;
-  border-radius:20px;
-  display:grid;
-  place-items:center;
-  margin:auto;
-  font-size:28px;
-  font-weight:bold
+    width:65px;
+    height:65px;
+    background:white;
+    color:#075078;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    margin:auto;
+    font-size:30px;
+    font-weight:bold;
 }
 
 .nav button{
-  width:100%;
-  border:0;
-  background:white;
-  text-align:left;
-  padding:14px 18px;
-  color:#304a55
+    width:100%;
+    border:0;
+    background:white;
+    text-align:left;
+    padding:14px 18px;
 }
 
 .nav button:hover,
 .nav button.active{
-  background:#e6f8ff;
-  color:#007fb8;
-  font-weight:bold
+    background:#e5f7fc;
+    color:#075078;
+    font-weight:bold;
 }
 
+/* MAIN */
 .main{
-  margin-left:250px;
-  padding:18px
+    margin-left:245px;
+    padding:18px;
 }
 
 .hero{
-  background:linear-gradient(135deg,#08aeea,#075078);
-  color:white;
-  padding:23px;
-  border-radius:16px;
-  margin-bottom:18px;
-  box-shadow:0 8px 25px #07507822
+    background:linear-gradient(135deg,#075078,#19b6d6);
+    color:white;
+    padding:23px;
+    border-radius:14px;
+    margin-bottom:18px;
 }
 
-.hero h2{margin:0 0 6px}
+.hero h2{
+    margin:0 0 6px;
+}
 
 .cards{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:13px
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:13px;
 }
 
 .card{
-  background:white;
-  padding:18px;
-  border-radius:14px;
-  border:1px solid #e0edf2;
-  box-shadow:0 3px 12px #07507810
+    background:white;
+    padding:18px;
+    border-radius:12px;
+    box-shadow:0 2px 8px #07507815;
+    border:1px solid #e0eef2;
 }
 
 .number{
-  font-size:29px;
-  font-weight:bold;
-  margin-top:8px;
-  color:#075078
+    font-size:29px;
+    font-weight:bold;
+    margin-top:8px;
+    color:#075078;
 }
 
 .panel{
-  background:white;
-  padding:18px;
-  border-radius:14px;
-  margin-top:18px;
-  border:1px solid #e0edf2;
-  box-shadow:0 3px 12px #07507810
+    background:white;
+    padding:18px;
+    border-radius:12px;
+    margin-top:18px;
+    box-shadow:0 2px 8px #07507812;
+    border:1px solid #e0eef2;
 }
 
-.panel h2{margin-top:0;color:#075078}
+.panel h2{margin-top:0}
 
 .grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
 }
 
 .grid3{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
 }
 
 .actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:14px
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:14px;
 }
 
 table{
-  width:100%;
-  border-collapse:collapse
+    width:100%;
+    border-collapse:collapse;
 }
 
 th,td{
-  padding:10px 7px;
-  border-bottom:1px solid #e0e8eb;
-  text-align:left;
-  font-size:13px
+    padding:10px 7px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+    font-size:13px;
 }
 
 th{
-  background:#edf8fc;
-  color:#075078
+    background:#eef8fb;
+    color:#075078;
 }
 
-.tableWrap{overflow:auto}
+.tableWrap{
+    overflow:auto;
+}
 
 .badge{
-  padding:4px 8px;
-  border-radius:20px;
-  background:#dff5ef;
-  color:#087d6e;
-  font-size:12px
+    padding:4px 8px;
+    border-radius:20px;
+    background:#dff5ef;
+    color:#087d6e;
+    font-size:12px;
 }
 
 .off{
-  background:#eee;
-  color:#777
+    background:#eee;
+    color:#777;
 }
 
 .location{
-  background:#edf9ff;
-  padding:15px;
-  border-radius:10px;
-  border:1px solid #d6edf7
+    background:#edf9f7;
+    padding:15px;
+    border-radius:8px;
 }
 
 .small{
-  padding:7px 9px;
-  font-size:12px
+    padding:7px 9px;
+    font-size:12px;
 }
 
-.muted{color:#69777d}
+.muted{
+    color:#69777d;
+}
 
 .switch{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  padding:15px 0;
-  border-bottom:1px solid #eee
+    display:flex;
+    gap:10px;
+    align-items:center;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
 }
 
-.switch input{width:auto}
-
-.roleCard{
-  background:#f3fbff;
-  border:1px solid #d8eef7;
-  border-radius:12px;
-  padding:14px;
-  margin-top:10px
+.switch input{
+    width:auto;
 }
 
-.statusOn{
-  color:#07866f;
-  font-weight:bold
-}
-
-.statusOff{
-  color:#c62828;
-  font-weight:bold
-}
-
+/* MOBILE */
 @media(max-width:800px){
-  .sidebar{
-    transform:translateX(-100%);
-    transition:.2s;
-    width:270px
-  }
 
-  .sidebar.open{transform:translateX(0)}
-  .main{margin-left:0}
-  .cards{grid-template-columns:repeat(2,1fr)}
-  .grid,.grid3{grid-template-columns:1fr}
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.2s;
+        width:270px;
+        z-index:30;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+        padding:12px;
+    }
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .grid,
+    .grid3{
+        grid-template-columns:1fr;
+    }
+
+    .top{
+        height:58px;
+    }
+
+    .brand{
+        font-size:17px;
+    }
+
 }
 
 @media(max-width:450px){
-  .cards{grid-template-columns:1fr 1fr}
-  .card{padding:13px}
-  .main{padding:10px}
-  .loginBox{padding:22px}
+
+    .loginBox{
+        padding:22px;
+    }
+
+    .cards{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .card{
+        padding:13px;
+    }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<!-- LOGIN PAGE -->
 <div id="loginPage" class="loginPage">
 
-  <div class="loginBox">
+    <div class="loginBox">
 
-    <div class="logo">V-CareRx</div>
+        <div class="logo">VCareRx</div>
 
-    <h1>V-CareRx DCR</h1>
-    <p>Medical Representative Reporting System</p>
+        <h1>VCareRx-DCR</h1>
 
-    <div class="field">
-      <label>Login ID</label>
-      <input id="loginId" placeholder="Enter Login ID" autocomplete="username">
+        <p>Medical Representative Reporting System</p>
+
+        <div class="field">
+            <label>Login ID</label>
+            <input
+                id="loginId"
+                placeholder="Enter Login ID"
+                autocomplete="username">
+        </div>
+
+        <div class="field">
+            <label>Password</label>
+            <input
+                id="loginPassword"
+                type="password"
+                placeholder="Enter Password"
+                autocomplete="current-password">
+        </div>
+
+        <button class="btn loginBtn" onclick="login()">
+            LOGIN
+        </button>
+
+        <div id="loginError" class="error"></div>
+
     </div>
 
-    <div class="field">
-      <label>Password</label>
-      <input id="loginPassword" type="password"
-             placeholder="Enter Password"
-             autocomplete="current-password">
-    </div>
-
-    <button class="btn loginBtn" onclick="login()">
-      LOGIN
-    </button>
-
-    <div id="loginError" class="error"></div>
-
-  </div>
 </div>
 
 
@@ -383,122 +434,82 @@ th{
 
 <header class="top">
 
-  <button class="menu" onclick="toggleMenu()">☰</button>
+    <button class="menu" onclick="toggleMenu()">☰</button>
 
-  <div class="brand">
-    V-CareRx DCR
-  </div>
+    <div class="brand">
+        VCareRx-DCR
+    </div>
 
-  <div class="topRight">
-    <button onclick="logout()">Logout</button>
-  </div>
+    <div class="topRight">
+        <button onclick="logout()">Logout</button>
+    </div>
 
 </header>
 
 
 <aside id="sidebar" class="sidebar">
 
-  <div class="profile">
+    <div class="profile">
 
-    <div class="avatar" id="profileAvatar">V</div>
+        <div class="avatar" id="profileAvatar">V</div>
 
-    <h3 id="profileName">User</h3>
+        <h3 id="profileName">Vaibhav</h3>
 
-    <small id="profileRole">User</small>
+        <small id="profileRole">Administrator</small>
 
-  </div>
-
-
-  <!-- ADMIN / MANAGEMENT NAV -->
-  <div class="nav hidden" id="managementNav">
-
-    <button onclick="page('dashboard')">
-      🏠 Dashboard
-    </button>
-
-    <button onclick="page('summary')">
-      📊 Quick Summary
-    </button>
-
-    <button onclick="page('representatives')">
-      👥 Medical Representatives
-    </button>
-
-    <button onclick="page('doctors')">
-      🩺 Doctors
-    </button>
-
-    <button onclick="page('chemists')">
-      💊 Chemists
-    </button>
-
-    <button onclick="page('stockists')">
-      📦 Stockists
-    </button>
-
-    <button onclick="page('products')">
-      🧴 Products
-    </button>
-
-    <button onclick="page('assignments')">
-      🔗 Assignments
-    </button>
-
-    <button onclick="page('dcr')">
-      📝 DCR
-    </button>
-
-    <button onclick="page('visitStatus')">
-      📅 Doctor Visit Status
-    </button>
-
-    <button onclick="page('tour')">
-      🗺️ Tour Plan
-    </button>
-
-    <button onclick="page('reports')">
-      📈 Reports
-    </button>
-
-    <button id="settingsButton" onclick="page('settings')">
-      ⚙️ Admin Settings
-    </button>
-
-    <button onclick="logout()">
-      🚪 Sign Out
-    </button>
-
-  </div>
+    </div>
 
 
-  <!-- REPRESENTATIVE NAV -->
-  <div class="nav hidden" id="repNav">
+    <!-- ADMIN / MANAGEMENT -->
+    <div class="nav" id="adminNav">
 
-    <button onclick="page('repHome')">
-      🏠 My Dashboard
-    </button>
+        <button onclick="page('dashboard')">🏠 Dashboard</button>
 
-    <button onclick="page('myClients')">
-      👨‍⚕️ My Clients
-    </button>
+        <button onclick="page('summary')">📊 Quick Summary</button>
 
-    <button onclick="page('dcr')">
-      📝 DCR Entry
-    </button>
+        <button onclick="page('representatives')">👥 Medical Representatives</button>
 
-    <button onclick="page('tour')">
-      🗺️ My Tour Plan
-    </button>
+        <button onclick="page('doctors')">🩺 Doctors</button>
 
-    <button onclick="page('repSummary')">
-      📊 My Summary
-    </button>
+        <button onclick="page('chemists')">💊 Chemists</button>
 
-    <button onclick="logout()">
-      🚪 Sign Out
-    </button>
+        <button onclick="page('stockists')">📦 Stockists</button>
 
-  </div>
+        <button onclick="page('products')">🧴 Products</button>
+
+        <button onclick="page('assignments')">🔗 Assignments</button>
+
+        <button onclick="page('dcr')">📝 DCR</button>
+
+        <button onclick="page('visitStatus')">📅 Doctor Visit Status</button>
+
+        <button onclick="page('tour')">🗺️ Tour Plan</button>
+
+        <button onclick="page('reports')">📈 Reports</button>
+
+        <button onclick="page('settings')">⚙️ Admin Settings</button>
+
+        <button onclick="logout()">🚪 Sign Out</button>
+
+    </div>
+
+
+    <!-- REPRESENTATIVE -->
+    <div class="nav hidden" id="repNav">
+
+        <button onclick="page('repHome')">🏠 My Dashboard</button>
+
+        <button onclick="page('myClients')">👨‍⚕️ My Clients</button>
+
+        <button onclick="page('dcr')">📝 DCR Entry</button>
+
+        <button onclick="page('tour')">🗺️ My Tour Plan</button>
+
+        <button onclick="page('repSummary')">📊 My Summary</button>
+
+        <button onclick="logout()">🚪 Sign Out</button>
+
+    </div>
 
 </aside>
 
@@ -511,106 +522,122 @@ th{
 <script>
 
 /* =====================================================
-   V-CARE RX DCR DATABASE
+   LOGIN ACCOUNTS
+   Keep/change these accounts as required.
 ===================================================== */
 
-const ADMIN_ID = "Vaibhav";
-const ADMIN_PASSWORD = "Vaibhav@123";
+const ACCOUNTS = {
 
-const DEFAULT_USERS = [
+    admin:{
+        id:"Vaibhav",
+        password:"Vaibhav@123",
+        name:"Vaibhav Dalavi",
+        role:"Administrator"
+    },
 
-  {
-    id:"CEO001",
-    name:"CEO",
-    role:"ceo",
-    password:"CEO@123",
-    active:true
-  },
+    md:{
+        id:"MD",
+        password:"MD@123",
+        name:"MD",
+        role:"Managing Director"
+    },
 
-  {
-    id:"MD001",
-    name:"MD",
-    role:"md",
-    password:"MD@123",
-    active:true
-  },
+    ceo:{
+        id:"CEO",
+        password:"CEO@123",
+        name:"CEO",
+        role:"Chief Executive Officer"
+    },
 
-  {
-    id:"MGR001",
-    name:"Manager",
-    role:"manager",
-    password:"Manager@123",
-    active:true
-  },
+    manager:{
+        id:"MANAGER",
+        password:"Manager@123",
+        name:"Manager",
+        role:"Manager"
+    },
 
-  {
-    id:"MR001",
-    name:"Medical Representative",
-    role:"mr",
-    password:"MR@123",
-    phone:"",
-    active:true
-  }
+    mr001:{
+        id:"MR001",
+        password:"Tanuja@123",
+        name:"Tanuja",
+        role:"Medical Representative"
+    }
 
-];
+};
 
 
-let db = JSON.parse(
-  localStorage.getItem("VCARERX_DATABASE") || "null"
+/* =====================================================
+   DATABASE
+===================================================== */
+
+let db=JSON.parse(
+    localStorage.getItem("VCARERX_DATABASE") || "null"
 );
-
 
 if(!db){
 
-  db = {
+    db={
 
-    users:DEFAULT_USERS,
+        representatives:[
+            {
+                id:"MR001",
+                name:"Tanuja",
+                password:"Tanuja@123",
+                phone:"",
+                active:true
+            }
+        ],
 
-    representatives:[
-      {
-        id:"MR001",
-        name:"Medical Representative",
-        password:"MR@123",
-        phone:"",
-        active:true
-      }
-    ],
+        doctors:[],
 
-    doctors:[],
-    chemists:[],
-    stockists:[],
-    products:[],
-    assignments:[],
-    dcr:[],
-    tours:[],
+        chemists:[],
 
-    settings:{
-      gpsRequired:true
-    }
+        stockists:[],
 
-  };
+        products:[],
 
-  save();
+        assignments:[],
+
+        dcr:[],
+
+        tours:[],
+
+        settings:{
+            gpsRequired:true
+        }
+
+    };
+
+    save();
+
 }
 
 
-let currentUser = null;
-let dcrGPS = null;
+let currentUser=null;
+let dcrGPS=null;
 
+
+/* =====================================================
+   SAVE
+===================================================== */
 
 function save(){
 
-  localStorage.setItem(
-    "VCARERX_DATABASE",
-    JSON.stringify(db)
-  );
+    localStorage.setItem(
+        "VCARERX_DATABASE",
+        JSON.stringify(db)
+    );
 
 }
 
 
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
 function esc(v){
 
-  return String(v ?? "")
+    return String(v ?? "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
@@ -626,117 +653,159 @@ function esc(v){
 
 function login(){
 
-  const id =
-    document.getElementById("loginId")
-      .value.trim();
+    let id=document
+        .getElementById("loginId")
+        .value
+        .trim();
 
-  const password =
-    document.getElementById("loginPassword")
-      .value;
+    let password=document
+        .getElementById("loginPassword")
+        .value;
 
-  document.getElementById("loginError")
-    .innerText="";
-
-
-  /* ADMIN */
-
-  if(
-    id === ADMIN_ID &&
-    password === ADMIN_PASSWORD
-  ){
-
-    currentUser = {
-
-      id:"ADMIN",
-      name:"Vaibhav",
-      role:"admin"
-
-    };
-
-    openApp();
-    return;
-
-  }
+    document.getElementById("loginError").innerText="";
 
 
-  /* MANAGEMENT / MR */
+    /* ADMIN */
 
-  let user =
-    db.users.find(u =>
-      u.id.toLowerCase() === id.toLowerCase() &&
-      u.password === password
+    if(
+        id===ACCOUNTS.admin.id &&
+        password===ACCOUNTS.admin.password
+    ){
+
+        currentUser={
+            type:"admin",
+            id:"ADMIN",
+            name:ACCOUNTS.admin.name,
+            role:ACCOUNTS.admin.role
+        };
+
+        openApp();
+        return;
+    }
+
+
+    /* MD */
+
+    if(
+        id===ACCOUNTS.md.id &&
+        password===ACCOUNTS.md.password
+    ){
+
+        currentUser={
+            type:"management",
+            id:"MD",
+            name:"MD",
+            role:"Managing Director"
+        };
+
+        openApp();
+        return;
+    }
+
+
+    /* CEO */
+
+    if(
+        id===ACCOUNTS.ceo.id &&
+        password===ACCOUNTS.ceo.password
+    ){
+
+        currentUser={
+            type:"management",
+            id:"CEO",
+            name:"CEO",
+            role:"Chief Executive Officer"
+        };
+
+        openApp();
+        return;
+    }
+
+
+    /* MANAGER */
+
+    if(
+        id===ACCOUNTS.manager.id &&
+        password===ACCOUNTS.manager.password
+    ){
+
+        currentUser={
+            type:"management",
+            id:"MANAGER",
+            name:"Manager",
+            role:"Manager"
+        };
+
+        openApp();
+        return;
+    }
+
+
+    /* MEDICAL REPRESENTATIVE */
+
+    let rep=db.representatives.find(
+
+        r =>
+        r.id.toLowerCase()===id.toLowerCase()
+        &&
+        r.password===password
+
     );
 
 
-  /* Existing representative records */
-
-  if(!user){
-
-    const rep =
-      db.representatives.find(r =>
-        r.id.toLowerCase() === id.toLowerCase() &&
-        r.password === password
-      );
-
     if(rep){
 
-      user = {
+        if(!rep.active){
 
-        id:rep.id,
-        name:rep.name,
-        role:"mr",
-        password:rep.password,
-        active:rep.active
+            document.getElementById(
+                "loginError"
+            ).innerText=
+            "Your account is inactive.";
 
-      };
+            return;
+        }
 
+
+        currentUser={
+
+            type:"rep",
+
+            id:rep.id,
+
+            name:rep.name,
+
+            role:"Medical Representative"
+
+        };
+
+
+        openApp();
+
+        return;
     }
 
-  }
 
-
-  if(!user){
-
-    document.getElementById("loginError")
-      .innerText="Invalid ID or password";
-
-    return;
-
-  }
-
-
-  if(user.active === false){
-
-    document.getElementById("loginError")
-      .innerText="This account is inactive.";
-
-    return;
-
-  }
-
-
-  currentUser = {
-
-    id:user.id,
-    name:user.name,
-    role:user.role
-
-  };
-
-
-  openApp();
+    document.getElementById(
+        "loginError"
+    ).innerText="Invalid ID or password";
 
 }
 
 
 /* ENTER KEY LOGIN */
 
-document.getElementById("loginPassword")
-.addEventListener("keydown",function(e){
+document.getElementById(
+    "loginPassword"
+).addEventListener(
+    "keydown",
+    function(e){
 
-  if(e.key==="Enter") login();
+        if(e.key==="Enter"){
+            login();
+        }
 
-});
+    }
+);
 
 
 /* =====================================================
@@ -745,99 +814,58 @@ document.getElementById("loginPassword")
 
 function openApp(){
 
-  document.getElementById("loginPage")
-    .classList.add("hidden");
+    document
+        .getElementById("loginPage")
+        .classList.add("hidden");
 
-  document.getElementById("app")
-    .classList.remove("hidden");
-
-
-  document.getElementById("profileName")
-    .innerText=currentUser.name;
+    document
+        .getElementById("app")
+        .classList.remove("hidden");
 
 
-  document.getElementById("profileRole")
-    .innerText=getRoleName(currentUser.role);
+    document
+        .getElementById("profileName")
+        .innerText=currentUser.name;
 
 
-  document.getElementById("profileAvatar")
-    .innerText=
-    currentUser.name.charAt(0).toUpperCase();
+    document
+        .getElementById("profileRole")
+        .innerText=currentUser.role;
 
 
-  const managementRoles =
-    ["admin","ceo","md","manager"];
+    document
+        .getElementById("profileAvatar")
+        .innerText=
+        currentUser.name
+        .charAt(0)
+        .toUpperCase();
 
 
-  if(managementRoles.includes(currentUser.role)){
+    if(currentUser.type==="rep"){
 
-    document.getElementById("managementNav")
-      .classList.remove("hidden");
+        document
+            .getElementById("adminNav")
+            .classList.add("hidden");
 
-    document.getElementById("repNav")
-      .classList.add("hidden");
+        document
+            .getElementById("repNav")
+            .classList.remove("hidden");
 
-    document.getElementById("settingsButton")
-      .classList.toggle(
-        "hidden",
-        currentUser.role!=="admin"
-      );
+        page("repHome");
 
-    page("dashboard");
-
-  }else{
-
-    document.getElementById("managementNav")
-      .classList.add("hidden");
-
-    document.getElementById("repNav")
-      .classList.remove("hidden");
-
-    page("repHome");
-
-  }
-
-}
-
-
-function getRoleName(role){
-
-  const names={
-
-    admin:"Administrator",
-    ceo:"Chief Executive Officer",
-    md:"Managing Director",
-    manager:"Manager",
-    mr:"Medical Representative"
-
-  };
-
-  return names[role] || role;
-
-}
-
-
-/* =====================================================
-   ADMIN ACCESS PROTECTION
-===================================================== */
-
-function adminOnly(){
-
-  if(!currentUser || currentUser.role!=="admin"){
-
-    alert("Admin access required.");
-
-    if(currentUser && currentUser.role!=="mr"){
-      page("dashboard");
     }else{
-      page("repHome");
+
+        document
+            .getElementById("adminNav")
+            .classList.remove("hidden");
+
+        document
+            .getElementById("repNav")
+            .classList.add("hidden");
+
+        page("dashboard");
+
     }
-
-    return false;
-
-  }
-
-  return true;
 
 }
 
@@ -848,60 +876,82 @@ function adminOnly(){
 
 function logout(){
 
-  currentUser=null;
+    currentUser=null;
 
-  document.getElementById("app")
-    .classList.add("hidden");
+    document
+        .getElementById("app")
+        .classList.add("hidden");
 
-  document.getElementById("loginPage")
-    .classList.remove("hidden");
+    document
+        .getElementById("loginPage")
+        .classList.remove("hidden");
 
-  document.getElementById("loginId").value="";
-  document.getElementById("loginPassword").value="";
+    document
+        .getElementById("loginId")
+        .value="";
+
+    document
+        .getElementById("loginPassword")
+        .value="";
 
 }
 
 
 /* =====================================================
-   NAVIGATION
+   MENU
 ===================================================== */
 
 function toggleMenu(){
 
-  document.getElementById("sidebar")
-    .classList.toggle("open");
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
 
 }
 
 
+/* =====================================================
+   PAGE
+===================================================== */
+
 function page(name){
 
-  document.getElementById("sidebar")
-    .classList.remove("open");
+    document
+        .getElementById("sidebar")
+        .classList.remove("open");
 
 
-  /* Admin settings protected */
+    if(name==="dashboard")dashboard();
 
-  if(name==="settings" && !adminOnly()) return;
+    if(name==="summary")summary();
 
+    if(name==="representatives")representatives();
 
-  if(name==="dashboard") dashboard();
-  if(name==="summary") summary();
-  if(name==="representatives") representatives();
-  if(name==="doctors") doctors();
-  if(name==="chemists") chemists();
-  if(name==="stockists") stockists();
-  if(name==="products") products();
-  if(name==="assignments") assignments();
-  if(name==="dcr") dcr();
-  if(name==="visitStatus") visitStatus();
-  if(name==="tour") tour();
-  if(name==="reports") reports();
-  if(name==="settings") settings();
+    if(name==="doctors")doctors();
 
-  if(name==="repHome") repHome();
-  if(name==="myClients") myClients();
-  if(name==="repSummary") repSummary();
+    if(name==="chemists")chemists();
+
+    if(name==="stockists")stockists();
+
+    if(name==="products")products();
+
+    if(name==="assignments")assignments();
+
+    if(name==="dcr")dcr();
+
+    if(name==="visitStatus")visitStatus();
+
+    if(name==="tour")tour();
+
+    if(name==="reports")reports();
+
+    if(name==="settings")settings();
+
+    if(name==="repHome")repHome();
+
+    if(name==="myClients")myClients();
+
+    if(name==="repSummary")repSummary();
 
 }
 
@@ -912,97 +962,92 @@ function page(name){
 
 function dashboard(){
 
-  document.getElementById("main").innerHTML=`
+    document.getElementById("main").innerHTML=`
 
     <div class="hero">
 
-      <h2>V-CareRx DCR</h2>
+        <h2>VCareRx-DCR Dashboard</h2>
 
-      <p>
-        Welcome ${esc(currentUser.name)}
-      </p>
+        <p>
+            Welcome ${esc(currentUser.name)}
+        </p>
 
-      <p>
-        ${esc(getRoleName(currentUser.role))}
-      </p>
+        <p>
+            Role: ${esc(currentUser.role)}
+        </p>
 
     </div>
 
 
     <div class="cards">
 
-      <div class="card">
-        Medical Representatives
-        <div class="number">
-          ${db.representatives.length}
+        <div class="card">
+            Medical Representatives
+            <div class="number">
+                ${db.representatives.length}
+            </div>
         </div>
-      </div>
 
-      <div class="card">
-        Doctors
-        <div class="number">
-          ${db.doctors.length}
+        <div class="card">
+            Doctors
+            <div class="number">
+                ${db.doctors.length}
+            </div>
         </div>
-      </div>
 
-      <div class="card">
-        Chemists
-        <div class="number">
-          ${db.chemists.length}
+        <div class="card">
+            Chemists
+            <div class="number">
+                ${db.chemists.length}
+            </div>
         </div>
-      </div>
 
-      <div class="card">
-        Stockists
-        <div class="number">
-          ${db.stockists.length}
+        <div class="card">
+            Stockists
+            <div class="number">
+                ${db.stockists.length}
+            </div>
         </div>
-      </div>
 
     </div>
 
 
     <div class="panel">
 
-      <h2>Quick Actions</h2>
+        <h2>Quick Actions</h2>
 
-      <div class="actions">
+        <div class="actions">
 
-        <button class="btn"
-          onclick="page('representatives')">
-          + Medical Representative
-        </button>
+            <button class="btn"
+                onclick="page('representatives')">
+                + Medical Representative
+            </button>
 
-        <button class="btn"
-          onclick="page('doctors')">
-          + Doctor
-        </button>
+            <button class="btn"
+                onclick="page('doctors')">
+                + Doctor
+            </button>
 
-        <button class="btn"
-          onclick="page('chemists')">
-          + Chemist
-        </button>
+            <button class="btn"
+                onclick="page('chemists')">
+                + Chemist
+            </button>
 
-        <button class="btn"
-          onclick="page('stockists')">
-          + Stockist
-        </button>
+            <button class="btn"
+                onclick="page('stockists')">
+                + Stockist
+            </button>
 
-        <button class="btn blue"
-          onclick="page('assignments')">
-          🔗 Assignments
-        </button>
+            <button class="btn blue"
+                onclick="page('assignments')">
+                🔗 Assignments
+            </button>
 
-        <button class="btn blue"
-          onclick="page('reports')">
-          📈 Reports
-        </button>
-
-      </div>
+        </div>
 
     </div>
 
-  `;
+    `;
 
 }
 
@@ -1013,232 +1058,213 @@ function dashboard(){
 
 function representatives(){
 
-  if(!adminOnly()) return;
+    let rows=db.representatives.map((r,i)=>`
 
+        <tr>
 
-  const rows =
-    db.representatives.map((r,i)=>`
+            <td>${esc(r.id)}</td>
 
-      <tr>
+            <td>${esc(r.name)}</td>
 
-        <td>${esc(r.id)}</td>
-        <td>${esc(r.name)}</td>
-        <td>${esc(r.phone)}</td>
+            <td>${esc(r.phone)}</td>
 
-        <td>
-          <span class="badge ${r.active?"":"off"}">
-            ${r.active?"ACTIVE":"INACTIVE"}
-          </span>
-        </td>
+            <td>
+                <span class="badge ${r.active?"":"off"}">
+                    ${r.active?"ACTIVE":"INACTIVE"}
+                </span>
+            </td>
 
-        <td>
+            <td>
 
-          <button class="btn small"
-            onclick="toggleRep(${i})">
-            ${r.active?"Deactivate":"Activate"}
-          </button>
+                <button
+                    class="btn small"
+                    onclick="toggleRep(${i})">
+                    ${r.active?"Deactivate":"Activate"}
+                </button>
 
-          <button class="btn red small"
-            onclick="deleteRep(${i})">
-            Delete
-          </button>
+                <button
+                    class="btn red small"
+                    onclick="deleteRep(${i})">
+                    Delete
+                </button>
 
-        </td>
+            </td>
 
-      </tr>
+        </tr>
 
     `).join("");
 
 
-  document.getElementById("main").innerHTML=`
+    document.getElementById("main").innerHTML=`
 
     <div class="panel">
 
-      <h2>Create Medical Representative</h2>
+        <h2>Medical Representatives</h2>
 
-      <div class="grid">
+        <div class="grid">
 
-        <div>
-          <label>MR ID</label>
-          <input id="repId"
-                 placeholder="Example MR002">
+            <div>
+                <label>Representative ID</label>
+                <input id="repId">
+            </div>
+
+            <div>
+                <label>Name</label>
+                <input id="repName">
+            </div>
+
+            <div>
+                <label>Password</label>
+                <input id="repPassword"
+                       type="password">
+            </div>
+
+            <div>
+                <label>Mobile</label>
+                <input id="repPhone">
+            </div>
+
         </div>
 
-        <div>
-          <label>Name</label>
-          <input id="repName"
-                 placeholder="Representative name">
+        <div class="actions">
+
+            <button
+                class="btn"
+                onclick="createRep()">
+                CREATE REPRESENTATIVE
+            </button>
+
         </div>
-
-        <div>
-          <label>Password</label>
-          <input id="repPassword"
-                 type="password"
-                 placeholder="Create password">
-        </div>
-
-        <div>
-          <label>Mobile</label>
-          <input id="repPhone">
-        </div>
-
-      </div>
-
-      <div class="actions">
-
-        <button class="btn"
-          onclick="createRep()">
-          CREATE REPRESENTATIVE
-        </button>
-
-      </div>
 
     </div>
 
 
     <div class="panel">
 
-      <h2>Medical Representatives</h2>
+        <h2>Representative List</h2>
 
-      <div class="tableWrap">
+        <div class="tableWrap">
 
-        <table>
+            <table>
 
-          <tr>
-            <th>MR ID</th>
-            <th>Name</th>
-            <th>Mobile</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
+                <tr>
+                    <th>MR ID</th>
+                    <th>Name</th>
+                    <th>Mobile</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
 
-          ${
-            rows ||
-            "<tr><td colspan='5'>No representatives</td></tr>"
-          }
+                ${rows ||
+                "<tr><td colspan='5'>No representatives</td></tr>"}
 
-        </table>
+            </table>
 
-      </div>
+        </div>
 
     </div>
 
-  `;
+    `;
 
 }
 
 
 function createRep(){
 
-  const id =
-    document.getElementById("repId")
-      .value.trim();
+    let id=document.getElementById("repId").value.trim();
 
-  const name =
-    document.getElementById("repName")
-      .value.trim();
+    let name=document.getElementById("repName").value.trim();
 
-  const password =
-    document.getElementById("repPassword")
-      .value;
+    let password=document
+        .getElementById("repPassword")
+        .value;
 
-  const phone =
-    document.getElementById("repPhone")
-      .value.trim();
+    let phone=document.getElementById("repPhone").value.trim();
 
 
-  if(!id || !name || !password){
+    if(!id||!name||!password){
 
-    alert("Enter ID, name and password.");
-    return;
+        alert("Enter ID, name and password.");
 
-  }
-
-
-  if(db.representatives.some(
-    r=>r.id.toLowerCase()===id.toLowerCase()
-  )){
-
-    alert("Representative ID already exists.");
-    return;
-
-  }
+        return;
+    }
 
 
-  db.representatives.push({
+    if(db.representatives.some(
+        r=>r.id.toLowerCase()===id.toLowerCase()
+    )){
 
-    id,
-    name,
-    password,
-    phone,
-    active:true
+        alert("Representative ID already exists.");
 
-  });
-
-
-  db.users.push({
-
-    id,
-    name,
-    role:"mr",
-    password,
-    active:true
-
-  });
+        return;
+    }
 
 
-  save();
+    db.representatives.push({
 
-  alert("Representative created successfully.");
+        id:id,
 
-  representatives();
+        name:name,
+
+        password:password,
+
+        phone:phone,
+
+        active:true
+
+    });
+
+
+    save();
+
+    representatives();
 
 }
 
 
 function toggleRep(i){
 
-  if(!adminOnly()) return;
-
-  db.representatives[i].active =
+    db.representatives[i].active=
     !db.representatives[i].active;
 
-  const id=db.representatives[i].id;
+    save();
 
-  const user=db.users.find(u=>u.id===id);
-
-  if(user){
-    user.active=db.representatives[i].active;
-  }
-
-  save();
-
-  representatives();
+    representatives();
 
 }
 
 
 function deleteRep(i){
 
-  if(!adminOnly()) return;
+    if(
+        currentUser.type!=="admin"
+    ){
 
-  const rep=db.representatives[i];
+        alert(
+            "Only Administrator can delete representatives."
+        );
 
-  if(!confirm("Delete "+rep.name+"?")) return;
+        return;
+    }
 
-  db.representatives.splice(i,1);
 
-  db.users =
-    db.users.filter(u=>u.id!==rep.id);
+    let rep=db.representatives[i];
 
-  db.assignments =
+    if(!confirm(
+        "Delete "+rep.name+"?"
+    ))return;
+
+
+    db.representatives.splice(i,1);
+
+    db.assignments=
     db.assignments.filter(
-      a=>a.repId!==rep.id
+        a=>a.repId!==rep.id
     );
 
-  save();
+    save();
 
-  representatives();
+    representatives();
 
 }
 
@@ -1249,233 +1275,246 @@ function deleteRep(i){
 
 function doctors(){
 
-  if(!["admin","ceo","md","manager"].includes(
-    currentUser.role
-  )){
+    let rows=db.doctors.map((d,i)=>`
 
-    alert("Management access required.");
-    return;
+        <tr>
 
-  }
+            <td>${esc(d.id)}</td>
 
+            <td>${esc(d.name)}</td>
 
-  const rows =
-    db.doctors.map((d,i)=>`
+            <td>${esc(d.speciality)}</td>
 
-      <tr>
+            <td>${esc(d.phone)}</td>
 
-        <td>${esc(d.id)}</td>
-        <td>${esc(d.name)}</td>
-        <td>${esc(d.speciality)}</td>
-        <td>${esc(d.phone)}</td>
+            <td>
+                ${
+                    d.lat&&d.lng
+                    ?
+                    "📍 "+esc(d.lat)+", "+esc(d.lng)
+                    :
+                    "—"
+                }
+            </td>
 
-        <td>
-          ${
-            d.lat && d.lng
-            ? "📍 "+esc(d.lat)+", "+esc(d.lng)
-            : "—"
-          }
-        </td>
+            <td>
 
-        <td>
+                <button
+                    class="btn red small"
+                    onclick="deleteDoctor(${i})">
+                    Delete
+                </button>
 
-          ${
-            currentUser.role==="admin"
-            ? `<button class="btn red small"
-                 onclick="deleteDoctor(${i})">
-                 Delete
-               </button>`
-            : ""
-          }
+            </td>
 
-        </td>
-
-      </tr>
+        </tr>
 
     `).join("");
 
 
-  document.getElementById("main").innerHTML=`
+    document.getElementById("main").innerHTML=`
 
     <div class="panel">
 
-      <h2>Add Doctor</h2>
+        <h2>Add Doctor</h2>
 
-      <div class="grid">
+        <div class="grid">
 
-        <div>
-          <label>Doctor ID</label>
-          <input id="doctorId">
+            <div>
+                <label>Doctor ID</label>
+                <input id="doctorId">
+            </div>
+
+            <div>
+                <label>Doctor Name</label>
+                <input id="doctorName">
+            </div>
+
+            <div>
+                <label>Speciality</label>
+                <input id="doctorSpeciality">
+            </div>
+
+            <div>
+                <label>Phone</label>
+                <input id="doctorPhone">
+            </div>
+
+            <div>
+                <label>Latitude</label>
+                <input id="doctorLat">
+            </div>
+
+            <div>
+                <label>Longitude</label>
+                <input id="doctorLng">
+            </div>
+
         </div>
 
-        <div>
-          <label>Doctor Name</label>
-          <input id="doctorName">
+        <div class="actions">
+
+            <button
+                class="btn blue"
+                onclick="getDoctorGPS()">
+                📍 GET CURRENT LOCATION
+            </button>
+
+            <button
+                class="btn"
+                onclick="addDoctor()">
+                ADD DOCTOR
+            </button>
+
         </div>
-
-        <div>
-          <label>Speciality</label>
-          <input id="doctorSpeciality">
-        </div>
-
-        <div>
-          <label>Phone</label>
-          <input id="doctorPhone">
-        </div>
-
-        <div>
-          <label>Latitude</label>
-          <input id="doctorLat">
-        </div>
-
-        <div>
-          <label>Longitude</label>
-          <input id="doctorLng">
-        </div>
-
-      </div>
-
-      <div class="actions">
-
-        <button class="btn blue"
-          onclick="getDoctorGPS()">
-          📍 GET CURRENT LOCATION
-        </button>
-
-        <button class="btn"
-          onclick="addDoctor()">
-          ADD DOCTOR
-        </button>
-
-      </div>
 
     </div>
 
 
     <div class="panel">
 
-      <h2>Doctor List</h2>
+        <h2>Doctor List</h2>
 
-      <div class="tableWrap">
+        <div class="tableWrap">
 
-        <table>
+            <table>
 
-          <tr>
-            <th>ID</th>
-            <th>Doctor</th>
-            <th>Speciality</th>
-            <th>Phone</th>
-            <th>GPS</th>
-            <th>Action</th>
-          </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Doctor</th>
+                    <th>Speciality</th>
+                    <th>Phone</th>
+                    <th>GPS</th>
+                    <th>Action</th>
+                </tr>
 
-          ${
-            rows ||
-            "<tr><td colspan='6'>No doctors</td></tr>"
-          }
+                ${rows ||
+                "<tr><td colspan='6'>No doctors</td></tr>"}
 
-        </table>
+            </table>
 
-      </div>
+        </div>
 
     </div>
 
-  `;
+    `;
 
 }
 
 
 function getDoctorGPS(){
 
-  if(!navigator.geolocation){
+    if(!navigator.geolocation){
 
-    alert("GPS is not supported.");
-    return;
+        alert("GPS is not supported.");
 
-  }
-
-
-  navigator.geolocation.getCurrentPosition(
-
-    function(position){
-
-      document.getElementById("doctorLat").value =
-        position.coords.latitude.toFixed(6);
-
-      document.getElementById("doctorLng").value =
-        position.coords.longitude.toFixed(6);
-
-      alert("Doctor location captured.");
-
-    },
-
-    function(){
-
-      alert(
-        "Location permission denied. " +
-        "Please allow location permission."
-      );
-
-    },
-
-    {
-      enableHighAccuracy:true,
-      timeout:15000
+        return;
     }
 
-  );
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position){
+
+            document.getElementById("doctorLat").value=
+            position.coords.latitude.toFixed(6);
+
+            document.getElementById("doctorLng").value=
+            position.coords.longitude.toFixed(6);
+
+            alert("Doctor location captured.");
+
+        },
+
+        function(){
+
+            alert(
+                "Location permission denied. "+
+                "Allow location access for this website."
+            );
+
+        },
+
+        {
+            enableHighAccuracy:true,
+            timeout:15000,
+            maximumAge:0
+        }
+
+    );
 
 }
 
 
 function addDoctor(){
 
-  let d={
+    let d={
 
-    id:document.getElementById("doctorId").value.trim(),
+        id:document.getElementById("doctorId").value.trim(),
 
-    name:document.getElementById("doctorName").value.trim(),
+        name:document.getElementById("doctorName").value.trim(),
 
-    speciality:
-      document.getElementById("doctorSpeciality")
-      .value.trim(),
+        speciality:
+        document.getElementById("doctorSpeciality").value.trim(),
 
-    phone:
-      document.getElementById("doctorPhone")
-      .value.trim(),
+        phone:
+        document.getElementById("doctorPhone").value.trim(),
 
-    lat:
-      document.getElementById("doctorLat")
-      .value.trim(),
+        lat:
+        document.getElementById("doctorLat").value.trim(),
 
-    lng:
-      document.getElementById("doctorLng")
-      .value.trim()
+        lng:
+        document.getElementById("doctorLng").value.trim()
 
-  };
+    };
 
 
-  if(!d.id || !d.name){
+    if(!d.id||!d.name){
 
-    alert("Doctor ID and name are required.");
-    return;
+        alert("Doctor ID and name are required.");
 
-  }
-
-
-  if(db.doctors.some(x=>x.id===d.id)){
-
-    alert("Doctor ID already exists.");
-    return;
-
-  }
+        return;
+    }
 
 
-  db.doctors.push(d);
+    if(db.doctors.some(x=>x.id===d.id)){
 
-  save();
+        alert("Doctor ID already exists.");
 
-  doctors();
+        return;
+    }
+
+
+    db.doctors.push(d);
+
+    save();
+
+    doctors();
+
+}
+
+
+function deleteDoctor(i){
+
+    if(
+        currentUser.type!=="admin"
+    ){
+
+        alert(
+            "Only Administrator can delete doctors."
+        );
+
+        return;
+    }
+
+
+    if(!confirm("Delete this doctor?"))return;
+
+    db.doctors.splice(i,1);
+
+    save();
+
+    doctors();
 
 }
 
@@ -1486,148 +1525,160 @@ function addDoctor(){
 
 function chemists(){
 
-  if(!["admin","ceo","md","manager"].includes(
-    currentUser.role
-  )){
+    let rows=db.chemists.map((c,i)=>`
 
-    alert("Management access required.");
-    return;
+        <tr>
 
-  }
+            <td>${esc(c.id)}</td>
+            <td>${esc(c.name)}</td>
+            <td>${esc(c.phone)}</td>
+            <td>${esc(c.address)}</td>
 
+            <td>
 
-  let rows =
-    db.chemists.map((c,i)=>`
+                <button
+                    class="btn red small"
+                    onclick="deleteItem('chemists',${i})">
+                    Delete
+                </button>
 
-      <tr>
+            </td>
 
-        <td>${esc(c.id)}</td>
-        <td>${esc(c.name)}</td>
-        <td>${esc(c.phone)}</td>
-        <td>${esc(c.address)}</td>
-
-        <td>
-
-          ${
-            currentUser.role==="admin"
-            ? `<button class="btn red small"
-                onclick="deleteItem('chemists',${i})">
-                Delete
-               </button>`
-            : ""
-          }
-
-        </td>
-
-      </tr>
+        </tr>
 
     `).join("");
 
 
-  document.getElementById("main").innerHTML=`
+    document.getElementById("main").innerHTML=`
 
     <div class="panel">
 
-      <h2>Add Chemist</h2>
+        <h2>Add Chemist</h2>
 
-      <div class="grid">
+        <div class="grid">
 
-        <div>
-          <label>Chemist ID</label>
-          <input id="chemId">
+            <div>
+                <label>Chemist ID</label>
+                <input id="chemId">
+            </div>
+
+            <div>
+                <label>Chemist Name</label>
+                <input id="chemName">
+            </div>
+
+            <div>
+                <label>Phone</label>
+                <input id="chemPhone">
+            </div>
+
+            <div>
+                <label>Address</label>
+                <input id="chemAddress">
+            </div>
+
         </div>
 
-        <div>
-          <label>Chemist Name</label>
-          <input id="chemName">
-        </div>
+        <br>
 
-        <div>
-          <label>Phone</label>
-          <input id="chemPhone">
-        </div>
-
-        <div>
-          <label>Address</label>
-          <input id="chemAddress">
-        </div>
-
-      </div>
-
-      <br>
-
-      <button class="btn"
-        onclick="addChemist()">
-        ADD CHEMIST
-      </button>
+        <button
+            class="btn"
+            onclick="addChemist()">
+            ADD CHEMIST
+        </button>
 
     </div>
 
 
     <div class="panel">
 
-      <h2>Chemist List</h2>
+        <h2>Chemist List</h2>
 
-      <div class="tableWrap">
+        <div class="tableWrap">
 
-        <table>
+            <table>
 
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th>Action</th>
-          </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
 
-          ${
-            rows ||
-            "<tr><td colspan='5'>No chemists</td></tr>"
-          }
+                ${rows ||
+                "<tr><td colspan='5'>No chemists</td></tr>"}
 
-        </table>
+            </table>
 
-      </div>
+        </div>
 
     </div>
 
-  `;
+    `;
 
 }
 
 
 function addChemist(){
 
-  const c={
+    let c={
 
-    id:document.getElementById("chemId")
-      .value.trim(),
+        id:document.getElementById("chemId").value.trim(),
 
-    name:document.getElementById("chemName")
-      .value.trim(),
+        name:document.getElementById("chemName").value.trim(),
 
-    phone:document.getElementById("chemPhone")
-      .value.trim(),
+        phone:document.getElementById("chemPhone").value.trim(),
 
-    address:document.getElementById("chemAddress")
-      .value.trim()
+        address:document.getElementById("chemAddress").value.trim()
 
-  };
+    };
 
 
-  if(!c.id || !c.name){
+    if(!c.id||!c.name){
 
-    alert("Chemist ID and name required.");
-    return;
+        alert("Chemist ID and name required.");
 
-  }
+        return;
+    }
 
 
-  db.chemists.push(c);
+    db.chemists.push(c);
 
-  save();
+    save();
 
-  chemists();
+    chemists();
+
+}
+
+
+function deleteItem(type,i){
+
+    if(
+        currentUser.type!=="admin"
+    ){
+
+        alert(
+            "Only Administrator can delete master records."
+        );
+
+        return;
+    }
+
+
+    if(!confirm("Delete this record?"))return;
+
+
+    db[type].splice(i,1);
+
+    save();
+
+
+    if(type==="chemists")chemists();
+
+    if(type==="stockists")stockists();
+
+    if(type==="products")products();
 
 }
 
@@ -1638,177 +1689,129 @@ function addChemist(){
 
 function stockists(){
 
-  if(!["admin","ceo","md","manager"].includes(
-    currentUser.role
-  )){
+    let rows=db.stockists.map((s,i)=>`
 
-    alert("Management access required.");
-    return;
+        <tr>
 
-  }
+            <td>${esc(s.id)}</td>
+            <td>${esc(s.name)}</td>
+            <td>${esc(s.phone)}</td>
+            <td>${esc(s.address)}</td>
 
+            <td>
 
-  const rows =
-    db.stockists.map((s,i)=>`
+                <button
+                    class="btn red small"
+                    onclick="deleteItem('stockists',${i})">
+                    Delete
+                </button>
 
-      <tr>
+            </td>
 
-        <td>${esc(s.id)}</td>
-        <td>${esc(s.name)}</td>
-        <td>${esc(s.phone)}</td>
-        <td>${esc(s.address)}</td>
-
-        <td>
-
-          ${
-            currentUser.role==="admin"
-            ? `<button class="btn red small"
-                onclick="deleteItem('stockists',${i})">
-                Delete
-               </button>`
-            : ""
-          }
-
-        </td>
-
-      </tr>
+        </tr>
 
     `).join("");
 
 
-  document.getElementById("main").innerHTML=`
+    document.getElementById("main").innerHTML=`
 
     <div class="panel">
 
-      <h2>Add Stockist</h2>
+        <h2>Add Stockist</h2>
 
-      <div class="grid">
+        <div class="grid">
 
-        <div>
-          <label>Stockist ID</label>
-          <input id="stockId">
+            <div>
+                <label>Stockist ID</label>
+                <input id="stockId">
+            </div>
+
+            <div>
+                <label>Stockist Name</label>
+                <input id="stockName">
+            </div>
+
+            <div>
+                <label>Phone</label>
+                <input id="stockPhone">
+            </div>
+
+            <div>
+                <label>Address</label>
+                <input id="stockAddress">
+            </div>
+
         </div>
 
-        <div>
-          <label>Stockist Name</label>
-          <input id="stockName">
-        </div>
+        <br>
 
-        <div>
-          <label>Phone</label>
-          <input id="stockPhone">
-        </div>
-
-        <div>
-          <label>Address</label>
-          <input id="stockAddress">
-        </div>
-
-      </div>
-
-      <br>
-
-      <button class="btn"
-        onclick="addStockist()">
-        ADD STOCKIST
-      </button>
+        <button
+            class="btn"
+            onclick="addStockist()">
+            ADD STOCKIST
+        </button>
 
     </div>
 
 
     <div class="panel">
 
-      <h2>Stockist List</h2>
+        <h2>Stockist List</h2>
 
-      <div class="tableWrap">
+        <div class="tableWrap">
 
-        <table>
+            <table>
 
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th>Action</th>
-          </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
 
-          ${
-            rows ||
-            "<tr><td colspan='5'>No stockists</td></tr>"
-          }
+                ${rows ||
+                "<tr><td colspan='5'>No stockists</td></tr>"}
 
-        </table>
+            </table>
 
-      </div>
+        </div>
 
     </div>
 
-  `;
+    `;
 
 }
 
 
 function addStockist(){
 
-  const s={
+    let s={
 
-    id:document.getElementById("stockId")
-      .value.trim(),
+        id:document.getElementById("stockId").value.trim(),
 
-    name:document.getElementById("stockName")
-      .value.trim(),
+        name:document.getElementById("stockName").value.trim(),
 
-    phone:document.getElementById("stockPhone")
-      .value.trim(),
+        phone:document.getElementById("stockPhone").value.trim(),
 
-    address:document.getElementById("stockAddress")
-      .value.trim()
+        address:document.getElementById("stockAddress").value.trim()
 
-  };
+    };
 
 
-  if(!s.id || !s.name){
+    if(!s.id||!s.name){
 
-    alert("Stockist ID and name required.");
-    return;
+        alert("Stockist ID and name required.");
 
-  }
-
-
-  db.stockists.push(s);
-
-  save();
-
-  stockists();
-
-}
+        return;
+    }
 
 
-/* =====================================================
-   DELETE MASTER ITEM
-===================================================== */
+    db.stockists.push(s);
 
-function deleteItem(type,i){
+    save();
 
-  if(currentUser.role!=="admin"){
-
-    alert("Admin access required.");
-    return;
-
-  }
-
-
-  if(!confirm("Delete this record?")) return;
-
-
-  db[type].splice(i,1);
-
-  save();
-
-
-  if(type==="chemists") chemists();
-  if(type==="stockists") stockists();
-  if(type==="products") products();
+    stockists();
 
 }
 
@@ -1819,134 +1822,116 @@ function deleteItem(type,i){
 
 function products(){
 
-  if(!["admin","ceo","md","manager"].includes(
-    currentUser.role
-  )){
+    let rows=db.products.map((p,i)=>`
 
-    alert("Management access required.");
-    return;
+        <tr>
 
-  }
+            <td>${esc(p.id)}</td>
+            <td>${esc(p.name)}</td>
+            <td>${esc(p.brand)}</td>
 
+            <td>
 
-  const rows =
-    db.products.map((p,i)=>`
+                <button
+                    class="btn red small"
+                    onclick="deleteItem('products',${i})">
+                    Delete
+                </button>
 
-      <tr>
+            </td>
 
-        <td>${esc(p.id)}</td>
-        <td>${esc(p.name)}</td>
-        <td>${esc(p.brand)}</td>
-
-        <td>
-
-          ${
-            currentUser.role==="admin"
-            ? `<button class="btn red small"
-                onclick="deleteItem('products',${i})">
-                Delete
-               </button>`
-            : ""
-          }
-
-        </td>
-
-      </tr>
+        </tr>
 
     `).join("");
 
 
-  document.getElementById("main").innerHTML=`
+    document.getElementById("main").innerHTML=`
 
     <div class="panel">
 
-      <h2>Product Management</h2>
+        <h2>Product Management</h2>
 
-      <div class="grid">
+        <div class="grid">
 
-        <div>
-          <label>Product ID</label>
-          <input id="productId">
+            <div>
+                <label>Product ID</label>
+                <input id="productId">
+            </div>
+
+            <div>
+                <label>Product Name</label>
+                <input id="productName">
+            </div>
+
+            <div>
+                <label>Brand</label>
+                <input id="productBrand">
+            </div>
+
         </div>
 
-        <div>
-          <label>Product Name</label>
-          <input id="productName">
-        </div>
+        <br>
 
-        <div>
-          <label>Brand</label>
-          <input id="productBrand">
-        </div>
-
-      </div>
-
-      <br>
-
-      <button class="btn"
-        onclick="addProduct()">
-        ADD PRODUCT
-      </button>
+        <button
+            class="btn"
+            onclick="addProduct()">
+            ADD PRODUCT
+        </button>
 
     </div>
 
 
     <div class="panel">
 
-      <h2>Products</h2>
+        <h2>Products</h2>
 
-      <table>
+        <table>
 
-        <tr>
-          <th>ID</th>
-          <th>Product</th>
-          <th>Brand</th>
-          <th>Action</th>
-        </tr>
+            <tr>
+                <th>ID</th>
+                <th>Product</th>
+                <th>Brand</th>
+                <th>Action</th>
+            </tr>
 
-        ${
-          rows ||
-          "<tr><td colspan='4'>No products</td></tr>"
-        }
+            ${rows ||
+            "<tr><td colspan='4'>No products</td></tr>"}
 
-      </table>
+        </table>
 
     </div>
 
-  `;
+    `;
 
 }
 
 
 function addProduct(){
 
-  const p={
+    let p={
 
-    id:document.getElementById("productId")
-      .value.trim(),
+        id:document.getElementById("productId").value.trim(),
 
-    name:document.getElementById("productName")
-      .value.trim(),
+        name:document.getElementById("productName").value.trim(),
 
-    brand:document.getElementById("productBrand")
-      .value.trim()
+        brand:document.getElementById("productBrand").value.trim()
 
-  };
+    };
 
 
-  if(!p.id || !p.name){
+    if(!p.id||!p.name){
 
-    alert("Product ID and name required.");
-    return;
+        alert("Product ID and name required.");
 
-  }
+        return;
+    }
 
 
-  db.products.push(p);
+    db.products.push(p);
 
-  save();
+    save();
 
-  products();
+    products();
 
 }
 
@@ -1957,266 +1942,260 @@ function addProduct(){
 
 function assignments(){
 
-  if(!["admin","ceo","md","manager"].includes(
-    currentUser.role
-  )){
+    let repOptions=db.representatives
+        .filter(r=>r.active)
+        .map(r=>`
+            <option value="${esc(r.id)}">
+                ${esc(r.name)} (${esc(r.id)})
+            </option>
+        `).join("");
 
-    alert("Management access required.");
-    return;
 
-  }
-
-
-  const repOptions =
-    db.representatives
-      .filter(r=>r.active)
-      .map(r=>`
-
-        <option value="${esc(r.id)}">
-          ${esc(r.name)} (${esc(r.id)})
+    let doctorOptions=db.doctors.map(d=>`
+        <option value="${esc(d.id)}">
+            ${esc(d.name)}
         </option>
+    `).join("");
 
-      `).join("");
+
+    let chemOptions=db.chemists.map(c=>`
+        <option value="${esc(c.id)}">
+            ${esc(c.name)}
+        </option>
+    `).join("");
 
 
-  const doctorOptions =
-    db.doctors.map(d=>`
+    let stockOptions=db.stockists.map(s=>`
+        <option value="${esc(s.id)}">
+            ${esc(s.name)}
+        </option>
+    `).join("");
 
-      <option value="${esc(d.id)}">
-        ${esc(d.name)}
-      </option>
+
+    let rows=db.assignments.map((a,i)=>`
+
+        <tr>
+
+            <td>${esc(a.repId)}</td>
+
+            <td>${esc(a.doctorId||"—")}</td>
+
+            <td>${esc(a.chemistId||"—")}</td>
+
+            <td>${esc(a.stockistId||"—")}</td>
+
+            <td>
+
+                <button
+                    class="btn red small"
+                    onclick="deleteAssignment(${i})">
+                    Delete
+                </button>
+
+            </td>
+
+        </tr>
 
     `).join("");
 
 
-  const chemOptions =
-    db.chemists.map(c=>`
-
-      <option value="${esc(c.id)}">
-        ${esc(c.name)}
-      </option>
-
-    `).join("");
-
-
-  const stockOptions =
-    db.stockists.map(s=>`
-
-      <option value="${esc(s.id)}">
-        ${esc(s.name)}
-      </option>
-
-    `).join("");
-
-
-  const rows =
-    db.assignments.map((a,i)=>`
-
-      <tr>
-
-        <td>${esc(a.repId)}</td>
-        <td>${esc(a.doctorId||"—")}</td>
-        <td>${esc(a.chemistId||"—")}</td>
-        <td>${esc(a.stockistId||"—")}</td>
-
-        <td>
-
-          ${
-            currentUser.role==="admin"
-            ? `<button class="btn red small"
-                 onclick="deleteAssignment(${i})">
-                 Delete
-               </button>`
-            : ""
-          }
-
-        </td>
-
-      </tr>
-
-    `).join("");
-
-
-  document.getElementById("main").innerHTML=`
+    document.getElementById("main").innerHTML=`
 
     <div class="panel">
 
-      <h2>🔗 Assign Doctor / Chemist / Stockist</h2>
+        <h2>🔗 Assignments</h2>
 
-      <div class="grid">
+        <div class="grid">
 
-        <div>
-          <label>Medical Representative</label>
+            <div>
 
-          <select id="assignRep">
+                <label>Medical Representative</label>
 
-            <option value="">
-              Select Representative
-            </option>
+                <select id="assignRep">
 
-            ${repOptions}
+                    <option value="">
+                        Select Representative
+                    </option>
 
-          </select>
+                    ${repOptions}
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Doctor</label>
+
+                <select id="assignDoctor">
+
+                    <option value="">
+                        Select Doctor
+                    </option>
+
+                    ${doctorOptions}
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Chemist</label>
+
+                <select id="assignChemist">
+
+                    <option value="">
+                        Optional Chemist
+                    </option>
+
+                    ${chemOptions}
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Stockist</label>
+
+                <select id="assignStockist">
+
+                    <option value="">
+                        Optional Stockist
+                    </option>
+
+                    ${stockOptions}
+
+                </select>
+
+            </div>
 
         </div>
 
 
-        <div>
+        <div class="actions">
 
-          <label>Doctor</label>
-
-          <select id="assignDoctor">
-
-            <option value="">
-              Select Doctor
-            </option>
-
-            ${doctorOptions}
-
-          </select>
+            <button
+                class="btn"
+                onclick="saveAssignment()">
+                SAVE ASSIGNMENT
+            </button>
 
         </div>
-
-
-        <div>
-
-          <label>Chemist</label>
-
-          <select id="assignChemist">
-
-            <option value="">
-              Optional Chemist
-            </option>
-
-            ${chemOptions}
-
-          </select>
-
-        </div>
-
-
-        <div>
-
-          <label>Stockist</label>
-
-          <select id="assignStockist">
-
-            <option value="">
-              Optional Stockist
-            </option>
-
-            ${stockOptions}
-
-          </select>
-
-        </div>
-
-      </div>
-
-
-      <div class="actions">
-
-        <button class="btn"
-          onclick="saveAssignment()">
-          SAVE ASSIGNMENT
-        </button>
-
-      </div>
 
     </div>
 
 
     <div class="panel">
 
-      <h2>Current Assignments</h2>
+        <h2>Current Assignments</h2>
 
-      <div class="tableWrap">
+        <div class="tableWrap">
 
-        <table>
+            <table>
 
-          <tr>
-            <th>Representative</th>
-            <th>Doctor</th>
-            <th>Chemist</th>
-            <th>Stockist</th>
-            <th>Action</th>
-          </tr>
+                <tr>
+                    <th>Representative</th>
+                    <th>Doctor</th>
+                    <th>Chemist</th>
+                    <th>Stockist</th>
+                    <th>Action</th>
+                </tr>
 
-          ${
-            rows ||
-            "<tr><td colspan='5'>No assignments</td></tr>"
-          }
+                ${rows ||
+                "<tr><td colspan='5'>No assignments</td></tr>"}
 
-        </table>
+            </table>
 
-      </div>
+        </div>
 
     </div>
 
-  `;
+    `;
 
 }
 
 
 function saveAssignment(){
 
-  const rep =
-    document.getElementById("assignRep").value;
+    let rep=document
+        .getElementById("assignRep")
+        .value;
 
-  const doctor =
-    document.getElementById("assignDoctor").value;
+    let doctor=document
+        .getElementById("assignDoctor")
+        .value;
 
-  const chem =
-    document.getElementById("assignChemist").value;
+    let chem=document
+        .getElementById("assignChemist")
+        .value;
 
-  const stock =
-    document.getElementById("assignStockist").value;
-
-
-  if(!rep){
-
-    alert("Select representative.");
-    return;
-
-  }
+    let stock=document
+        .getElementById("assignStockist")
+        .value;
 
 
-  if(!doctor && !chem && !stock){
+    if(!rep){
 
-    alert("Select at least one client.");
-    return;
+        alert("Select representative.");
 
-  }
-
-
-  db.assignments.push({
-
-    repId:rep,
-    doctorId:doctor,
-    chemistId:chem,
-    stockistId:stock
-
-  });
+        return;
+    }
 
 
-  save();
+    if(!doctor&&!chem&&!stock){
 
-  alert("Assignment saved.");
+        alert("Select at least one client.");
 
-  assignments();
+        return;
+    }
+
+
+    db.assignments.push({
+
+        repId:rep,
+
+        doctorId:doctor,
+
+        chemistId:chem,
+
+        stockistId:stock
+
+    });
+
+
+    save();
+
+    alert("Assignment saved.");
+
+    assignments();
 
 }
 
 
 function deleteAssignment(i){
 
-  if(!adminOnly()) return;
+    if(
+        currentUser.type!=="admin"
+    ){
 
-  db.assignments.splice(i,1);
+        alert(
+            "Only Administrator can delete assignments."
+        );
 
-  save();
+        return;
+    }
 
-  assignments();
+
+    db.assignments.splice(i,1);
+
+    save();
+
+    assignments();
 
 }
 
@@ -2227,331 +2206,434 @@ function deleteAssignment(i){
 
 function dcr(){
 
-  const management =
-    ["admin","ceo","md","manager"].includes(
-      currentUser.role
-    );
+    let repOptions=db.representatives
+        .filter(r=>r.active)
+        .map(r=>`
+            <option value="${esc(r.id)}">
+                ${esc(r.name)} (${esc(r.id)})
+            </option>
+        `).join("");
 
 
-  let repOptions =
-    db.representatives
-      .filter(r=>r.active)
-      .map(r=>`
-
-        <option value="${esc(r.id)}">
-          ${esc(r.name)} (${esc(r.id)})
+    let doctorOptions=db.doctors.map(d=>`
+        <option value="${esc(d.id)}">
+            ${esc(d.name)}
         </option>
-
-      `).join("");
-
-
-  let doctorOptions =
-    db.doctors.map(d=>`
-
-      <option value="${esc(d.id)}">
-        ${esc(d.name)}
-      </option>
-
     `).join("");
 
 
-  if(currentUser.role==="mr"){
+    if(currentUser.type==="rep"){
 
-    repOptions=`
-
-      <option value="${esc(currentUser.id)}">
-        ${esc(currentUser.name)}
-        (${esc(currentUser.id)})
-      </option>
-
-    `;
+        repOptions=`
+            <option value="${esc(currentUser.id)}">
+                ${esc(currentUser.name)}
+                (${esc(currentUser.id)})
+            </option>
+        `;
 
 
-    const allowed =
-      db.assignments
-        .filter(a=>a.repId===currentUser.id)
-        .map(a=>a.doctorId)
-        .filter(Boolean);
+        let allowed=db.assignments
+            .filter(a=>a.repId===currentUser.id)
+            .map(a=>a.doctorId)
+            .filter(Boolean);
 
 
-    doctorOptions =
-      db.doctors
-        .filter(d=>allowed.includes(d.id))
-        .map(d=>`
+        doctorOptions=db.doctors
+            .filter(d=>allowed.includes(d.id))
+            .map(d=>`
+                <option value="${esc(d.id)}">
+                    ${esc(d.name)}
+                </option>
+            `).join("");
 
-          <option value="${esc(d.id)}">
-            ${esc(d.name)}
-          </option>
-
-        `).join("");
-
-  }
+    }
 
 
-  document.getElementById("main").innerHTML=`
+    document.getElementById("main").innerHTML=`
 
     <div class="panel">
 
-      <h2>📝 Daily Call Report</h2>
+        <h2>📝 DCR Entry</h2>
 
-      <div class="grid">
 
-        <div>
+        <div class="grid">
 
-          <label>Representative</label>
+            <div>
 
-          <select id="dcrRep">
+                <label>Representative</label>
 
-            <option value="">
-              Select Representative
-            </option>
+                <select id="dcrRep">
 
-            ${repOptions}
+                    <option value="">
+                        Select Representative
+                    </option>
 
-          </select>
+                    ${repOptions}
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Doctor</label>
+
+                <select id="dcrDoctor">
+
+                    <option value="">
+                        Select Doctor
+                    </option>
+
+                    ${doctorOptions}
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Visit Date</label>
+
+                <input
+                    type="date"
+                    id="dcrDate"
+                    value="${new Date()
+                        .toISOString()
+                        .slice(0,10)}">
+
+            </div>
+
+
+            <div>
+
+                <label>Visit Status</label>
+
+                <select id="dcrStatus">
+
+                    <option>Visited</option>
+
+                    <option>Missed</option>
+
+                </select>
+
+            </div>
 
         </div>
 
 
-        <div>
+        <div
+            class="location"
+            style="margin-top:15px">
 
-          <label>Doctor</label>
+            <h3>📍 Doctor Visit GPS</h3>
 
-          <select id="dcrDoctor">
+            <p id="gpsStatus">
+                Location not captured
+            </p>
 
-            <option value="">
-              Select Doctor
-            </option>
+            <p>
+                Latitude:
+                <b id="gpsLat">—</b>
+            </p>
 
-            ${doctorOptions}
+            <p>
+                Longitude:
+                <b id="gpsLng">—</b>
+            </p>
 
-          </select>
-
-        </div>
-
-
-        <div>
-
-          <label>Visit Date</label>
-
-          <input
-            type="date"
-            id="dcrDate"
-            value="${new Date()
-              .toISOString()
-              .slice(0,10)}">
-
-        </div>
+            <p>
+                Accuracy:
+                <b id="gpsAccuracy">—</b>
+            </p>
 
 
-        <div>
-
-          <label>Visit Status</label>
-
-          <select id="dcrStatus">
-
-            <option>Visited</option>
-            <option>Missed</option>
-
-          </select>
+            <button
+                class="btn blue"
+                onclick="captureDCRGPS()">
+                GET CURRENT LOCATION
+            </button>
 
         </div>
 
-      </div>
+
+        <br>
 
 
-      <div class="location" style="margin-top:15px">
+        <label>Remarks</label>
 
-        <h3>📍 Doctor Visit GPS</h3>
-
-        <p id="gpsStatus">
-          Location not captured
-        </p>
-
-        <p>
-          Latitude:
-          <b id="gpsLat">—</b>
-        </p>
-
-        <p>
-          Longitude:
-          <b id="gpsLng">—</b>
-        </p>
-
-        <p>
-          Accuracy:
-          <b id="gpsAccuracy">—</b>
-        </p>
-
-        <button class="btn blue"
-          onclick="captureDCRGPS()">
-          GET CURRENT LOCATION
-        </button>
-
-      </div>
+        <textarea
+            id="dcrRemarks"
+            placeholder="Enter visit details">
+        </textarea>
 
 
-      <br>
+        <div class="actions">
 
-      <label>Remarks</label>
+            <button
+                class="btn"
+                onclick="saveDCR()">
+                SAVE DCR
+            </button>
 
-      <textarea id="dcrRemarks"
-        placeholder="Enter visit details"></textarea>
-
-
-      <div class="actions">
-
-        <button class="btn"
-          onclick="saveDCR()">
-          SAVE DCR
-        </button>
-
-      </div>
+        </div>
 
     </div>
 
-  `;
+    `;
 
 }
 
 
 function captureDCRGPS(){
 
-  if(!navigator.geolocation){
+    if(!navigator.geolocation){
 
-    alert("GPS not supported.");
-    return;
+        alert("GPS not supported.");
 
-  }
-
-
-  document.getElementById("gpsStatus")
-    .innerText="Getting location...";
-
-
-  navigator.geolocation.getCurrentPosition(
-
-    function(position){
-
-      dcrGPS={
-
-        lat:position.coords.latitude,
-        lng:position.coords.longitude,
-        accuracy:position.coords.accuracy
-
-      };
-
-
-      document.getElementById("gpsLat")
-        .innerText=dcrGPS.lat.toFixed(6);
-
-      document.getElementById("gpsLng")
-        .innerText=dcrGPS.lng.toFixed(6);
-
-      document.getElementById("gpsAccuracy")
-        .innerText=
-        Math.round(dcrGPS.accuracy)+" metres";
-
-
-      document.getElementById("gpsStatus")
-        .innerText=
-        "Location captured successfully.";
-
-    },
-
-
-    function(){
-
-      document.getElementById("gpsStatus")
-        .innerText=
-        "Location permission denied.";
-
-      alert(
-        "Allow Location permission for this website."
-      );
-
-    },
-
-
-    {
-      enableHighAccuracy:true,
-      timeout:15000,
-      maximumAge:0
+        return;
     }
 
-  );
+
+    document.getElementById(
+        "gpsStatus"
+    ).innerText="Getting location...";
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position){
+
+            dcrGPS={
+
+                lat:position.coords.latitude,
+
+                lng:position.coords.longitude,
+
+                accuracy:position.coords.accuracy
+
+            };
+
+
+            document.getElementById(
+                "gpsLat"
+            ).innerText=
+            dcrGPS.lat.toFixed(6);
+
+
+            document.getElementById(
+                "gpsLng"
+            ).innerText=
+            dcrGPS.lng.toFixed(6);
+
+
+            document.getElementById(
+                "gpsAccuracy"
+            ).innerText=
+            Math.round(
+                dcrGPS.accuracy
+            )+" metres";
+
+
+            document.getElementById(
+                "gpsStatus"
+            ).innerText=
+            "Location captured successfully.";
+
+        },
+
+        function(){
+
+            document.getElementById(
+                "gpsStatus"
+            ).innerText=
+            "Location permission denied.";
+
+            alert(
+                "Allow Location permission for this website."
+            );
+
+        },
+
+        {
+            enableHighAccuracy:true,
+            timeout:15000,
+            maximumAge:0
+        }
+
+    );
 
 }
 
 
 function saveDCR(){
 
-  const rep =
-    document.getElementById("dcrRep").value;
+    let rep=document
+        .getElementById("dcrRep")
+        .value;
 
-  const doctor =
-    document.getElementById("dcrDoctor").value;
+    let doctor=document
+        .getElementById("dcrDoctor")
+        .value;
 
-  const date =
-    document.getElementById("dcrDate").value;
-
-
-  if(!rep || !doctor){
-
-    alert("Select representative and doctor.");
-    return;
-
-  }
+    let date=document
+        .getElementById("dcrDate")
+        .value;
 
 
-  if(
-    db.settings.gpsRequired &&
-    !dcrGPS
-  ){
+    if(!rep||!doctor){
 
-    alert("GPS location is required.");
-    return;
+        alert(
+            "Select representative and doctor."
+        );
 
-  }
-
-
-  db.dcr.push({
-
-    id:Date.now(),
-
-    repId:rep,
-
-    doctorId:doctor,
-
-    date:date,
-
-    status:
-      document.getElementById("dcrStatus").value,
-
-    remarks:
-      document.getElementById("dcrRemarks").value,
-
-    gps:dcrGPS ? {
-
-      lat:dcrGPS.lat,
-      lng:dcrGPS.lng,
-      accuracy:dcrGPS.accuracy
-
-    } : null
-
-  });
+        return;
+    }
 
 
-  save();
+    if(
+        db.settings.gpsRequired &&
+        !dcrGPS
+    ){
 
-  dcrGPS=null;
+        alert(
+            "GPS location is required."
+        );
 
-  alert("DCR saved successfully.");
+        return;
+    }
 
-  if(currentUser.role==="mr")
-    page("repSummary");
-  else
-    page("reports");
+
+    db.dcr.push({
+
+        id:Date.now(),
+
+        repId:rep,
+
+        doctorId:doctor,
+
+        date:date,
+
+        status:
+        document
+        .getElementById("dcrStatus")
+        .value,
+
+        remarks:
+        document
+        .getElementById("dcrRemarks")
+        .value,
+
+        gps:dcrGPS ? {
+
+            lat:dcrGPS.lat,
+
+            lng:dcrGPS.lng,
+
+            accuracy:dcrGPS.accuracy
+
+        } : null
+
+    });
+
+
+    save();
+
+    dcrGPS=null;
+
+    alert("DCR saved successfully.");
+
+
+    if(currentUser.type==="rep"){
+
+        page("repSummary");
+
+    }else{
+
+        page("reports");
+
+    }
+
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+function getRepStats(repId){
+
+    let assignments=db.assignments
+        .filter(a=>a.repId===repId);
+
+
+    let doctorsAssigned=
+        assignments
+        .map(a=>a.doctorId)
+        .filter(Boolean);
+
+
+    let chemAssigned=
+        assignments
+        .map(a=>a.chemistId)
+        .filter(Boolean);
+
+
+    let stockAssigned=
+        assignments
+        .map(a=>a.stockistId)
+        .filter(Boolean);
+
+
+    let records=db.dcr.filter(
+        d=>d.repId===repId
+    );
+
+
+    let doctorVisits=
+        new Set(
+            records
+            .filter(d=>d.status==="Visited")
+            .map(d=>d.doctorId)
+        ).size;
+
+
+    let activeDates=
+        new Set(
+            records
+            .filter(d=>d.status==="Visited")
+            .map(d=>d.date)
+        );
+
+
+    let visits=
+        records.filter(
+            d=>d.status==="Visited"
+        ).length;
+
+
+    return{
+
+        doctors:doctorsAssigned.length,
+
+        doctorVisits:doctorVisits,
+
+        chemists:chemAssigned.length,
+
+        stockists:stockAssigned.length,
+
+        totalVisits:visits,
+
+        activeDays:activeDates.size,
+
+        average:activeDates.size
+            ?
+            (visits/activeDates.size).toFixed(2)
+            :
+            "0.00"
+
+    };
 
 }
 
@@ -2560,154 +2642,84 @@ function saveDCR(){
    SUMMARY
 ===================================================== */
 
-function getRepStats(repId){
-
-  const assignments =
-    db.assignments.filter(
-      a=>a.repId===repId
-    );
-
-
-  const doctors =
-    assignments.map(
-      a=>a.doctorId
-    ).filter(Boolean);
-
-
-  const chemists =
-    assignments.map(
-      a=>a.chemistId
-    ).filter(Boolean);
-
-
-  const stockists =
-    assignments.map(
-      a=>a.stockistId
-    ).filter(Boolean);
-
-
-  const records =
-    db.dcr.filter(
-      d=>d.repId===repId
-    );
-
-
-  const visits =
-    records.filter(
-      d=>d.status==="Visited"
-    ).length;
-
-
-  const activeDates =
-    new Set(
-      records
-        .filter(d=>d.status==="Visited")
-        .map(d=>d.date)
-    );
-
-
-  return {
-
-    doctors:doctors.length,
-
-    doctorVisits:
-      new Set(
-        records
-          .filter(d=>d.status==="Visited")
-          .map(d=>d.doctorId)
-      ).size,
-
-    chemists:chemists.length,
-
-    stockists:stockists.length,
-
-    totalVisits:visits,
-
-    activeDays:activeDates.size,
-
-    average:
-      activeDates.size
-      ? (visits/activeDates.size).toFixed(2)
-      : "0.00"
-
-  };
-
-}
-
-
 function summary(){
 
-  const rows =
-    db.representatives.map(r=>{
+    let rows=db.representatives.map(r=>{
 
-      const s=getRepStats(r.id);
+        let s=getRepStats(r.id);
 
-      return `
+        return`
 
         <tr>
 
-          <td>${esc(r.name)}</td>
-          <td>${esc(r.id)}</td>
-          <td>${s.doctors}</td>
-          <td>${s.doctorVisits}</td>
-          <td>${s.chemists}</td>
-          <td>${s.stockists}</td>
-          <td>${s.totalVisits}</td>
-          <td>${s.activeDays}</td>
-          <td>${s.average}</td>
+            <td>${esc(r.name)}</td>
+
+            <td>${esc(r.id)}</td>
+
+            <td>${s.doctors}</td>
+
+            <td>${s.doctorVisits}</td>
+
+            <td>${s.chemists}</td>
+
+            <td>${s.stockists}</td>
+
+            <td>${s.totalVisits}</td>
+
+            <td>${s.activeDays}</td>
+
+            <td>${s.average}</td>
 
         </tr>
 
-      `;
+        `;
 
     }).join("");
 
 
-  document.getElementById("main").innerHTML=`
+    document.getElementById("main").innerHTML=`
 
     <div class="hero">
 
-      <h2>📊 Quick Summary</h2>
+        <h2>📊 Quick Summary</h2>
 
-      <p>Representative-wise field performance.</p>
+        <p>
+            Representative-wise field performance.
+        </p>
 
     </div>
 
 
     <div class="panel">
 
-      <h2>Representative Summary</h2>
+        <h2>Representative Summary</h2>
 
-      <div class="tableWrap">
+        <div class="tableWrap">
 
-        <table>
+            <table>
 
-          <tr>
+                <tr>
+                    <th>Representative</th>
+                    <th>MR ID</th>
+                    <th>Total Doctors</th>
+                    <th>Doctors Visited</th>
+                    <th>Total Chemists</th>
+                    <th>Total Stockists</th>
+                    <th>Total Visits</th>
+                    <th>Field Active Days</th>
+                    <th>Visits / Active Day</th>
+                </tr>
 
-            <th>Representative</th>
-            <th>MR ID</th>
-            <th>Doctors</th>
-            <th>Doctors Visited</th>
-            <th>Chemists</th>
-            <th>Stockists</th>
-            <th>Total Visits</th>
-            <th>Active Days</th>
-            <th>Visits / Day</th>
+                ${rows ||
+                "<tr><td colspan='9'>No data</td></tr>"}
 
-          </tr>
+            </table>
 
-          ${
-            rows ||
-            "<tr><td colspan='9'>No data</td></tr>"
-          }
-
-        </table>
-
-      </div>
+        </div>
 
     </div>
 
-  `;
+    `;
 
 }
 
@@ -2718,95 +2730,101 @@ function summary(){
 
 function visitStatus(){
 
-  let rows =
-    db.doctors.map(d=>{
+    let rows=db.doctors.map(d=>{
 
-      const records =
-        db.dcr
-          .filter(x=>x.doctorId===d.id)
-          .sort(
-            (a,b)=>
-              b.date.localeCompare(a.date)
-          );
+        let records=db.dcr
+            .filter(x=>x.doctorId===d.id)
+            .sort(
+                (a,b)=>
+                b.date.localeCompare(a.date)
+            );
 
 
-      const last =
-        records.length
-        ? records[0].date
-        : "Not visited";
+        let last=records.length
+            ?
+            records[0].date
+            :
+            "Not visited";
 
 
-      return `
+        let reps=[
+            ...new Set(
+                records.map(x=>x.repId)
+            )
+        ].join(", ");
+
+
+        return`
 
         <tr>
 
-          <td>${esc(d.name)}</td>
+            <td>${esc(d.name)}</td>
 
-          <td>
-            ${records.length
-              ? records[0].repId
-              : "—"}
-          </td>
+            <td>${esc(reps||"—")}</td>
 
-          <td>${records.length}</td>
+            <td>${records.length}</td>
 
-          <td>${esc(last)}</td>
+            <td>${esc(last)}</td>
 
-          <td>
+            <td>
 
-            ${
-              records.length
-              ? records.map(x=>
-                `<div>
-                  ${esc(x.date)}
-                  —
-                  ${esc(x.status)}
-                </div>`
-              ).join("")
-              : "—"
-            }
+                ${
+                    records.length
+                    ?
+                    records.map(x=>
+                    `<div>
+                        ${esc(x.date)}
+                        —
+                        ${esc(x.status)}
+                    </div>`
+                    ).join("")
+                    :
+                    "—"
+                }
 
-          </td>
+            </td>
 
         </tr>
 
-      `;
+        `;
 
     }).join("");
 
 
-  document.getElementById("main").innerHTML=`
+    document.getElementById("main").innerHTML=`
 
     <div class="panel">
 
-      <h2>📅 Doctor Visit Status</h2>
+        <h2>📅 Doctor Visit Status</h2>
 
-      <div class="tableWrap">
+        <div class="tableWrap">
 
-        <table>
+            <table>
 
-          <tr>
+                <tr>
 
-            <th>Doctor</th>
-            <th>Representative</th>
-            <th>Total Visits</th>
-            <th>Last Visit</th>
-            <th>Visit History</th>
+                    <th>Doctor</th>
 
-          </tr>
+                    <th>Representative</th>
 
-          ${
-            rows ||
-            "<tr><td colspan='5'>No doctors</td></tr>"
-          }
+                    <th>Total Visits</th>
 
-        </table>
+                    <th>Last Visit</th>
 
-      </div>
+                    <th>Visit Dates / Status</th>
+
+                </tr>
+
+                ${rows ||
+                "<tr><td colspan='5'>No doctors</td></tr>"}
+
+            </table>
+
+        </div>
 
     </div>
 
-  `;
+    `;
 
 }
 
@@ -2817,233 +2835,244 @@ function visitStatus(){
 
 function tour(){
 
-  const reps =
-    db.representatives
-      .filter(r=>r.active)
-      .map(r=>`
+    let reps=db.representatives
+        .filter(r=>r.active)
+        .map(r=>`
+            <option value="${esc(r.id)}">
+                ${esc(r.name)}
+            </option>
+        `).join("");
 
-        <option value="${esc(r.id)}">
-          ${esc(r.name)}
+
+    let doctors=db.doctors.map(d=>`
+        <option value="${esc(d.id)}">
+            ${esc(d.name)}
         </option>
+    `).join("");
 
-      `).join("");
 
+    let rows=db.tours.map((t,i)=>`
 
-  const doctors =
-    db.doctors.map(d=>`
+        <tr>
 
-      <option value="${esc(d.id)}">
-        ${esc(d.name)}
-      </option>
+            <td>${esc(t.date)}</td>
+
+            <td>${esc(t.repId)}</td>
+
+            <td>${esc(t.doctorId)}</td>
+
+            <td>${esc(t.type)}</td>
+
+            <td>${esc(t.status)}</td>
+
+            <td>
+
+                <button
+                    class="btn red small"
+                    onclick="deleteTour(${i})">
+                    Delete
+                </button>
+
+            </td>
+
+        </tr>
 
     `).join("");
 
 
-  const rows =
-    db.tours.map((t,i)=>`
-
-      <tr>
-
-        <td>${esc(t.date)}</td>
-        <td>${esc(t.repId)}</td>
-        <td>${esc(t.doctorId)}</td>
-        <td>${esc(t.type)}</td>
-        <td>${esc(t.status)}</td>
-
-        <td>
-
-          ${
-            currentUser.role==="admin"
-            ? `<button class="btn red small"
-                onclick="deleteTour(${i})">
-                Delete
-               </button>`
-            : ""
-          }
-
-        </td>
-
-      </tr>
-
-    `).join("");
-
-
-  document.getElementById("main").innerHTML=`
+    document.getElementById("main").innerHTML=`
 
     <div class="panel">
 
-      <h2>🗺️ Create Tour Plan</h2>
+        <h2>🗺️ Create Tour Plan</h2>
 
-      <div class="grid">
+        <div class="grid">
 
-        <div>
+            <div>
 
-          <label>Representative</label>
+                <label>Representative</label>
 
-          <select id="tourRep">
+                <select id="tourRep">
 
-            <option value="">
-              Select Representative
-            </option>
+                    <option value="">
+                        Select Representative
+                    </option>
 
-            ${reps}
+                    ${reps}
 
-          </select>
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Date</label>
+
+                <input
+                    type="date"
+                    id="tourDate"
+                    value="${new Date()
+                    .toISOString()
+                    .slice(0,10)}">
+
+            </div>
+
+
+            <div>
+
+                <label>Doctor</label>
+
+                <select id="tourDoctor">
+
+                    <option value="">
+                        Select Doctor
+                    </option>
+
+                    ${doctors}
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Visit Type</label>
+
+                <select id="tourType">
+
+                    <option>Doctor</option>
+
+                    <option>Chemist</option>
+
+                    <option>Stockist</option>
+
+                </select>
+
+            </div>
 
         </div>
 
 
-        <div>
-
-          <label>Date</label>
-
-          <input type="date"
-                 id="tourDate"
-                 value="${new Date()
-                   .toISOString()
-                   .slice(0,10)}">
-
-        </div>
+        <br>
 
 
-        <div>
-
-          <label>Doctor</label>
-
-          <select id="tourDoctor">
-
-            <option value="">
-              Select Doctor
-            </option>
-
-            ${doctors}
-
-          </select>
-
-        </div>
-
-
-        <div>
-
-          <label>Visit Type</label>
-
-          <select id="tourType">
-
-            <option>Doctor</option>
-            <option>Chemist</option>
-            <option>Stockist</option>
-
-          </select>
-
-        </div>
-
-      </div>
-
-
-      <br>
-
-      <button class="btn"
-        onclick="saveTour()">
-        CREATE TOUR PLAN
-      </button>
+        <button
+            class="btn"
+            onclick="saveTour()">
+            CREATE TOUR PLAN
+        </button>
 
     </div>
 
 
     <div class="panel">
 
-      <h2>Tour Plans</h2>
+        <h2>Tour Plans</h2>
 
-      <div class="tableWrap">
+        <div class="tableWrap">
 
-        <table>
+            <table>
 
-          <tr>
+                <tr>
 
-            <th>Date</th>
-            <th>Representative</th>
-            <th>Client</th>
-            <th>Type</th>
-            <th>Status</th>
-            <th>Action</th>
+                    <th>Date</th>
+                    <th>Representative</th>
+                    <th>Client</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Action</th>
 
-          </tr>
+                </tr>
 
-          ${
-            rows ||
-            "<tr><td colspan='6'>No tour plans</td></tr>"
-          }
+                ${rows ||
+                "<tr><td colspan='6'>No tour plans</td></tr>"}
 
-        </table>
+            </table>
 
-      </div>
+        </div>
 
     </div>
 
-  `;
+    `;
 
 }
 
 
 function saveTour(){
 
-  const rep =
-    document.getElementById("tourRep").value;
+    let rep=document
+        .getElementById("tourRep")
+        .value;
 
-  const date =
-    document.getElementById("tourDate").value;
+    let date=document
+        .getElementById("tourDate")
+        .value;
 
-  const doctor =
-    document.getElementById("tourDoctor").value;
-
-
-  if(!rep || !date || !doctor){
-
-    alert(
-      "Select representative, date and doctor."
-    );
-
-    return;
-
-  }
+    let doctor=document
+        .getElementById("tourDoctor")
+        .value;
 
 
-  db.tours.push({
+    if(!rep||!date||!doctor){
 
-    id:Date.now(),
+        alert(
+            "Select representative, date and doctor."
+        );
 
-    repId:rep,
-
-    date:date,
-
-    doctorId:doctor,
-
-    type:
-      document.getElementById("tourType").value,
-
-    status:"Planned"
-
-  });
+        return;
+    }
 
 
-  save();
+    db.tours.push({
 
-  alert("Tour plan created.");
+        id:Date.now(),
 
-  tour();
+        repId:rep,
+
+        date:date,
+
+        doctorId:doctor,
+
+        type:
+        document
+        .getElementById("tourType")
+        .value,
+
+        status:"Planned"
+
+    });
+
+
+    save();
+
+    alert("Tour plan created.");
+
+    tour();
 
 }
 
 
 function deleteTour(i){
 
-  if(!adminOnly()) return;
+    if(
+        currentUser.type!=="admin"
+    ){
 
-  db.tours.splice(i,1);
+        alert(
+            "Only Administrator can delete tour plans."
+        );
 
-  save();
+        return;
+    }
 
-  tour();
+
+    db.tours.splice(i,1);
+
+    save();
+
+    tour();
 
 }
 
@@ -3054,214 +3083,207 @@ function deleteTour(i){
 
 function reports(){
 
-  if(!["admin","ceo","md","manager"].includes(
-    currentUser.role
-  )){
-
-    alert("Management access required.");
-    return;
-
-  }
-
-
-  const rows =
-    db.dcr
-      .slice()
-      .reverse()
-      .map(d=>`
+    let rows=db.dcr
+        .slice()
+        .reverse()
+        .map(d=>`
 
         <tr>
 
-          <td>${esc(d.date)}</td>
-          <td>${esc(d.repId)}</td>
-          <td>${esc(d.doctorId)}</td>
-          <td>${esc(d.status)}</td>
+            <td>${esc(d.date)}</td>
 
-          <td>
+            <td>${esc(d.repId)}</td>
 
-            ${
-              d.gps
-              ? "📍 "+
-                Number(d.gps.lat).toFixed(5)+
-                ", "+
-                Number(d.gps.lng).toFixed(5)
-              : "—"
-            }
+            <td>${esc(d.doctorId)}</td>
 
-          </td>
+            <td>${esc(d.status)}</td>
+
+            <td>
+
+                ${
+                    d.gps
+                    ?
+                    "📍 "+
+                    Number(d.gps.lat).toFixed(5)+
+                    ", "+
+                    Number(d.gps.lng).toFixed(5)
+                    :
+                    "—"
+                }
+
+            </td>
 
         </tr>
 
-      `).join("");
+        `).join("");
 
 
-  document.getElementById("main").innerHTML=`
+    document.getElementById("main").innerHTML=`
 
     <div class="cards">
 
-      <div class="card">
+        <div class="card">
 
-        Total DCR
+            Total DCR
 
-        <div class="number">
-          ${db.dcr.length}
+            <div class="number">
+                ${db.dcr.length}
+            </div>
+
         </div>
 
-      </div>
 
+        <div class="card">
 
-      <div class="card">
+            Visited
 
-        Visited
+            <div class="number">
+                ${
+                    db.dcr.filter(
+                        x=>x.status==="Visited"
+                    ).length
+                }
+            </div>
 
-        <div class="number">
-          ${
-            db.dcr.filter(
-              x=>x.status==="Visited"
-            ).length
-          }
         </div>
 
-      </div>
 
+        <div class="card">
 
-      <div class="card">
+            Missed
 
-        Missed
+            <div class="number">
+                ${
+                    db.dcr.filter(
+                        x=>x.status==="Missed"
+                    ).length
+                }
+            </div>
 
-        <div class="number">
-          ${
-            db.dcr.filter(
-              x=>x.status==="Missed"
-            ).length
-          }
         </div>
 
-      </div>
 
+        <div class="card">
 
-      <div class="card">
+            Tour Plans
 
-        Tour Plans
+            <div class="number">
+                ${db.tours.length}
+            </div>
 
-        <div class="number">
-          ${db.tours.length}
         </div>
-
-      </div>
 
     </div>
 
 
     <div class="panel">
 
-      <h2>DCR Report</h2>
+        <h2>DCR Report</h2>
 
-      <div class="tableWrap">
+        <div class="tableWrap">
 
-        <table>
+            <table>
 
-          <tr>
-            <th>Date</th>
-            <th>MR</th>
-            <th>Doctor</th>
-            <th>Status</th>
-            <th>GPS</th>
-          </tr>
+                <tr>
+                    <th>Date</th>
+                    <th>MR</th>
+                    <th>Doctor</th>
+                    <th>Status</th>
+                    <th>GPS</th>
+                </tr>
 
-          ${
-            rows ||
-            "<tr><td colspan='5'>No DCR records</td></tr>"
-          }
+                ${rows ||
+                "<tr><td colspan='5'>No DCR records</td></tr>"}
 
-        </table>
+            </table>
 
-      </div>
+        </div>
 
     </div>
 
-  `;
+    `;
 
 }
 
 
 /* =====================================================
-   ADMIN SETTINGS
+   SETTINGS
 ===================================================== */
 
 function settings(){
 
-  if(!adminOnly()) return;
+    /* Only Admin can access settings */
+
+    if(currentUser.type!=="admin"){
+
+        alert(
+            "Administrator access required."
+        );
+
+        page("dashboard");
+
+        return;
+    }
 
 
-  document.getElementById("main").innerHTML=`
+    document.getElementById("main").innerHTML=`
 
     <div class="panel">
 
-      <h2>⚙️ Admin Settings</h2>
-
-      <div class="switch">
-
-        <input
-          id="gpsRequired"
-          type="checkbox"
-          ${
-            db.settings.gpsRequired
-            ? "checked"
-            : ""
-          }
-          onchange="changeGPSSetting()">
-
-        <label>
-          Require GPS for DCR visits
-        </label>
-
-      </div>
+        <h2>⚙️ Admin Settings</h2>
 
 
-      <div class="roleCard">
+        <div class="switch">
 
-        <h3>Administrator Access</h3>
+            <input
+                id="gpsRequired"
+                type="checkbox"
+                ${
+                    db.settings.gpsRequired
+                    ?"checked"
+                    :""
+                }
+                onchange="changeGPSSetting()">
 
-        <p>
-          Only the Administrator can access
-          Admin Settings and delete master records.
-        </p>
+            <label>
+                Require GPS for DCR visits
+            </label>
 
-        <p>
-          <b>Administrator:</b> Vaibhav
-        </p>
-
-      </div>
+        </div>
 
 
-      <div class="roleCard">
+        <div class="panel">
 
-        <h3>Available Roles</h3>
+            <h3>Admin Access</h3>
 
-        <p>CEO — Management access</p>
-        <p>MD — Management access</p>
-        <p>Manager — Management access</p>
-        <p>Medical Representative — Field access</p>
+            <p>
+                Only Administrator can manage
+                representatives, master data,
+                assignments and settings.
+            </p>
 
-      </div>
+            <p>
+                Administrator:
+                <b>Vaibhav Dalavi</b>
+            </p>
+
+        </div>
 
     </div>
 
-  `;
+    `;
 
 }
 
 
 function changeGPSSetting(){
 
-  if(!adminOnly()) return;
+    db.settings.gpsRequired=
+        document
+        .getElementById("gpsRequired")
+        .checked;
 
-  db.settings.gpsRequired =
-    document.getElementById("gpsRequired")
-      .checked;
-
-  save();
+    save();
 
 }
 
@@ -3272,280 +3294,294 @@ function changeGPSSetting(){
 
 function repHome(){
 
-  const s =
-    getRepStats(currentUser.id);
+    let s=getRepStats(
+        currentUser.id
+    );
 
 
-  document.getElementById("main").innerHTML=`
+    document.getElementById("main").innerHTML=`
 
     <div class="hero">
 
-      <h2>
-        Welcome ${esc(currentUser.name)}
-      </h2>
+        <h2>
+            Welcome ${esc(currentUser.name)}
+        </h2>
 
-      <p>
-        MR ID: ${esc(currentUser.id)}
-      </p>
+        <p>
+            MR ID:
+            ${esc(currentUser.id)}
+        </p>
+
+        <p>
+            Medical Representative
+        </p>
 
     </div>
 
 
     <div class="cards">
 
-      <div class="card">
+        <div class="card">
 
-        My Doctors
+            My Doctors
 
-        <div class="number">
-          ${s.doctors}
+            <div class="number">
+                ${s.doctors}
+            </div>
+
         </div>
 
-      </div>
 
+        <div class="card">
 
-      <div class="card">
+            Doctors Visited
 
-        Doctors Visited
+            <div class="number">
+                ${s.doctorVisits}
+            </div>
 
-        <div class="number">
-          ${s.doctorVisits}
         </div>
 
-      </div>
 
+        <div class="card">
 
-      <div class="card">
+            Chemists
 
-        Chemists
+            <div class="number">
+                ${s.chemists}
+            </div>
 
-        <div class="number">
-          ${s.chemists}
         </div>
 
-      </div>
 
+        <div class="card">
 
-      <div class="card">
+            Stockists
 
-        Stockists
+            <div class="number">
+                ${s.stockists}
+            </div>
 
-        <div class="number">
-          ${s.stockists}
         </div>
-
-      </div>
 
     </div>
 
 
     <div class="panel">
 
-      <h2>Quick Actions</h2>
+        <h2>Quick Actions</h2>
 
-      <div class="actions">
+        <div class="actions">
 
-        <button class="btn"
-          onclick="page('dcr')">
-          📝 Fill DCR
-        </button>
+            <button
+                class="btn"
+                onclick="page('dcr')">
+                📝 Fill DCR
+            </button>
 
-        <button class="btn blue"
-          onclick="page('tour')">
-          🗺️ My Tour Plan
-        </button>
+            <button
+                class="btn blue"
+                onclick="page('tour')">
+                🗺️ My Tour Plan
+            </button>
 
-        <button class="btn blue"
-          onclick="page('repSummary')">
-          📊 My Summary
-        </button>
+            <button
+                class="btn blue"
+                onclick="page('repSummary')">
+                📊 My Summary
+            </button>
 
-      </div>
+        </div>
 
     </div>
 
-  `;
+    `;
 
 }
 
 
 /* =====================================================
-   REPRESENTATIVE CLIENTS
+   MY CLIENTS
 ===================================================== */
 
 function myClients(){
 
-  const assignments =
-    db.assignments.filter(
-      a=>a.repId===currentUser.id
-    );
+    let assignments=db.assignments
+        .filter(
+            a=>a.repId===currentUser.id
+        );
 
 
-  const doctors =
-    assignments
-      .map(a=>
-        db.doctors.find(
-          d=>d.id===a.doctorId
+    let doctors=assignments
+        .map(
+            a=>db.doctors.find(
+                d=>d.id===a.doctorId
+            )
         )
-      )
-      .filter(Boolean);
+        .filter(Boolean);
 
 
-  const rows =
-    doctors.map(d=>`
+    let rows=doctors.map(d=>`
 
-      <tr>
+        <tr>
 
-        <td>${esc(d.id)}</td>
-        <td>${esc(d.name)}</td>
-        <td>${esc(d.speciality)}</td>
+            <td>${esc(d.id)}</td>
 
-      </tr>
+            <td>${esc(d.name)}</td>
+
+            <td>${esc(d.speciality)}</td>
+
+        </tr>
 
     `).join("");
 
 
-  document.getElementById("main").innerHTML=`
+    document.getElementById("main").innerHTML=`
 
     <div class="panel">
 
-      <h2>My Assigned Doctors</h2>
+        <h2>My Assigned Doctors</h2>
 
-      <div class="tableWrap">
+        <div class="tableWrap">
 
-        <table>
+            <table>
 
-          <tr>
-            <th>ID</th>
-            <th>Doctor</th>
-            <th>Speciality</th>
-          </tr>
+                <tr>
 
-          ${
-            rows ||
-            "<tr><td colspan='3'>No assigned doctors</td></tr>"
-          }
+                    <th>ID</th>
 
-        </table>
+                    <th>Doctor</th>
 
-      </div>
+                    <th>Speciality</th>
+
+                </tr>
+
+                ${rows ||
+                "<tr><td colspan='3'>No assigned doctors</td></tr>"}
+
+            </table>
+
+        </div>
 
     </div>
 
-  `;
+    `;
 
 }
 
 
 /* =====================================================
-   REPRESENTATIVE SUMMARY
+   MY SUMMARY
 ===================================================== */
 
 function repSummary(){
 
-  const s =
-    getRepStats(currentUser.id);
+    let s=getRepStats(
+        currentUser.id
+    );
 
 
-  document.getElementById("main").innerHTML=`
+    document.getElementById("main").innerHTML=`
 
     <div class="hero">
 
-      <h2>My Quick Summary</h2>
+        <h2>My Quick Summary</h2>
 
-      <p>
-        ${esc(currentUser.name)}
-        (${esc(currentUser.id)})
-      </p>
+        <p>
+            ${esc(currentUser.name)}
+            (${esc(currentUser.id)})
+        </p>
 
     </div>
 
 
     <div class="cards">
 
-      <div class="card">
+        <div class="card">
 
-        Total Doctors
+            Total Doctors
 
-        <div class="number">
-          ${s.doctors}
+            <div class="number">
+                ${s.doctors}
+            </div>
+
         </div>
 
-      </div>
 
+        <div class="card">
 
-      <div class="card">
+            Doctors Visited
 
-        Doctors Visited
+            <div class="number">
+                ${s.doctorVisits}
+            </div>
 
-        <div class="number">
-          ${s.doctorVisits}
         </div>
 
-      </div>
 
+        <div class="card">
 
-      <div class="card">
+            Chemists
 
-        Chemists
+            <div class="number">
+                ${s.chemists}
+            </div>
 
-        <div class="number">
-          ${s.chemists}
         </div>
 
-      </div>
 
+        <div class="card">
 
-      <div class="card">
+            Stockists
 
-        Stockists
+            <div class="number">
+                ${s.stockists}
+            </div>
 
-        <div class="number">
-          ${s.stockists}
         </div>
-
-      </div>
 
     </div>
 
 
     <div class="panel">
 
-      <h2>Field Performance</h2>
+        <h2>Field Performance</h2>
 
-      <p>
-        Total Visits:
-        <b>${s.totalVisits}</b>
-      </p>
+        <p>
+            Total Visits:
+            <b>${s.totalVisits}</b>
+        </p>
 
-      <p>
-        Field Active Days:
-        <b>${s.activeDays}</b>
-      </p>
+        <p>
+            Field Active Days:
+            <b>${s.activeDays}</b>
+        </p>
 
-      <p>
-        Average Visits / Active Day:
-        <b>${s.average}</b>
-      </p>
+        <p>
+            Average Visits / Active Day:
+            <b>${s.average}</b>
+        </p>
 
     </div>
 
-  `;
+    `;
 
 }
 
 
 /* =====================================================
-   INITIALIZE
+   START
 ===================================================== */
 
 document.addEventListener(
-  "DOMContentLoaded",
-  function(){
+    "DOMContentLoaded",
+    function(){
 
-    document.getElementById("loginId").focus();
+        document
+            .getElementById("loginId")
+            .focus();
 
-  }
+    }
 );
 
 </script>
